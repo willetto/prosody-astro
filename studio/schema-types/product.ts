@@ -1,13 +1,13 @@
 import {defineField, defineType} from 'sanity'
 
-export default defineType({
-  name: 'post',
-  title: 'Post',
+export const product = defineType({
+  name: 'product',
+  title: 'Product',
   type: 'document',
   fields: [
     defineField({
-      name: 'title',
-      title: 'Title',
+      name: 'name',
+      title: 'Name',
       type: 'string',
     }),
     defineField({
@@ -15,7 +15,7 @@ export default defineType({
       title: 'Slug',
       type: 'slug',
       options: {
-        source: 'title',
+        source: 'name',
         maxLength: 96,
       },
     }),
@@ -23,6 +23,13 @@ export default defineType({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
+    }),
+    defineField({
+      name: 'image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
     }),
   ],
 })
