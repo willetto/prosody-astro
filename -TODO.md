@@ -1,0 +1,4 @@
+- [x] Add polar data to sanity
+- [ ] Setup queries
+- [ ] Adapt content collections
+- [ ] Adapt frontend pages

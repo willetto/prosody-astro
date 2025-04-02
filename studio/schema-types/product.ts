@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {ProductSelector} from '../components/product-selector'
 
 export const product = defineType({
   name: 'product',
@@ -29,6 +30,14 @@ export const product = defineType({
       type: 'image',
       options: {
         hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'sku',
+      title: 'SKU',
+      type: 'string',
+      components: {
+        input: ProductSelector,
       },
     }),
   ],
