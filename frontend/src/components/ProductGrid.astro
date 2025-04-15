@@ -1,24 +1,24 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import ArtistCard from "./ArtistCard.astro";
-import Tooltip from "./Tooltip.astro";
+import ProductCard from "./ProductCard.astro";
+import ProductTooltip from "./ProductTooltip.astro";
 
 type Props = {
-  artists: CollectionEntry<"artists">[];
+  products: CollectionEntry<"products">[];
 };
 
-const { artists } = Astro.props;
-const grid = "artists";
+const { products } = Astro.props;
+const grid = "products";
 ---
 
-<section class="artist-grid"  data-grid={grid}>
-  {artists.map((artist) => <ArtistCard artist={artist} />)}
+<section class="product-grid" id='grid' data-grid={grid}>
+  {products.map((product) => <ProductCard product={product} />)}
 </section>
 
-<Tooltip grid={grid} />
+<ProductTooltip grid={grid} />
 
 <style>
-  section {
+  .product-grid {
     position: relative;
     overflow: hidden;
     display: grid;

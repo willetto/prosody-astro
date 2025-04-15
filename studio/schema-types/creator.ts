@@ -1,14 +1,15 @@
 import { defineField, defineType } from "sanity";
 
 export const creator = defineType({
+  __experimental_formPreviewTitle: false,
   name: "creator",
-  title: "Creator",
   type: "document",
   fields: [
     defineField({
       name: "name",
       title: "Name",
       type: "string",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "alias",
@@ -19,17 +20,27 @@ export const creator = defineType({
       name: "slug",
       title: "Slug",
       type: "slug",
+      validation: (rule) => rule.required(),
       options: {
         source: "name",
         maxLength: 96,
       },
     }),
     defineField({
-      name: "image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
+      name: "imageWithAlt",
+      type: "imageWithAlt",
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "content",
+      type: "portableText",
     }),
   ],
+  preview: {
+    select: {
+      title: "name",
+      subtitle: "alias",
+      media: "imageWithAlt",
+    },
+  },
 });

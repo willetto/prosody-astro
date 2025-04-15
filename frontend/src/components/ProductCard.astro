@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from "astro:content";
+import SanityImage from "./SanityImage.astro";
+
+type Props = {
+  product: CollectionEntry<"products">;
+};
+
+const { product } = Astro.props;
+const currencyCode = product.data.price.currency;
+const amount = (product.data.price.amount/100).toString();
+
+const price = `${new Intl.NumberFormat(undefined, {
+  style: "currency",
+  currency: currencyCode,
+  currencyDisplay: "narrowSymbol",
+}).format(parseFloat(amount))}`
+
+
+
+---
+
+<a class="product-card"
+data-product-title={product.data.name}
+data-creator-name={product.data.creator.id}
+data-price={price}
+data-astro-prefetch
+href={`/${product.data.creator.id}/products/${product.id}`}>
+  <div>
+    <SanityImage node={product.data.imageWithAlt} width={300}  />
+  </div>
+  <h3>{product.data.name}</h3>
+  <p>{new Date(product.data.publishedAt).getFullYear()}</p>
+</a>
+
+<style>
+  .product-card {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    align-content: start;
+    max-width: 300px;
+  }
+  div {
+    background: var(--color-placeholder);
+  }
+  h3,
+  p {
+    margin: 0;
+  }
+  h3 {
+    grid-area: title;
+  }
+  p {
+    justify-self: end;
+    grid-area: meta;
+  }
+</style>
