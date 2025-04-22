@@ -4,7 +4,9 @@ import { getCollection, getEntry } from "astro:content";
 import RichText from "../../../components/RichText.astro";
 import SanityImage from "../../../components/SanityImage.astro";
 import Separator from "../../../components/Separator.astro";
+import { getCheckoutUrl } from "../../../data/polar";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getFormattedPrice } from "../../../utils/getFormattedPrice";
 
 export const getStaticPaths = async () => {
   // Fetch all products from the 'products' collection
@@ -54,7 +56,11 @@ type Props = {
 
 const { creator, product } = Astro.props; // Extract creator and product data from props
 
-console.log(product.data.content)
+const price = getFormattedPrice(product.data.price)
+
+// TODO: fetch the checkout link from Polar
+const productCheckoutLink = await getCheckoutUrl([product.data.sku]) ??'#'
+
 ---
 
 <BaseLayout title={product.data.name}>
@@ -71,7 +77,20 @@ console.log(product.data.content)
       <SanityImage node={product.data.imageWithAlt} width={1000} />
       <div class="content">
         <RichText content={product.data.content}  />
+        {productCheckoutLink ? <a target="_blank" href={productCheckoutLink}>Get A Digital Copy for {price}
+        </a> : <>ERROR NO CHECKOUT LINK</>}
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+.cart-action {
+  display: flex;
+  gap: 1rem;
+}
+
+button {
+  font-weight: bold;
+}
+</style>

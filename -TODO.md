@@ -1,6 +1,8 @@
 # TODO
 
-- [ ] Add a cart and chekout workflow
+- [ ] Add direct checkout workflow
+- [ ] Add a cart and checkout workflow
+- [ ] Cleanup
 
 - [ ] Update README
 
