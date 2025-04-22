@@ -1,13 +1,13 @@
 # TODO
 
-- [ ] Add direct checkout workflow
-- [ ] Add a cart and checkout workflow
-- [ ] Cleanup
+- [ ] Add /cart and checkout workflow
+- [ ] Cleanup unused files
 
 - [ ] Update README
 
 # DONE
 
+- [x] Add direct checkout workflow
 - [x] Home page display products instead of artists
 - [x] Convert artist occurences to creator
 - [x] Convert album occurences to product
