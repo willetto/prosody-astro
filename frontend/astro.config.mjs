@@ -16,9 +16,6 @@ export default defineConfig({
   trailingSlash: "never",
   site: SITE_URL,
   integrations: [sitemap()],
-  experimental: {
-    svg: true,
-  },
   image: {
     domains: ["cdn.sanity.io"],
     remotePatterns: [{ protocol: "https" }],

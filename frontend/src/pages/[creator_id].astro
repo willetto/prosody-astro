@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 import ProductPreviewGrid from "../components/ProductPreviewGrid.astro";
 import RichText from "../components/RichText.astro";
 import SanityImage from "../components/SanityImage.astro";
@@ -48,8 +48,6 @@ const products = await getCollection(
   ({ data }) => data.creator.id === creator_id,
 );
 
-// Render the content of the current creator (e.g., markdown or MDX)
-const { Content } = await render(creator);
 ---
 
 <BaseLayout title={creator.data.name}>
