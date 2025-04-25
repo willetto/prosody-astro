@@ -34,6 +34,7 @@ export const product = defineType({
       name: "publishedAt",
       title: "Published at",
       type: "datetime",
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: "creator",

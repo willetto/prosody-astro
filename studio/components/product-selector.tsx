@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import { Card, Select, Text } from "@sanity/ui";
-
-import { Product } from "@polar-sh/sdk/models/components/product.js";
+import { RefreshIcon } from "@sanity/icons";
 import { useSecrets } from "@sanity/studio-secrets";
+import { Box, Button, Card, Select, Text } from "@sanity/ui";
 import { StringInputProps, set, unset } from "sanity";
 
 export function ProductSelector(props: StringInputProps) {
@@ -22,13 +21,11 @@ export function ProductSelector(props: StringInputProps) {
     [onChange],
   );
 
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!secrets) return;
-
+  const fetchProducts = () => {
     if (!secrets?.polarAccessTokenProducts) {
       setError("Failed to find access token");
       setIsLoading(false);
@@ -36,6 +33,8 @@ export function ProductSelector(props: StringInputProps) {
     }
 
     setIsLoading(true);
+    setError(null);
+
     fetch("https://api.polar.sh/v1/products/?limit=100", {
       method: "GET",
       headers: { Authorization: `Bearer ${secrets.polarAccessTokenProducts}` },
@@ -56,6 +55,11 @@ export function ProductSelector(props: StringInputProps) {
         setError("Failed to load products");
         setIsLoading(false);
       });
+  };
+
+  useEffect(() => {
+    if (!secrets) return;
+    fetchProducts();
   }, [secrets?.polarAccessTokenProducts]);
 
   if (isLoading) {
@@ -65,7 +69,15 @@ export function ProductSelector(props: StringInputProps) {
   if (error) {
     return (
       <Card padding={2} tone="critical">
-        <Text>{error}</Text>
+        <Box marginBottom={2}>
+          <Text>{error}</Text>
+        </Box>
+        <Button
+          icon={RefreshIcon}
+          text="Refresh"
+          tone="primary"
+          onClick={fetchProducts}
+        />
       </Card>
     );
   }
@@ -82,14 +94,20 @@ export function ProductSelector(props: StringInputProps) {
     <>
       <Select onChange={handleChange} value={value}>
         <option value={""}>None</option>
-        {products.map((item) => {
-          const price = (item.prices?.[0] as any)?.priceAmount;
-          return (
-            <option key={item.id} value={item.id}>
-              {item.name} {price ? `($${price})` : ""}
-            </option>
-          );
-        })}
+        {products.map(
+          (item: {
+            prices: Array<Partial<{ priceAmount: number }>>;
+            id: string;
+            name: string;
+          }) => {
+            const price = (item.prices?.[0] as any)?.priceAmount;
+            return (
+              <option key={item.id} value={item.id}>
+                {item.name} {price ? `($${price})` : ""}
+              </option>
+            );
+          },
+        )}
       </Select>
     </>
   );
