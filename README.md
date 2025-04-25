@@ -48,7 +48,7 @@ Follow Soufiane [Bluesky](https://bsky.app/profile/soufianee.com), [GitHub](http
 Made with :blue_heart: by [Codrops](https://www.codrops.com)
 Extended with :yellow_hear: by [Soufiane](https://soufianee.com)
 
-## Deployment
+## Deployment and Configuration
 
 ### Deploy Studio
 
@@ -69,3 +69,17 @@ pnpm --filter=studio run deploy
 ### Deploy Frontend
 
 You have the freedom to deploy your app to your hosting provider of choice.
+
+### Configuration
+
+There are env.example files for the studio and frontend folders, with the relevant secrets that need to be filled.
+You need to create a [Polar](https://polar.sh) account, add your products and create an API key with read and write access to checkout_links, checkouts and products.
+You need to add your Polar API key and your Polar Organisation ID in the secret tab inside your [Sanity](https://www.sanity.io/manage).
+You can also need to setup a webhook to trigger rebuilds when content changes.
+
+Contact me via email [jazsouf@pm.me](mailto:jazsouf@pm.me) or dm on bluesky if you need anything.
+
+## Next steps
+
+- [ ] Add basic client-side cart functionality
+- [ ] Add full server-side cart functionality
