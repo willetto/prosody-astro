@@ -21,7 +21,7 @@ export default defineConfig({
 	},
 	vite: {
 		server: {
-			// // enable cloudflare tunnel
+			// // enable cloudflare tunnel for mobile testing
 			// allowedHosts: true,
 		},
 		css: {
