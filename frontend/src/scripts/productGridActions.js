@@ -76,11 +76,11 @@ const shuffleGrid = () => {
 	}
 };
 
-/* Sort grid items alphabetically by 'data-product' */
+/* Sort grid items alphabetically by 'data-product-title' */
 const sortGrid = () => {
 	const sortedItems = gridItems.sort((a, b) => {
-		const nameA = a.getAttribute("data-product").toLowerCase();
-		const nameB = b.getAttribute("data-product").toLowerCase();
+		const nameA = a.getAttribute("data-product-title").toLowerCase();
+		const nameB = b.getAttribute("data-product-title").toLowerCase();
 		return nameA.localeCompare(nameB);
 	});
 	if (gridContainer) {
@@ -96,8 +96,8 @@ const sortGrid = () => {
 const filterGrid = (searchValue) => {
 	const lowerCaseSearch = searchValue.toLowerCase();
 	for (const item of gridItems) {
-		const creatorName = item.getAttribute("data-creatorName").toLowerCase();
-		const productTitle = item.getAttribute("data-productTitle").toLowerCase();
+		const creatorName = item.getAttribute("data-creator-name").toLowerCase();
+		const productTitle = item.getAttribute("data-product-title").toLowerCase();
 
 		item.style.display =
 			creatorName.includes(lowerCaseSearch) ||
