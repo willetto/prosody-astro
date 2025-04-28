@@ -5,8 +5,6 @@ Sanity Astro Club is a free Astro template for showcasing artworks or any other 
 
 ![Image Title](https://tympanus.net/codrops/wp-content/uploads/2025/02/PlayersClub_Template_featured.png)
 
-[Original Article on Codrops](https://tympanus.net/codrops/?p=86632)
-
 [Demo](https://sanity-astro-club.netlify.app/)
 
 ## Folder Structure
@@ -21,20 +19,25 @@ Sanity Astro Club is a free Astro template for showcasing artworks or any other 
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                    | Action                                           |
-| :------------------------- | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm run dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm run build`           | Build your production site to `./dist/`          |
-| `pnpm run preview`         | Preview your build locally, before deploying     |
-| `pnpm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm run astro -- --help` | Get help using the Astro CLI                     |
+| Command                                      | Action                                                                                |
+| :------------------------------------------- | :------------------------------------------------------------------------------------ |
+| `pnpm install`                               | Installs dependencies for the frontend asn studio workspaces                          |
+| `pnpm run dev`                               | Starts local dev server at `localhost:4321` for Astro and `localhost:3333` for Sanity |
+| `pnpm --filter=frontend run build`           | Build your Astro production site to `./dist/`                                         |
+| `pnpm --filter=frontend run preview`         | Preview your Astro build locally, before deploying                                    |
+| `pnpm --filter=frontend run astro ...`       | Run Astro CLI commands like `astro add`, `astro check`                                |
+| `pnpm --filter=frontend run astro -- --help` | Get help using the Astro CLI                                                          |
+| `pnpm --filter=frontend run lint`            | Lint your Astro code using Biome                                                      |
+| `pnpm --filter=frontend run format`          | Format your Astro code using Biome                                                    |
+| `pnpm --filter=studio run build`             | Build your studio site to `./dist/`                                                   |
+| `pnpm --filter=studio run start`             | Preview your Sanity Studio build locally, before deploying                            |
+| `pnpm --filter=studio run deploy`            | Deploy your Sanity Studio on the Sanity Cloud                                         |
 
 ## Credits
 
 - Design based on [Alex Tkachev's](https://alextkachev.com/) [Players Club Dribbble shot](https://dribbble.com/shots/25156320-Players-Club-UI-Animation).
-- Original Template by [Codrops](https://codrops.com)
-- Template extension and Artworks by [Soufiane](https://soufianee.com)
+- Original Template by [Codrops](https://codrops.com). Checkout the [original article on Codrops](https://tympanus.net/codrops/?p=86632)
+- Template extension and Artwork content by [Soufiane](https://soufianee.com)
 
 ## Misc
 
@@ -49,6 +52,10 @@ Made with :blue_heart: by [Codrops](https://www.codrops.com)
 Extended with :yellow_hear: by [Soufiane](https://soufianee.com)
 
 ## Deployment and Configuration
+
+### Deploy Frontend
+
+You have the freedom to deploy your app to your hosting provider of choice.
 
 ### Deploy Studio
 
@@ -66,20 +73,15 @@ npx sanity login
 pnpm --filter=studio run deploy
 ```
 
-### Deploy Frontend
-
-You have the freedom to deploy your app to your hosting provider of choice.
-
 ### Configuration
 
-There are env.example files for the studio and frontend folders, with the relevant secrets that need to be filled.
+There are <code>env.example</code> files for the studio and frontend folders, with the relevant secrets that need to be filled.
 You need to create a [Polar](https://polar.sh) account, add your products and create an API key with read and write access to checkout_links, checkouts and products.
-You need to add your Polar API key and your Polar Organisation ID in the secret tab inside your [Sanity](https://www.sanity.io/manage).
-You can also need to setup a webhook to trigger rebuilds when content changes.
+You need to add your Polar API key and your Polar Organisation ID in the secret tab inside your [Sanity Studio](https://www.sanity.io/manage).
+You can also need to set up a webhook to trigger rebuilds when content changes.
 
 Contact me via email [jazsouf@pm.me](mailto:jazsouf@pm.me) or dm on bluesky if you need anything.
 
 ## Next steps
 
-- [ ] Add basic client-side cart functionality
-- [ ] Add full server-side cart functionality
+- [ ] Add cart functionality w/ Astro sessions
