@@ -4,7 +4,7 @@ import { getCollection, getEntry } from "astro:content";
 import RichText from "../../../components/RichText.astro";
 import SanityImage from "../../../components/SanityImage.astro";
 import Separator from "../../../components/Separator.astro";
-import { getCheckoutSession } from "../../../data/polar";
+import { getCheckoutLinks } from "../../../data/polar";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { getFormattedPrice } from "../../../utils/getFormattedPrice";
 
@@ -41,7 +41,7 @@ const { creator, product } = Astro.props;
 
 const price = getFormattedPrice(product.data.price);
 
-const productCheckoutLink = await getCheckoutSession([product.data.sku]);
+const productCheckoutLink = await getCheckoutLinks([product.data.sku]);
 ---
 
 <BaseLayout title={product.data.name}>
@@ -58,16 +58,16 @@ const productCheckoutLink = await getCheckoutSession([product.data.sku]);
       <SanityImage node={product.data.imageWithAlt} width={1000} fit="contain" aspectRatio="9-16" />
       <div class="content">
         <RichText content={product.data.content}  />
-        <checkout-link data-polar-client-token={productCheckoutLink.clientSecret}>
+        <!-- <checkout-link data-polar-client-token={productCheckoutLink.clientSecret}> -->
         {productCheckoutLink ?
         <a id="checkout-link" target="_blank" href={productCheckoutLink.initialUrl}>Get A Digital Copy for {price}</a> : null}
-        </checkout-link>
+        <!-- </checkout-link> -->
       </div>
     </div>
   </section>
 </BaseLayout>
 
-<script>
+<!-- <script>
 class CheckoutLink extends HTMLElement {
   private anchor: HTMLAnchorElement | null
   private clientSecret : string | null
@@ -96,4 +96,4 @@ class CheckoutLink extends HTMLElement {
 }
 
 customElements.define('checkout-link', CheckoutLink);
-</script>
+</script> -->

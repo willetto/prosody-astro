@@ -48,3 +48,27 @@ export async function getCheckoutSession(skus: string[]) {
 		clientSecret: res.client_secret,
 	};
 }
+
+export async function getCheckoutLinks(skus: string[]) {
+  const body = JSON.stringify({
+		allow_discount_codes: false,
+		require_billing_address: false,
+		payment_processor:"stripe",
+		products: skus,
+		success_url: `${SITE_URL}/success`,
+	});
+
+	const res = await fetch("https://api.polar.sh/v1/checkout-links/", {
+		...postOptions,
+		body,
+	})
+		.then((response) => response.json())
+		.catch((err) => console.error(err));
+
+
+
+	return {
+		initialUrl: res.url,
+		clientSecret: res.client_secret,
+	};
+}
