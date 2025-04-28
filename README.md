@@ -3,7 +3,7 @@
 Sanity Astro Club is a free Astro template for showcasing artworks or any other digital product — an experimental proof of concept first built by [Codrops](https://www.codrops.com) in collaboration with [Alex Tkachev](https://alextkachev.com/).
 [Soufiane](https://soufianee.com) then enhanced the template with the addition of an extendable [Sanity](https://sanity.io/) Studio to handle content and a simple [Polar](https://polar.sh/) API integration for generating checkout sessions.
 
-![Image Title](https://tympanus.net/codrops/wp-content/uploads/2025/02/PlayersClub_Template_featured.png)
+![Image Title](https://cdn.sanity.io/images/awmb54he/production/f785e514977a6c57e1f9a32dd8e73e8083e1d1dc-2879x1698.png)
 
 [Demo](https://sanity-astro-club.netlify.app/)
 
