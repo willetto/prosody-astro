@@ -1,6 +1,7 @@
 # Sanity Astro Club: A Free Astro Template for Showcasing And Selling Digital Products
 
-Sanity Astro Club is a free Astro template for showcasing artworks or any other digital product — an experimental proof of concept first built by [Codrops](https://www.codrops.com) in collaboration with [Alex Tkachev](https://alextkachev.com/).
+Sanity Astro Club is a free Astro template for showcasing artworks or any other digital product.
+At first, an experimental proof of concept built by [Codrops](https://www.codrops.com) in collaboration with [Alex Tkachev](https://alextkachev.com/).
 [Soufiane](https://soufianee.com) then enhanced the template with the addition of an extendable [Sanity](https://sanity.io/) Studio to handle content and a simple [Polar](https://polar.sh/) API integration for generating checkout sessions.
 
 ![Image Title](https://cdn.sanity.io/images/awmb54he/production/f785e514977a6c57e1f9a32dd8e73e8083e1d1dc-2879x1698.png)
@@ -49,7 +50,7 @@ Follow Soufiane [Bluesky](https://bsky.app/profile/soufianee.com), [GitHub](http
 [MIT](LICENSE)
 
 Made with :blue_heart: by [Codrops](https://www.codrops.com)
-Extended with :yellow_hear: by [Soufiane](https://soufianee.com)
+Extended with :yellow_heart: by [Soufiane](https://soufianee.com)
 
 ## Deployment and Configuration
 
@@ -85,3 +86,4 @@ Contact me via email [jazsouf@pm.me](mailto:jazsouf@pm.me) or dm on bluesky if y
 ## Next steps
 
 - [ ] Add cart functionality w/ Astro sessions
+- [ ] Rewrite scripts in Typescript
