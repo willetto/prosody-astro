@@ -1,11 +1,17 @@
 ---
-// Assets
-import { Image } from "astro:assets";
-import Dashboard from "@/images/assets/dashboard.jpg";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import Link from "@/components/fundations/elements/Link.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import SanityImage from "@/components/fundations/elements/SanityImage.astro";
+import type { Hero } from "@/data/sanity";
+
+interface Props {
+  hero?: Hero;
+}
+
+const { hero } = Astro.props as Props;
+
 ---
 
 <section>
@@ -18,27 +24,28 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
             variant="displayMD"
             class="font-serif font-medium tracking-tight text-black"
           >
-            Email that actually lands — not lost in some spam void
+            {hero?.header || "Email that actually lands — not lost in some spam void"}
           </Text>
           <Text tag="p" variant="textBase" class="max-w-xl mt-4 text-base-500">
-            No more guessing games. Your emails get delivered, show up where
-            they should, and scale like a champ.
+            {hero?.subheader || "No more guessing games. Your emails get delivered, show up where they should, and scale like a champ."}
           </Text>
         </div>
 
-        <div
-          class="flex flex-wrap items-center justify-center w-full mt-10 just gap-2"
-        >
-          <Link size="sm" variant="accent" href="#_">Get started</Link>
-          <Link size="sm" variant="muted" href="#_">Start free trial</Link
-          >
+        <div class="flex flex-wrap items-center justify-center w-full mt-10 just gap-2">
+          {(hero?.primaryCtaLabel && hero?.primaryCtaHref) && (
+            <Link size="sm" variant="accent" href={hero.primaryCtaHref}>{hero.primaryCtaLabel}</Link>
+          )}
+          {(hero?.secondaryCtaLabel && hero?.secondaryCtaHref) && (
+            <Link size="sm" variant="muted" href={hero.secondaryCtaHref}>{hero.secondaryCtaLabel}</Link>
+          )}
         </div>
       </div>
-      <Image
-        src={Dashboard}
-        alt="Dashboard"
-        class="w-full h-auto rounded-xl lg:col-span-2 lg:-mb-12"
-      />
+      {hero?.image?.asset?._ref && (
+        <SanityImage
+          image={hero.image}
+          class="w-full h-auto rounded-xl lg:col-span-2 lg:-mb-12"
+        />
+      )}
     </div>
   </Wrapper>
 </section>

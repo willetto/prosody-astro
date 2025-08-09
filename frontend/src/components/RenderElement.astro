@@ -1,0 +1,40 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Link from "@/components/fundations/elements/Link.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import ShareButtons from "@/components/fundations/elements/ShareButtons.astro";
+import type { UiElement } from "@/data/sanity";
+import SanityImage from "@/components/fundations/elements/SanityImage.astro";
+
+interface Props {
+  el: UiElement;
+}
+
+const { el } = Astro.props as Props;
+---
+
+{el._type === "uiText"
+  ? (() => {
+      const { text, variant = "textBase", tag = "p", class: className, ...rest } = el as any;
+      return <Text tag={tag} variant={variant} class={className} {...rest}>{text}</Text>;
+    })()
+  : el._type === "uiLink"
+  ? (() => {
+      const { label, class: className, ariaLabel, ...rest } = el as any;
+      return <Link aria-label={ariaLabel} class={className} {...rest}>{label}</Link>;
+    })()
+  : el._type === "uiButton"
+  ? (() => {
+      const { label, class: className, ariaLabel, ...rest } = el as any;
+      return <Button aria-label={ariaLabel} class={className} {...rest}>{label}</Button>;
+    })()
+  : el._type === "uiShareButtons"
+  ? <ShareButtons {...(el as any)} />
+  : el._type === "uiImage"
+  ? (() => {
+      const { image, width, height, class: className, loading } = el as any;
+      return <SanityImage image={image} width={width} height={height} class={className} loading={loading} />;
+    })()
+  : null}
+
+
