@@ -13,8 +13,8 @@ export const hero2 = defineType({
     }),
     defineField({
       name: "subheader",
-      title: "Subheader",
-      type: "text",
+      title: "Subheader (Rich text)",
+      type: "portableText",
     }),
     defineField({
       name: "primaryCtaLabel",
@@ -46,12 +46,23 @@ export const hero2 = defineType({
   preview: {
     select: {
       title: "header",
-      subtitle: "subheader",
+      subheader: "subheader",
     },
-    prepare({ title, subtitle }) {
+    prepare({ title, subheader }) {
+      let subtitle: string | undefined = undefined;
+      if (Array.isArray(subheader) && subheader.length > 0) {
+        const firstBlock = subheader.find((b: any) => b?._type === "block");
+        if (firstBlock && Array.isArray(firstBlock.children)) {
+          subtitle = firstBlock.children
+            .map((c: any) => c?.text)
+            .filter(Boolean)
+            .join("")
+            .slice(0, 120);
+        }
+      }
       return {
         title: title || "Hero 2",
-        subtitle: subtitle || undefined,
+        subtitle,
       };
     },
   },

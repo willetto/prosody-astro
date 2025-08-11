@@ -3,6 +3,7 @@
 import Logo from "@/components/assets/Logo.astro";
 import Link from "@/components/fundations/elements/Link.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "../fundations/elements/Text.astro";
 const navigationLinks = [
   {
     title: "Overview",
@@ -17,7 +18,7 @@ const navigationLinks = [
 
 <div
   id="nav-wrapper"
-  class="fixed inset-x-0 top-0 z-50 w-full mx-auto bg-white border-b border-dashed border-base-200"
+  class="fixed inset-x-0 top-0 z-50 w-full mx-auto border-b border-dashed border-blue-200"
 >
   <Wrapper id="second-wrapper" variant="standard" class="py-4">
     <div
@@ -25,9 +26,10 @@ const navigationLinks = [
       class="relative flex flex-col md:items-center md:justify-between md:flex-row"
     >
       <div class="flex flex-row items-center justify-between">
-        <a href="/">
+        <a href="/" class="flex flex-col gap-1 brand-name">
           <span class="sr-only">Go to homepage</span>
-          <Logo class="h-6 text-base-800" />
+          <span class="font-brand text-4xl tracking-tight text-black">Prosody</span>
+          <span class="font-secondary text-2xl tracking-tight text-black">Digital</span>
         </a>
         <button
           id="menu-toggle"
@@ -142,3 +144,18 @@ const navigationLinks = [
     menuClose.addEventListener("click", () => toggleMenu(false));
   });
 </script>
+
+<style>
+  #nav-wrapper{
+    background: light-dark(var(--color-base-100), var(--color-base-900));
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+  .brand-name *{
+    text-box: trim-both cap alphabetic;
+    transition: color 0.2s ease-in-out;
+    color: light-dark(var(--color-base-900), var(--color-base-100));
+  }
+  .brand-name:hover *, .brand-name:focus-visible *{
+    color: var(--color-accent-500);
+  }
+</style>

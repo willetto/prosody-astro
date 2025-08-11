@@ -20,7 +20,7 @@ const { hideNav = false, hideFooter = false } = Astro.props;
   <head>
     <BaseHead />
   </head>
-  <body class="relative flex flex-col bg-white min-h-svh">
+  <body>
     { !hideNav && <Navigation /> }
 
     <main class="grow">
@@ -30,3 +30,14 @@ const { hideNav = false, hideFooter = false } = Astro.props;
     { !hideFooter && <Footer /> }
   </body>
 </html>
+
+<style>
+  body{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    background-color: light-dark(var(--color-base-100), var(--color-base-900));    
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+</style>

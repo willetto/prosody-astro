@@ -2,7 +2,11 @@
 // Using native <img> because src is a remote Sanity CDN URL
 
 interface Props {
-  image: { asset?: { _ref?: string }; alt?: string };
+  image: {
+    asset?: { _ref?: string; _id?: string; altText?: string };
+    assetAltText?: string;
+    alt?: string;
+  };
   width?: number;
   height?: number;
   class?: string;
@@ -14,7 +18,7 @@ const { image, width, height, class: className, loading = "lazy" } = Astro.props
 const projectId = import.meta.env.SANITY_STUDIO_PROJECT_ID;
 const dataset = import.meta.env.SANITY_STUDIO_DATASET || "production";
 
-const assetRef: string | undefined = image?.asset?._ref;
+const assetRef: string | undefined = image?.asset?._ref || image?.asset?._id;
 
 function sanityRefToUrl(ref?: string): string | null {
   // Ref format: image-<fileId>-<dimensions>-<format>
@@ -29,7 +33,7 @@ function sanityRefToUrl(ref?: string): string | null {
 }
 
 const src = sanityRefToUrl(assetRef);
-const alt = image?.alt || "";
+const alt = image?.alt || image?.assetAltText || image?.asset?.altText || "";
 ---
 
 {src ? (

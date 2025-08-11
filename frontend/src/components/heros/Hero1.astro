@@ -4,6 +4,7 @@ import Text from "@/components/fundations/elements/Text.astro";
 import Link from "@/components/fundations/elements/Link.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import SanityImage from "@/components/fundations/elements/SanityImage.astro";
+import PortableText from "@/components/fundations/elements/PortableText.astro";
 import type { Hero } from "@/data/sanity";
 
 interface Props {
@@ -13,26 +14,29 @@ interface Props {
 const { hero } = Astro.props as Props;
 ---
 
-<section>
+<section class="hero-1">
   <Wrapper variant="standard" class="pt-32 pb-4">
-    <div class="text-center text-balance">
+    <div class="text-left text-balance">
       <Text
         tag="h1"
         variant="displayMD"
-        class="font-serif font-medium tracking-tight text-black"
+        class="font-serif font-medium tracking-tight text-heading-text-color"
       >
-        {hero?.header || "Email delivery that doesn’t suck and won’t vanish into the spam abyss"}
+        {hero?.header || "Hero Header Text"}
       </Text>
-      <Text
-        tag="p"
-        variant="textBase"
-        class="max-w-xl mx-auto mt-4 text-base-500"
-      >
-        {hero?.subheader || "Stop wondering if your transactional and marketing emails made it. Send at scale, hit inboxes, and skip the mystery."}
-      </Text>
+      
+      {Array.isArray(hero?.subheader) && hero.subheader.length > 0 ? (
+        <div class="prose max-w-xl mt-4 text-body-text-color prose-p:m-0 prose-p:mb-3">
+          <PortableText value={hero.subheader} />
+        </div>
+      ) : (typeof hero?.subheader === "string" && hero.subheader) ? (
+        <Text tag="p" variant="textBase" class="max-w-xl mt-4 text-body-text-color">
+          {hero.subheader}
+        </Text>
+      ) : null}
     </div>
     <div
-      class="flex flex-wrap items-center justify-center w-full mt-10 just gap-2"
+      class="flex flex-wrap items-start justify-center w-full mt-10 just gap-2"
     >
       {(hero?.primaryCtaLabel && hero?.primaryCtaHref) && (
         <Link size="sm" variant="accent" href={hero.primaryCtaHref}>{hero.primaryCtaLabel}</Link>

@@ -8,6 +8,7 @@ export const HERO_FIELDS = `
   secondaryCtaHref,
   image {
     asset,
+    "assetAltText": asset->altText,
     alt
   }
 `;

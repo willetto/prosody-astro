@@ -91,7 +91,7 @@ export type UiElement = UiButton | UiLink | UiText | UiShareButtons | UiImage;
 export type Hero = {
   _type: "hero1" | "hero2";
   header?: string;
-  subheader?: string;
+  subheader?: any[]; // Portable Text blocks
   primaryCtaLabel?: string;
   primaryCtaHref?: string;
   secondaryCtaLabel?: string;
