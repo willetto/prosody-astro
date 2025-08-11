@@ -1,0 +1,37 @@
+---
+interface Props {
+  icon: {
+    assetUrl?: string;
+    alt?: string;
+  };
+  size?: "sm" | "base" | "lg";
+  class?: string;
+}
+
+const { icon, size = "base", class: className = "" } = Astro.props;
+
+// Size classes mapping
+const sizeClasses = {
+  sm: "size-4",
+  base: "size-8",
+  lg: "size-12",
+};
+
+const sizeClass = sizeClasses[size];
+---
+
+{icon?.assetUrl ? (
+  <div class={`icon-renderer custom-icon ${sizeClass} ${className}`}>
+    <img 
+      src={icon.assetUrl} 
+      alt={icon.alt || "Icon"} 
+      class={`w-full h-full object-contain ${className}`}
+    />
+  </div>
+) : (
+  <div class={`icon-renderer placeholder-icon ${sizeClass} ${className} bg-gray-200 rounded`}>
+    <div class="w-full h-full flex items-center justify-center text-gray-400 text-xs">
+      Icon
+    </div>
+  </div>
+)}

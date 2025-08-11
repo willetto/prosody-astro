@@ -25,8 +25,19 @@ export const page = defineType({
       name: "sections",
       title: "Sections",
       type: "array",
-      of: [{ type: "hero1" }, { type: "hero2" }],
-      description: "Add hero sections to compose this page.",
+      of: [
+        { type: "hero1" },
+        { type: "hero2" },
+        { type: "feature1" },
+        { type: "feature2" },
+        { type: "feature3" },
+        { type: "feature4" },
+        { type: "feature5" },
+        { type: "feature6" },
+        { type: "feature7" },
+      ],
+      description:
+        "Add sections to compose this page. Sections will be rendered in the order they appear here.",
     }),
   ],
   preview: {

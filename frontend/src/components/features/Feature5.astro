@@ -2,22 +2,41 @@
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import PortableText from "@/components/fundations/elements/PortableText.astro";
+
+interface Props {
+  feature?: {
+    header?: string;
+    subheading?: any[];
+  };
+}
+
+const { feature } = Astro.props;
+const { header, subheading } = feature || {};
+
+// Don't render if no feature data
+if (!feature) {
+  return null;
+}
 ---
-<section>
+
+<section class="feature-5">
   <Wrapper variant="standard" class="pt-12 pb-4 border-t">
-    <div class="text-balance">
-      <Text
-        tag="h2"
-        variant="displaySM"
-        class="font-serif font-medium tracking-tight text-black"
-      >
-        Built by developers who were sick of broken email APIs
-      </Text>
-      <Text tag="p" variant="textBase" class="mt-4 text-base-500">
-        We got tired of wrestling with clunky tools, so we built the email
-        platform we always wanted — fast, clean, and actually works without
-        swearing at your terminal.
-      </Text>
-    </div>
+    {header && (
+      <div class="text-balance">
+        <Text
+          tag="h2"
+          variant="displaySM"
+          class="font-serif font-medium tracking-tight text-black feature-header"
+        >
+          {header}
+        </Text>
+        {subheading && (
+          <div class="mt-4 text-base-500 feature-subheading">
+            <PortableText value={subheading} />
+          </div>
+        )}
+      </div>
+    )}
   </Wrapper>
 </section>

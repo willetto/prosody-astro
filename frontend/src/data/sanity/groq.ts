@@ -12,3 +12,126 @@ export const HERO_FIELDS = `
     alt
   }
 `;
+
+export const FEATURE1_FIELDS = `
+  _type,
+  header,
+  subheading,
+  codeTabs[] {
+    id,
+    label,
+    icon {
+      asset,
+      "assetUrl": asset->url,
+      alt
+    },
+    language,
+    code
+  }
+`;
+
+export const FEATURE2_FIELDS = `
+  _type,
+  header,
+  subheading,
+  features[] {
+    id,
+    title,
+    description,
+    icon {
+      asset,
+      "assetUrl": asset->url,
+      alt
+    }
+  }
+`;
+
+export const FEATURE3_FIELDS = `
+  _type,
+  header,
+  subheading,
+  customerTestimonial {
+    _ref,
+    title,
+    slug,
+    image {
+      asset,
+      "assetUrl": asset->url,
+      alt
+    }
+  }
+`;
+
+export const FEATURE4_FIELDS = `
+  _type,
+  header,
+  subheading,
+  firstFeature {
+    icon {
+      asset,
+      "assetUrl": asset->url,
+      alt
+    },
+    title,
+    subheading,
+    ctaLabel,
+    ctaHref
+  },
+  secondFeature {
+    icon {
+      asset,
+      "assetUrl": asset->url,
+      alt
+    },
+    title,
+    subheading,
+    ctaLabel,
+    ctaHref
+  }
+`;
+
+export const FEATURE5_FIELDS = `
+  _type,
+  header,
+  subheading
+`;
+
+export const FEATURE6_FIELDS = `
+  _type,
+  header,
+  subheading,
+  codeTabs[] {
+    id,
+    label,
+    language,
+    code
+  }
+`;
+
+export const FEATURE7_FIELDS = `
+  _type,
+  header,
+  subheading,
+  features[] {
+    id,
+    title,
+    description,
+    icon {
+      asset,
+      "assetUrl": asset->url,
+      alt
+    }
+  }
+`;
+
+export const ALL_SECTION_FIELDS = `
+  _type,
+  ${HERO_FIELDS},
+  ${FEATURE1_FIELDS},
+  ${FEATURE2_FIELDS},
+  ${FEATURE3_FIELDS},
+  ${FEATURE4_FIELDS},
+  ${FEATURE5_FIELDS},
+  ${FEATURE6_FIELDS},
+  ${FEATURE7_FIELDS}
+`;

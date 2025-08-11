@@ -5,13 +5,24 @@ import Link from "@/components/fundations/elements/Link.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import SanityImage from "@/components/fundations/elements/SanityImage.astro";
 import PortableText from "@/components/fundations/elements/PortableText.astro";
-import type { Hero } from "@/data/sanity";
 
 interface Props {
-  hero?: Hero;
+  feature?: {
+    header?: string;
+    subheader?: any[];
+    primaryCtaLabel?: string;
+    primaryCtaHref?: string;
+    secondaryCtaLabel?: string;
+    secondaryCtaHref?: string;
+    image?: {
+      asset?: { _ref?: string };
+      assetAltText?: string;
+      alt?: string;
+    };
+  };
 }
 
-const { hero } = Astro.props as Props;
+const { feature } = Astro.props as Props;
 ---
 
 <section class="hero-1">
@@ -22,32 +33,32 @@ const { hero } = Astro.props as Props;
         variant="displayMD"
         class="font-serif font-medium tracking-tight text-heading-text-color"
       >
-        {hero?.header || "Hero Header Text"}
+        {feature?.header || "Hero Header Text"}
       </Text>
       
-      {Array.isArray(hero?.subheader) && hero.subheader.length > 0 ? (
+      {Array.isArray(feature?.subheader) && feature.subheader.length > 0 ? (
         <div class="prose max-w-xl mt-4 text-body-text-color prose-p:m-0 prose-p:mb-3">
-          <PortableText value={hero.subheader} />
+          <PortableText value={feature.subheader} />
         </div>
-      ) : (typeof hero?.subheader === "string" && hero.subheader) ? (
+      ) : (typeof feature?.subheader === "string" && feature.subheader) ? (
         <Text tag="p" variant="textBase" class="max-w-xl mt-4 text-body-text-color">
-          {hero.subheader}
+          {feature.subheader}
         </Text>
       ) : null}
     </div>
     <div
       class="flex flex-wrap items-start justify-center w-full mt-10 just gap-2"
     >
-      {(hero?.primaryCtaLabel && hero?.primaryCtaHref) && (
-        <Link size="sm" variant="accent" href={hero.primaryCtaHref}>{hero.primaryCtaLabel}</Link>
+      {(feature?.primaryCtaLabel && feature?.primaryCtaHref) && (
+        <Link size="sm" variant="accent" href={feature.primaryCtaHref}>{feature.primaryCtaLabel}</Link>
       )}
-      {(hero?.secondaryCtaLabel && hero?.secondaryCtaHref) && (
-        <Link size="sm" variant="muted" href={hero.secondaryCtaHref}>{hero.secondaryCtaLabel}</Link>
+      {(feature?.secondaryCtaLabel && feature?.secondaryCtaHref) && (
+        <Link size="sm" variant="muted" href={feature.secondaryCtaHref}>{feature.secondaryCtaLabel}</Link>
       )}
     </div>
-    {hero?.image?.asset?._ref && (
+    {feature?.image?.asset?._ref && (
       <div class="mt-8">
-        <SanityImage image={hero.image} class="w-full h-auto rounded-xl" />
+        <SanityImage image={feature.image} class="w-full h-auto rounded-xl" />
       </div>
     )}
   </Wrapper>

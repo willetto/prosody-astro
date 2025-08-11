@@ -4,22 +4,25 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 // Sections
 import Hero1 from "@/components/heros/Hero1.astro";
 import Hero2 from "@/components/heros/Hero2.astro";
-import LogoCloud1 from "@/components/testimonials/LogoCloud1.astro";
 import Feature1 from "@/components/features/Feature1.astro";
 import Feature2 from "@/components/features/Feature2.astro";
 import Feature3 from "@/components/features/Feature3.astro";
 import Feature4 from "@/components/features/Feature4.astro";
+import Feature5 from "@/components/features/Feature5.astro";
+import Feature6 from "@/components/features/Feature6.astro";
+import Feature7 from "@/components/features/Feature7.astro";
+import LogoCloud1 from "@/components/testimonials/LogoCloud1.astro";
 import Cta1 from "@/components/ctas/Cta1.astro";
 import Pricing1 from "@/components/pricing/Pricing1.astro";
 import Testimonial1 from "@/components/testimonials/Testimonial1.astro";
 
 // Sanity
 import { sanityClient } from "@/data/sanity/fetch";
-import { HERO_FIELDS } from "@/data/sanity/groq";
+import { ALL_SECTION_FIELDS } from "@/data/sanity/groq";
 
-type Hero = {
-  _type: "hero1" | "hero2";
-  children?: any[];
+type Section = {
+  _type: string;
+  [key: string]: any;
 };
 
 const homeSlugCandidates = ["/", "home", "index"] as const;
@@ -27,11 +30,11 @@ const homeSlugCandidates = ["/", "home", "index"] as const;
 const query = `*[_type == "page" && slug.current in $slugs]{
   slug,
   sections[]{
-    ${HERO_FIELDS}
+    ${ALL_SECTION_FIELDS}
   }
 }`;
 
-type PageDoc = { slug?: { current?: string }; sections?: any[] };
+type PageDoc = { slug?: { current?: string }; sections?: Section[] };
 
 const pages = (await sanityClient
   .fetch<PageDoc[]>(query, { slugs: homeSlugCandidates })
@@ -45,9 +48,22 @@ const selectedPage = homeSlugCandidates
   .map((s) => pages.find((p) => p?.slug?.current === s))
   .find((p) => !!p) || null;
 
-const heroSections: Hero[] = Array.isArray(selectedPage?.sections)
-  ? selectedPage.sections.filter((s: any) => s?._type === "hero1" || s?._type === "hero2")
+const sections: Section[] = Array.isArray(selectedPage?.sections)
+  ? selectedPage.sections
   : [];
+
+// Section component mapping
+const sectionComponents = {
+  hero1: Hero1,
+  hero2: Hero2,
+  feature1: Feature1,
+  feature2: Feature2,
+  feature3: Feature3,
+  feature4: Feature4,
+  feature5: Feature5,
+  feature6: Feature6,
+  feature7: Feature7,
+};
 
 // Minimal debug: summarize what we received from Sanity
 try {
@@ -55,47 +71,27 @@ try {
     triedSlugs: [...homeSlugCandidates],
     foundPages: pages.map((p) => p?.slug?.current),
     selectedSlug: selectedPage?.slug?.current ?? null,
-    sectionsCount: Array.isArray(selectedPage?.sections) ? selectedPage.sections.length : 0,
-    sectionTypes: Array.isArray(selectedPage?.sections)
-      ? selectedPage.sections.map((s: any) => s?._type)
-      : null,
-    heroSectionsCount: heroSections.length,
-    heroTypes: heroSections.map((h: any) => h?._type),
-    imageItems: Array.isArray(selectedPage?.sections)
-      ? selectedPage.sections
-          .flatMap((s: any) => Array.isArray(s?.children) ? s.children : [])
-          .filter((c: any) => c?._type === "uiImage")
-          .map((img: any) => ({
-            hasAsset: !!img?.image?.asset?._ref,
-            width: img?.width,
-            height: img?.height,
-            alt: img?.image?.alt || null,
-          }))
-      : [],
+    sectionsCount: sections.length,
+    sectionTypes: sections.map((s) => s?._type),
   };
   console.debug("[Sanity] Home page resolution:", debugSummary);
   if (!selectedPage) {
     console.warn("[Sanity] No home page found for any of:", homeSlugCandidates);
-  } else if (debugSummary.heroSectionsCount === 0) {
-    console.warn("[Sanity] No hero sections found on home page slug:", debugSummary.selectedSlug);
+  } else if (sections.length === 0) {
+    console.warn("[Sanity] No sections found on home page slug:", debugSummary.selectedSlug);
   }
 } catch {}
 ---
 
 <BaseLayout>
-
-  {heroSections.length > 0 && (
-    heroSections.map((section) => (
-      section._type === "hero1" ? <Hero1 hero={section} /> :
-      section._type === "hero2" ? <Hero2 hero={section} /> : null
-    ))
-  )}
-  <Feature1 />
-  <Feature2 />
-  <Feature3 />
-  <Feature4 />
-  <Cta1 />
-  <Pricing1 />
-  <Testimonial1 />
-
+  {sections.map((section) => {
+    const Component = sectionComponents[section._type];
+    if (!Component) {
+      console.warn(`[Sanity] Unknown section type: ${section._type}`);
+      return null;
+    }
+    
+    // Pass the section data as props to the component
+    return <Component feature={section} />;
+  })}
 </BaseLayout>
