@@ -7,14 +7,14 @@
   font-weight: 600;
   font-style: normal;
   font-display: block;
-  src: url("fonts/Benditos.woff") format("woff");
+  src: url("/fonts/Benditos.woff") format("woff");
 }
 @font-face {
   font-family: "Big Bird";
   font-weight: 600;
-  font-style: none;
+  font-style: normal;
   font-display: block;
-  src: url("fonts/BigBird.woff") format("woff");
+  src: url("/fonts/BigBird.woff") format("woff");
 }
 @theme {
   /* Typography */

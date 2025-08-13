@@ -183,14 +183,6 @@ declare module 'astro:content' {
   rendered?: RenderedContent;
   filePath?: string;
 }>;
-"customers": Record<string, {
-  id: string;
-  body?: string;
-  collection: "customers";
-  data: any;
-  rendered?: RenderedContent;
-  filePath?: string;
-}>;
 "helpcenter": Record<string, {
   id: string;
   render(): Render[".md"];

@@ -78,9 +78,6 @@ importers:
       '@sanity/icons':
         specifier: ^3.7.0
         version: 3.7.0(react@19.1.0)
-      '@sanity/studio-secrets':
-        specifier: ^3.0.1
-        version: 3.0.1(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.0(react@19.1.0))(react-is@18.3.1)(react@19.1.0)(sanity@3.85.1(@emotion/is-prop-valid@1.2.2)(@types/node@22.13.17)(@types/react@19.1.0)(immer@10.1.1)(jiti@2.5.1)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(yaml@2.7.1))(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@sanity/ui':
         specifier: ^2.15.13
         version: 2.15.13(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.0(react@19.1.0))(react-is@18.3.1)(react@19.1.0)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
@@ -1981,14 +1978,6 @@ packages:
   '@sanity/sdk@0.0.0-alpha.25':
     resolution: {integrity: sha512-sb5IeEszGCVFF2J+EGaPe1wUuZzErUXikIYewhbPR+3uCu1096Xh8R2dBJ1ekiU8ZjUKUOrWnHWz30XdgeGGcw==}
     engines: {node: '>=20.0.0'}
-
-  '@sanity/studio-secrets@3.0.1':
-    resolution: {integrity: sha512-r9X/2t0xA5HHZyWZQvj8QQTE/mOm0Y5PsoZLKffMERvr8cDpRXYmzr33rRv5teMcWWUwYBMurcoGe29twvFDMA==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      react: ^18.2.0 || ^19
-      sanity: ^3.36.4
-      styled-components: ^6.1
 
   '@sanity/telemetry@0.8.1':
     resolution: {integrity: sha512-YybPb6s3IO2HmHZ4dLC3JCX+IAwAnVk5/qmhH4CWbC3iL/VsikRbz4FfOIIIt0cj2UOKrahL/wpSPBR/3quQzg==}
@@ -9182,18 +9171,6 @@ snapshots:
       - immer
       - react
       - use-sync-external-store
-
-  '@sanity/studio-secrets@3.0.1(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.0(react@19.1.0))(react-is@18.3.1)(react@19.1.0)(sanity@3.85.1(@emotion/is-prop-valid@1.2.2)(@types/node@22.13.17)(@types/react@19.1.0)(immer@10.1.1)(jiti@2.5.1)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(yaml@2.7.1))(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))':
-    dependencies:
-      '@sanity/incompatible-plugin': 1.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@sanity/ui': 2.15.13(@emotion/is-prop-valid@1.2.2)(react-dom@19.1.0(react@19.1.0))(react-is@18.3.1)(react@19.1.0)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
-      react: 19.1.0
-      sanity: 3.85.1(@emotion/is-prop-valid@1.2.2)(@types/node@22.13.17)(@types/react@19.1.0)(immer@10.1.1)(jiti@2.5.1)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(yaml@2.7.1)
-      styled-components: 6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-    transitivePeerDependencies:
-      - '@emotion/is-prop-valid'
-      - react-dom
-      - react-is
 
   '@sanity/telemetry@0.8.1(react@19.1.0)':
     dependencies:
