@@ -155,7 +155,21 @@ const navigationLinks = [
     transition: color 0.2s ease-in-out;
     color: light-dark(var(--color-base-900), var(--color-base-100));
   }
+
+  
+
   .brand-name:hover *, .brand-name:focus-visible *{
     color: var(--color-accent-500);
+  }
+
+  /* Firefox-specific styles */
+  @-moz-document url-prefix() {
+    .brand-name {
+      gap: 0;
+    }
+    .brand-name .font-brand, .brand-name .font-secondary{
+      line-height: 1;
+      margin-bottom: -5px;
+    }
   }
 </style>
