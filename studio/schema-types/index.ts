@@ -1,7 +1,5 @@
-import { creator } from "./creator";
 import { imageWithAlt } from "./image-with-alt";
 import { portableText } from "./portable-text";
-import { product } from "./product";
 import { uiButton } from "./ui/ui-button";
 import { uiLink } from "./ui/ui-link";
 import { uiText } from "./ui/ui-text";
@@ -18,12 +16,9 @@ import { feature5 } from "./sections/feature5";
 import { feature6 } from "./sections/feature6";
 import { feature7 } from "./sections/feature7";
 import { iconSelector } from "./icon-selector";
-import { customer } from "./customer";
 import { page } from "./page";
 
 export const schemaTypes = [
-  creator,
-  product,
   imageWithAlt,
   portableText,
   uiButton,
@@ -42,6 +37,5 @@ export const schemaTypes = [
   feature6,
   feature7,
   iconSelector,
-  customer,
   page,
 ];

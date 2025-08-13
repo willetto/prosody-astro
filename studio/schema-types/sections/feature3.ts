@@ -23,25 +23,16 @@ export const feature3 = defineType({
       type: "imageWithAlt",
       description: "Image to display in the feature section",
     }),
-    defineField({
-      name: "customerTestimonial",
-      title: "Customer Testimonial",
-      type: "reference",
-      to: [{ type: "customer" }],
-      description:
-        "Optional customer testimonial to display alongside the feature image",
-    }),
   ],
   preview: {
     select: {
       title: "header",
       image: "image",
-      customer: "customerTestimonial.title",
     },
-    prepare({ title, image, customer }) {
+    prepare({ title, image }) {
       return {
         title: title || "Feature 3 - Image",
-        subtitle: customer ? `with ${customer}` : "Image only",
+        subtitle: "Image feature",
         media: image,
       };
     },

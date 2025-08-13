@@ -1,8 +1,8 @@
-# Sanity Astro Club: A Free Astro Template for Showcasing And Selling Digital Products
+# Sanity Astro Club: A Free Astro Template for Showcasing Digital Products
 
 Sanity Astro Club is a free Astro template for showcasing artworks or any other digital product.
 At first, an experimental proof of concept built by [Codrops](https://www.codrops.com) in collaboration with [Alex Tkachev](https://alextkachev.com/).
-[Soufiane](https://soufianee.com) then enhanced the template with the addition of an extendable [Sanity](https://sanity.io/) Studio to handle content and a simple [Polar](https://polar.sh/) API integration for generating checkout sessions.
+[Soufiane](https://soufianee.com) then enhanced the template with the addition of an extendable [Sanity](https://sanity.io/) Studio to handle content.
 
 ![Image Title](https://cdn.sanity.io/images/awmb54he/production/f785e514977a6c57e1f9a32dd8e73e8083e1d1dc-2879x1698.png)
 
@@ -76,10 +76,7 @@ pnpm --filter=studio run deploy
 
 ### Configuration
 
-There are <code>env.example</code> files for the studio and frontend folders, with the relevant secrets that need to be filled.
-You need to create a [Polar](https://polar.sh) account, add your products and create an API key with read and write access to checkout_links, checkouts and products.
-You need to add your Polar API key and your Polar Organisation ID in the secret tab inside your [Sanity Studio](https://www.sanity.io/manage).
-You can also need to set up a webhook to trigger rebuilds when content changes.
+There are <code>env.example</code> files for the studio and frontend folders with the relevant environment variables that need to be filled.
 
 Contact me via email [jazsouf@pm.me](mailto:jazsouf@pm.me) or dm on bluesky if you need anything.
 

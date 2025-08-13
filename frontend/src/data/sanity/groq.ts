@@ -50,15 +50,10 @@ export const FEATURE3_FIELDS = `
   _type,
   header,
   subheading,
-  customerTestimonial {
-    _ref,
-    title,
-    slug,
-    image {
-      asset,
-      "assetUrl": asset->url,
-      alt
-    }
+  image {
+    asset,
+    "assetAltText": asset->altText,
+    alt
   }
 `;
 

@@ -4,7 +4,6 @@ import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import PortableText from "@/components/fundations/elements/PortableText.astro";
 import SanityImage from "@/components/fundations/elements/SanityImage.astro";
-import CustomerEntry1 from "@/components/customers/CustomerEntry1.astro";
 
 interface Props {
   feature?: {
@@ -15,20 +14,11 @@ interface Props {
       assetAltText?: string;
       alt?: string;
     };
-    customerTestimonial?: {
-      _ref: string;
-      title: string;
-      slug: string;
-      image: {
-        assetUrl?: string;
-        alt?: string;
-      };
-    };
   };
 }
 
 const { feature } = Astro.props;
-const { header, subheading, image, customerTestimonial } = feature || {};
+const { header, subheading, image } = feature || {};
 
 // Don't render if no feature data
 if (!feature) {
@@ -61,11 +51,6 @@ if (!feature) {
             image={image}
             class="w-full h-auto rounded-xl shadow-sm"
           />
-        </div>
-      )}
-      {customerTestimonial && (
-        <div class="feature-customer-testimonial">
-          <CustomerEntry1 post={customerTestimonial} />
         </div>
       )}
     </div>
