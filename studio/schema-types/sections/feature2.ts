@@ -46,12 +46,11 @@ export const feature2 = defineType({
               rows: 3,
               validation: (rule) => rule.required(),
             }),
-            defineField({
+            defineType({
               name: "icon",
               title: "Icon",
-              type: "iconSelector",
-              description:
-                "Select from available icons or upload custom SVG/PNG",
+              type: "lucide-icon",
+              description: "Search from Lucide Icons",
             }),
           ],
           preview: {

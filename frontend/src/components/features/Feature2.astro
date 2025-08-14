@@ -3,7 +3,6 @@
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import PortableText from "@/components/fundations/elements/PortableText.astro";
-import IconRenderer from "@/components/fundations/elements/IconRenderer.astro";
 
 interface Props {
   feature?: {
@@ -13,16 +12,18 @@ interface Props {
       id: string;
       title: string;
       description: string;
-      icon: {
-        assetUrl?: string;
-        alt?: string;
-      };
+      icon: string;
     }>;
   };
 }
 
+
 const { feature } = Astro.props;
 const { header, subheading, features = [] } = feature || {};
+
+// Debug: inspect icon values coming from CMS
+console.log("Feature2 icons:", features.map((f) => f.icon));
+console.log("Feature2 first icon + type:", features[0]?.icon, typeof features[0]?.icon);
 
 // Don't render if no feature data
 if (!feature || !features || features.length === 0) {
@@ -36,13 +37,13 @@ if (!feature || !features || features.length === 0) {
       <div class="max-w-xl text-balance">
         <Text
           tag="h2"
-          variant="displaySM"
-          class="font-serif font-medium tracking-tight text-black feature-header"
+          variant="displayMD"
+          class="font-serif font-medium tracking-tight feature-header"
         >
           {header}
         </Text>
         {subheading && (
-          <div class="mt-4 text-base-500 feature-subheading">
+          <div class="mt-4 text-base feature-subheading">
             <PortableText value={subheading} />
           </div>
         )}
@@ -55,16 +56,16 @@ if (!feature || !features || features.length === 0) {
         features.map((feature) => (
           <div class="flex flex-col h-full p-4 bg-sand-100 rounded-xl group hover:bg-white hover:shadow-2xl duration-300 outline-transparent hover:outline hover:outline-sand-100 feature-item">
             <div class="inline-flex p-4 bg-white rounded-lg group-hover:bg-sand-100 duration-300 group-hover:-rotate-12 group-hover:-translate-y-2 w-fit feature-icon">
-              <IconRenderer icon={feature.icon} size="base" class="text-accent-500" />
+              
             </div>
             <Text
               tag="h3"
-              variant="textSM"
+              variant="textLG"
               class="mt-12 font-medium text-base-900 feature-title"
             >
               {feature.title}
             </Text>
-            <Text tag="p" variant="textSM" class="mt-2 text-base-500 feature-description">
+            <Text tag="p" variant="text-base" class="mt-2  feature-description">
               {feature.description}
             </Text>
           </div>
@@ -73,3 +74,12 @@ if (!feature || !features || features.length === 0) {
     </div>
   </Wrapper>
 </section>
+
+<style>
+  .feature-header, .feature-title{
+    color: var(--heading-text-color);
+  }
+  .feature-subheading, .feature-description{
+    color: var(--body-text-color);
+  }
+</style>

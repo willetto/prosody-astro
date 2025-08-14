@@ -38,11 +38,7 @@ export const FEATURE2_FIELDS = `
     id,
     title,
     description,
-    icon {
-      asset,
-      "assetUrl": asset->url,
-      alt
-    }
+    icon
   }
 `;
 
@@ -111,11 +107,7 @@ export const FEATURE7_FIELDS = `
     id,
     title,
     description,
-    icon {
-      asset,
-      "assetUrl": asset->url,
-      alt
-    }
+    icon
   }
 `;
 

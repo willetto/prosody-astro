@@ -3,6 +3,7 @@ import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
 import { schemaTypes } from "./schema-types";
 import { media } from "sanity-plugin-media";
+import { lucideIconPicker } from "sanity-plugin-lucide-icon-picker";
 
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID ?? "";
 const dataset = process.env.SANITY_STUDIO_DATASET ?? "production";
@@ -13,6 +14,7 @@ export default defineConfig({
   projectId,
   dataset,
   plugins: [
+    lucideIconPicker(),
     structureTool({
       structure: (S) =>
         S.list()

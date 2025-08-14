@@ -23,7 +23,7 @@ const { hideNav = false, hideFooter = false } = Astro.props;
   <body>
     { !hideNav && <Navigation /> }
 
-    <main class="grow">
+    <main class="grow pt-18">
       <slot />
     </main>
 
@@ -37,7 +37,7 @@ const { hideNav = false, hideFooter = false } = Astro.props;
     display: flex;
     flex-direction: column;
     min-height: 100svh;
-    background-color: light-dark(var(--color-base-100), var(--color-base-900));    
+    background-color: light-dark(var(--color-sand-50), var(--color-base-900));    
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   }
 </style>
