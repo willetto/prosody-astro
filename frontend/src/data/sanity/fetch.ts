@@ -7,9 +7,9 @@ const dataset = import.meta.env.SANITY_STUDIO_DATASET || "production";
 const apiVersion = "2024-01-01";
 
 export const sanityClient = createClient({
-  projectId,
-  dataset,
   apiVersion,
+  dataset,
+  projectId,
   useCdn: true,
 });
 
@@ -29,9 +29,9 @@ export async function fetchHeroByType(
   try {
     const result = await sanityClient.fetch(query, { type });
     console.debug("[Sanity] fetchHeroByType result:", {
-      type,
-      hasResult: !!result,
       hasImage: !!result?.image?.asset?._ref,
+      hasResult: !!result,
+      type,
     });
     return result;
   } catch (err: any) {

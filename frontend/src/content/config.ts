@@ -3,52 +3,52 @@ import { defineCollection, z } from "astro:content";
 const integrations = defineCollection({
   schema: ({ image }) =>
     z.object({
-      email: z.string(),
-      integration: z.string(),
       description: z.string(),
-      permissions: z.array(z.string()),
       details: z.array(
         z.object({
           title: z.string(),
-          value: z.string(),
           url: z.optional(z.string()),
+          value: z.string(),
         })
       ),
+      email: z.string(),
+      integration: z.string(),
       logo: z.object({
-        url: image(),
         alt: z.string(),
+        url: image(),
       }),
+      permissions: z.array(z.string()),
       tags: z.array(z.string()),
     }),
 });
 const helpcenter = defineCollection({
   schema: z.object({
-    iconId: z.string().optional(),
-    page: z.string(),
-    description: z.string(),
     category: z.string().optional(),
-    keywords: z.array(z.string()).optional(),
-    lastUpdated: z.string().optional(),
+    description: z.string(),
     faq: z
       .array(
         z.object({
-          question: z.string(),
           answer: z.string(),
+          question: z.string(),
         })
       )
       .optional(),
+    iconId: z.string().optional(),
+    keywords: z.array(z.string()).optional(),
+    lastUpdated: z.string().optional(),
+    page: z.string(),
   }),
 });
 const changelog = defineCollection({
   schema: ({ image }) =>
     z.object({
-      page: z.string(),
       description: z.string(),
-      pubDate: z.date(),
       image: z.object({
-        url: image(),
         alt: z.string(),
+        url: image(),
       }),
+      page: z.string(),
+      pubDate: z.date(),
     }),
 });
 
@@ -61,19 +61,19 @@ const infopages = defineCollection({
 const team = defineCollection({
   schema: ({ image }) =>
     z.object({
-      name: z.string(),
-      role: z.string().optional(),
       bio: z.string().optional(),
       image: z.object({
-        url: image(),
         alt: z.string(),
+        url: image(),
       }),
+      name: z.string(),
+      role: z.string().optional(),
       socials: z
         .object({
+          email: z.string().optional(),
+          linkedin: z.string().optional(),
           twitter: z.string().optional(),
           website: z.string().optional(),
-          linkedin: z.string().optional(),
-          email: z.string().optional(),
         })
         .optional(),
     }),
@@ -82,23 +82,23 @@ const team = defineCollection({
 const postsCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
-      title: z.string(),
-      pubDate: z.date(),
       description: z.string(),
-      team: z.string(),
       image: z.object({
-        url: image(),
         alt: z.string(),
+        url: image(),
       }),
+      pubDate: z.date(),
       tags: z.array(z.string()),
+      team: z.string(),
+      title: z.string(),
     }),
 });
 
 export const collections = {
-  team: team,
   changelog: changelog,
-  infopages: infopages,
   helpcenter: helpcenter,
-  posts: postsCollection,
+  infopages: infopages,
   integrations: integrations,
+  posts: postsCollection,
+  team: team,
 };

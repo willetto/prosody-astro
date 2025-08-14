@@ -1,5 +1,5 @@
-// UPDATE ICON LIST IN STUDIO SCHEMA TYPES ALSO:
-// studio/schema-types/allowed-icons.ts
+// UPDATE ICON LIST IN STUDIO SCHEMA TYPES in studio/schema-types/allowed-icons.ts
+// ALSO UPDATE IMPORTS AND MAPPING IN LucideIcon.astro
 
 export const ALLOWED_ICONS = [
   "brain-circuit",

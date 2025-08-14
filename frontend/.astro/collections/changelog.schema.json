@@ -4,10 +4,26 @@
     "changelog": {
       "type": "object",
       "properties": {
-        "page": {
+        "description": {
           "type": "string"
         },
-        "description": {
+        "image": {
+          "type": "object",
+          "properties": {
+            "alt": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "alt",
+            "url"
+          ],
+          "additionalProperties": false
+        },
+        "page": {
           "type": "string"
         },
         "pubDate": {
@@ -26,31 +42,15 @@
             }
           ]
         },
-        "image": {
-          "type": "object",
-          "properties": {
-            "url": {
-              "type": "string"
-            },
-            "alt": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "url",
-            "alt"
-          ],
-          "additionalProperties": false
-        },
         "$schema": {
           "type": "string"
         }
       },
       "required": [
-        "page",
         "description",
-        "pubDate",
-        "image"
+        "image",
+        "page",
+        "pubDate"
       ],
       "additionalProperties": false
     }

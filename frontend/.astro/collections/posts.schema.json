@@ -4,8 +4,24 @@
     "posts": {
       "type": "object",
       "properties": {
-        "title": {
+        "description": {
           "type": "string"
+        },
+        "image": {
+          "type": "object",
+          "properties": {
+            "alt": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "alt",
+            "url"
+          ],
+          "additionalProperties": false
         },
         "pubDate": {
           "anyOf": [
@@ -23,45 +39,29 @@
             }
           ]
         },
-        "description": {
-          "type": "string"
-        },
-        "team": {
-          "type": "string"
-        },
-        "image": {
-          "type": "object",
-          "properties": {
-            "url": {
-              "type": "string"
-            },
-            "alt": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "url",
-            "alt"
-          ],
-          "additionalProperties": false
-        },
         "tags": {
           "type": "array",
           "items": {
             "type": "string"
           }
         },
+        "team": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
         "$schema": {
           "type": "string"
         }
       },
       "required": [
-        "title",
-        "pubDate",
         "description",
-        "team",
         "image",
-        "tags"
+        "pubDate",
+        "tags",
+        "team",
+        "title"
       ],
       "additionalProperties": false
     }

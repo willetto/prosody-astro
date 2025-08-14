@@ -4,20 +4,8 @@
     "integrations": {
       "type": "object",
       "properties": {
-        "email": {
-          "type": "string"
-        },
-        "integration": {
-          "type": "string"
-        },
         "description": {
           "type": "string"
-        },
-        "permissions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         },
         "details": {
           "type": "array",
@@ -27,10 +15,10 @@
               "title": {
                 "type": "string"
               },
-              "value": {
+              "url": {
                 "type": "string"
               },
-              "url": {
+              "value": {
                 "type": "string"
               }
             },
@@ -41,21 +29,33 @@
             "additionalProperties": false
           }
         },
+        "email": {
+          "type": "string"
+        },
+        "integration": {
+          "type": "string"
+        },
         "logo": {
           "type": "object",
           "properties": {
-            "url": {
+            "alt": {
               "type": "string"
             },
-            "alt": {
+            "url": {
               "type": "string"
             }
           },
           "required": [
-            "url",
-            "alt"
+            "alt",
+            "url"
           ],
           "additionalProperties": false
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "tags": {
           "type": "array",
@@ -68,12 +68,12 @@
         }
       },
       "required": [
+        "description",
+        "details",
         "email",
         "integration",
-        "description",
-        "permissions",
-        "details",
         "logo",
+        "permissions",
         "tags"
       ],
       "additionalProperties": false
