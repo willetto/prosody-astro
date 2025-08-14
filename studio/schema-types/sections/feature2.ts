@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { ALLOWED_ICONS } from "../allowed-icons";
 
 export const feature2 = defineType({
   name: "feature2",
@@ -51,6 +52,9 @@ export const feature2 = defineType({
               title: "Icon",
               type: "lucide-icon",
               description: "Search from Lucide Icons",
+              options: {
+                allowedIcons: ALLOWED_ICONS,
+              },
             }),
           ],
           preview: {

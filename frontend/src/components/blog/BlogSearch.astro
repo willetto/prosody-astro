@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 // Icons
-import X from "@/components/fundations/icons/X.astro";
-import Search from "@/components/fundations/icons/Search.astro";
+import X from "@/components/foundations/icons/X.astro";
+import Search from "@/components/foundations/icons/Search.astro";
 const posts = await Promise.all(
   (await getCollection("posts")).map(async (post) => ({
     title: post.data.title,

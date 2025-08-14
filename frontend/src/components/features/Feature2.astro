@@ -1,8 +1,10 @@
 ---
-// Fundations
-import Text from "@/components/fundations/elements/Text.astro";
-import Wrapper from "@/components/fundations/containers/Wrapper.astro";
-import PortableText from "@/components/fundations/elements/PortableText.astro";
+// foundations
+import Text from "@/components/foundations/elements/Text.astro";
+import Wrapper from "@/components/foundations/containers/Wrapper.astro";
+import PortableText from "@/components/foundations/elements/PortableText.astro";
+import LucideIcon from "../foundations/elements/LucideIcon.astro";
+import { type AllowedIcon } from "@/data/constants";
 
 interface Props {
   feature?: {
@@ -55,13 +57,13 @@ if (!feature || !features || features.length === 0) {
       {
         features.map((feature) => (
           <div class="flex flex-col h-full p-4 bg-sand-100 rounded-xl group hover:bg-white hover:shadow-2xl duration-300 outline-transparent hover:outline hover:outline-sand-100 feature-item">
-            <div class="inline-flex p-4 bg-white rounded-lg group-hover:bg-sand-100 duration-300 group-hover:-rotate-12 group-hover:-translate-y-2 w-fit feature-icon">
-              
+            <div class="inline-flex p-4 bg-white rounded-lg group-hover:bg-sand-100 duration-300 group-hover:-rotate-12 group-hover:-translate-y--1 w-fit feature-icon">
+              <LucideIcon icon={feature.icon as AllowedIcon} class="text-accent-500" size="base"/>
             </div>
             <Text
               tag="h3"
               variant="textLG"
-              class="mt-12 font-medium text-base-900 feature-title"
+              class="mt-8 font-medium text-base-900 feature-title"
             >
               {feature.title}
             </Text>

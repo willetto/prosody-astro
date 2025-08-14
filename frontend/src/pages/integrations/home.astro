@@ -1,13 +1,13 @@
 ---
-// Fundations
+// foundations
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Text from "@/components/fundations/elements/Text.astro";
-import Link from "@/components/fundations/elements/Link.astro";
-import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/foundations/elements/Text.astro";
+import Link from "@/components/foundations/elements/Link.astro";
+import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 // Components
 import IntegrationsEntries from "@/components/integrations/IntegrationsEntries.astro";
 // Icons
-import ChevronRight from "@/components/fundations/icons/ChevronRight.astro";
+import ChevronRight from "@/components/foundations/icons/ChevronRight.astro";
 // Content
 import { getCollection } from "astro:content";
 const allIntegrations = (await getCollection("integrations")).sort((a, b) =>

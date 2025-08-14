@@ -17,6 +17,7 @@
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.4.0",
     "@astrolib/seo": "^1.0.0-beta.8",
+    "@lucide/astro": "^0.539.0",
     "@sanity/client": "^6.29.0",
     "@sanity/image-url": "^1.1.0",
     "@tailwindcss/vite": "^4.1.7",

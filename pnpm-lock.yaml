@@ -32,6 +32,9 @@ importers:
       '@astrolib/seo':
         specifier: ^1.0.0-beta.8
         version: 1.0.0-beta.8(astro@5.12.9(@types/node@22.13.17)(jiti@2.5.1)(lightningcss@1.30.1)(rollup@4.38.0)(typescript@5.8.3)(yaml@2.7.1))
+      '@lucide/astro':
+        specifier: ^0.539.0
+        version: 0.539.0(astro@5.12.9(@types/node@22.13.17)(jiti@2.5.1)(lightningcss@1.30.1)(rollup@4.38.0)(typescript@5.8.3)(yaml@2.7.1))
       '@sanity/client':
         specifier: ^6.29.0
         version: 6.29.0(debug@4.4.0)
@@ -1584,6 +1587,11 @@ packages:
 
   '@lezer/lr@1.4.2':
     resolution: {integrity: sha512-pu0K1jCIdnQ12aWNaAVU5bzi7Bd1w54J3ECgANPmYLtQKP0HBj2cE/5coBD66MT10xbtIuUr7tg0Shbsvk0mDA==}
+
+  '@lucide/astro@0.539.0':
+    resolution: {integrity: sha512-PCAo48RsERkmyWX+bmssGlu0mb84cP8kLMyc1JuW5pRY4zkx7cnyZMr3RkfPFvDKJZf2/2KPoaZz8j6BjXaXcA==}
+    peerDependencies:
+      astro: ^4 || ^5
 
   '@marijn/find-cluster-break@1.0.2':
     resolution: {integrity: sha512-l0h88YhZFyKdXIFNfSWpyjStDjGHwZ/U7iobcK1cQQD8sejsONdQtTVU+1wVN1PBw40PiiHB1vA5S7VTfQiP9g==}
@@ -8615,6 +8623,10 @@ snapshots:
   '@lezer/lr@1.4.2':
     dependencies:
       '@lezer/common': 1.2.3
+
+  '@lucide/astro@0.539.0(astro@5.12.9(@types/node@22.13.17)(jiti@2.5.1)(lightningcss@1.30.1)(rollup@4.38.0)(typescript@5.8.3)(yaml@2.7.1))':
+    dependencies:
+      astro: 5.12.9(@types/node@22.13.17)(jiti@2.5.1)(lightningcss@1.30.1)(rollup@4.38.0)(typescript@5.8.3)(yaml@2.7.1)
 
   '@marijn/find-cluster-break@1.0.2': {}
 

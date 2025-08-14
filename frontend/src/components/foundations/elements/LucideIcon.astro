@@ -1,0 +1,35 @@
+---
+import { BrainCircuit, PencilRuler, HeartHandshake } from '@lucide/astro';
+// import type { IconProps, SVGAttributes } from '@lucide/astro';
+
+
+import type { AllowedIcon } from '@/data/constants';
+
+interface Props {
+  icon: AllowedIcon;
+  size?: "sm" | "base" | "lg";
+  class?: string;
+}
+
+const { icon, size = "base", class: className } = Astro.props;
+
+// Size classes mapping
+const sizeClasses = {
+  sm: "size-4",
+  base: "size-8",
+  lg: "size-12",
+};
+
+const sizeClass = sizeClasses[size];
+
+// Map icon names to their components
+const iconMap = {
+  'brain-circuit': BrainCircuit,
+  'pencil-ruler': PencilRuler,
+  'heart-handshake': HeartHandshake,
+};
+
+const IconComponent = iconMap[icon];
+---
+
+<IconComponent class={`${sizeClass} ${className}`} />
