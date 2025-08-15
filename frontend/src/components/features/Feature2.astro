@@ -45,7 +45,7 @@ if (!feature || !features || features.length === 0) {
           {header}
         </Text>
         {subheading && (
-          <div class="mt-4 text-base md:text-lg feature-subheading">
+          <div class="mt-4 text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif feature-subheading ">
             <PortableText value={subheading} />
           </div>
         )}
@@ -57,8 +57,8 @@ if (!feature || !features || features.length === 0) {
       {
         features.map((feature, index) => (
           <div class="flex flex-col h-full p-6 bg-sand-100 rounded-xl group hover:bg-white hover:shadow-2xl duration-300 outline-transparent hover:outline hover:outline-sand-100 feature-item">
-            <div class={`inline-flex p-4 bg-white rounded-lg ${index % 2 === 0 ? "group-hover:bg-blue-100" : "group-hover:bg-accent-100"} duration-300 group-hover:-rotate-12 group-hover:-translate-y--1 w-fit feature-icon`}>
-              <LucideIcon icon={feature.icon as AllowedIcon} class={index % 2 === 0 ? "text-blue-500" : "text-accent-500"} size="base"/>
+            <div class={`inline-flex p-4 bg-white rounded-lg ${index % 2 === 0 ? "group-hover:bg-sand-100" : "group-hover:bg-sand-100"} duration-300 group-hover:-rotate-12 group-hover:-translate-y--1 w-fit feature-icon`}>
+              <LucideIcon icon={feature.icon as AllowedIcon} class={index % 2 === 0 ? "text-blue-400" : "text-accent-400"} size="base"/>
             </div>
             <Text
               tag="h3"

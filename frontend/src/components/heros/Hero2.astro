@@ -27,19 +27,20 @@ const { feature } = Astro.props as Props;
 ---
 
 <section class="hero-2">
-  <Wrapper variant="standard" class="pt-31 pb-4 overflow-hidden">
-    <div class="grid gap-12 grid-cols-1 lg:grid-cols-3">
-      <div class="flex flex-col justify-between h-full">
+  <Wrapper variant="standard" class="pt-28 pb-6 overflow-hidden">
+    <!-- TODO: Improve grid system -->
+    <div class="grid gap-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+      <div class="flex flex-col justify-between h-full md:col-span-2">
         <div class="text-left text-balance">
           <Text
             tag="h1"
-            variant="displayMD"
-            class="font-serif font-medium tracking-tight text-heading-text-color"
+            variant="displayLG"
+            class="font-serif font-medium tracking-tight text-heading-text-color text-balance"
           >
             {feature?.header || "Hero Header Text"}
           </Text>
           {Array.isArray(feature?.subheader) && feature.subheader.length > 0 ? (
-            <div class="prose max-w-xl mt-4 text-body-text-color prose-p:m-0 prose-p:mb-3">
+          <div class="mt-4 text-xl md:text-2xl lg:text-3xl font-serif hero-subheading">
               <PortableText value={feature.subheader} />
             </div>
           ) : (
@@ -49,7 +50,7 @@ const { feature } = Astro.props as Props;
           )}
         </div>
 
-        <div class="flex flex-wrap items-center justify-center w-full mt-10 just gap-2">
+        <div class="flex flex-wrap items-center justify-start w-full gap-2">
           {(feature?.primaryCtaLabel && feature?.primaryCtaHref) && (
             <Link size="sm" variant="accent" href={feature.primaryCtaHref}>{feature.primaryCtaLabel}</Link>
           )}
@@ -61,9 +62,15 @@ const { feature } = Astro.props as Props;
       {feature?.image?.asset?._ref && (
         <SanityImage
           image={feature.image}
-          class="w-full h-auto rounded-xl lg:col-span-2 lg:-mb-12"
+          class="w-full h-auto rounded-xl md:col-span-1 lg:col-span-2"
         />
       )}
     </div>
   </Wrapper>
 </section>
+
+<style>
+  .hero-subheading{
+    color: var(--body-text-color);
+  }
+</style>
