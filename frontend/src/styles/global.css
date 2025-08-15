@@ -76,8 +76,14 @@
     var(--color-accent-200),
     var(--color-accent-900)
   );
-  --heading-text-color: light-dark(var(--color-base-900), var(--color-sand-50));
-  --body-text-color: light-dark(var(--color-base-600), var(--color-sand-100));
+  --heading-text-color: light-dark(
+    var(--color-base-900),
+    var(--color-neutral-50)
+  );
+  --body-text-color: light-dark(
+    var(--color-base-600),
+    var(--color-neutral-300)
+  );
 
   /* Keyframes */
   --animate-marquee: marquee 12s linear infinite;
@@ -142,4 +148,10 @@ code .line::before {
 }
 .brand-border {
   border-color: var(--border-x-color) var(--border-y-color);
+}
+.brand-heading-color {
+  color: var(--heading-text-color);
+}
+.brand-text-color {
+  color: var(--body-text-color);
 }

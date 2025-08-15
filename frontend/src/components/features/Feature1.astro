@@ -40,12 +40,12 @@ if (!feature || !codeTabs || codeTabs.length === 0) {
         <Text
           tag="h2"
           variant="displaySM"
-          class="font-serif font-medium tracking-tight text-black feature-header"
+          class="font-serif font-medium tracking-tight brand-heading-color feature-header"
         >
           {header}
         </Text>
         {subheading && (
-          <div class="max-w-xl mx-auto mt-4 text-base-500 feature-subheading">
+          <div class="max-w-xl mx-auto mt-4 brand-text-color feature-subheading">
             <PortableText value={subheading} />
           </div>
         )}
@@ -70,7 +70,7 @@ if (!feature || !codeTabs || codeTabs.length === 0) {
             >
               <IconRenderer icon={tab.icon} class="mx-auto" />
             </div>
-            <span class="mt-2 text-xs text-base-500 feature-tab-label">{tab.label}</span>
+            <span class="mt-2 text-xs brand-text-color feature-tab-label">{tab.label}</span>
           </button>
         ))
       }

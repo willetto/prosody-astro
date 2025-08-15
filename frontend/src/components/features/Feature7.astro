@@ -37,12 +37,12 @@ if (!feature || !features || features.length === 0) {
         <Text
           tag="h2"
           variant="displaySM"
-          class="font-serif font-medium tracking-tight text-black feature-header"
+          class="font-serif font-medium tracking-tight brand-heading-color feature-header"
         >
           {header}
         </Text>
         {subheading && (
-          <div class="mt-4 text-base-500 feature-subheading">
+          <div class="mt-4 brand-text-color feature-subheading">
             <PortableText value={subheading} />
           </div>
         )}
@@ -64,7 +64,7 @@ if (!feature || !features || features.length === 0) {
             >
               {feature.title}
             </Text>
-            <Text tag="p" variant="textSM" class="mt-2 text-base-500 feature-description">
+            <Text tag="p" variant="textSM" class="mt-2 brand-text-color feature-description">
               {feature.description}
             </Text>
           </div>

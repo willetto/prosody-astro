@@ -54,7 +54,7 @@ const footerLinks = [
 <footer class="border-t border-base-200 border-dashed">
   <Wrapper variant="standard" class="py-12">
     <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-      <div class="text-black">
+      <div class="brand-heading-color">
         <a
           href="/"
           class="flex items-center font-serif text-lg gap-2 text-accent-900"
@@ -63,7 +63,7 @@ const footerLinks = [
           <Logo class="h-4 text-base-900" />
           Brightlight
         </a>
-        <p class="mt-1 text-sm font-normal text-base-500 text-balance">
+        <p class="mt-1 text-sm font-normal brand-text-color text-balance">
           Premium multipage themes crafted with Astro and Tailwind CSS
         </p>
       </div>
@@ -71,15 +71,15 @@ const footerLinks = [
         {
           footerLinks.map((section) => (
             <div class="mt-12 md:mt-0">
-              <h3 class="text-black font-display">{section.heading}</h3>
-              <ul role="list" class="mt-4 text-sm space-y-2 text-base-500">
+              <h3 class="brand-heading-color font-display">{section.heading}</h3>
+              <ul role="list" class="mt-4 text-sm space-y-2 brand-text-color">
                 {section.links.map((link) => (
                   <li>
                     <a
                       title="Button to your page"
                       aria-label="your label"
                       href={link.href}
-                      class="hover:text-black"
+                      class="hover:brand-heading-color"
                     >
                       {link.label}
                     </a>

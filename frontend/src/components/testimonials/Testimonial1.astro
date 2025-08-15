@@ -34,7 +34,7 @@ if (!feature || !testimonials || testimonials.length === 0) {
         <Text
           tag="h2"
           variant="displaySM"
-          class="font-serif font-medium tracking-tight text-black mb-6"
+          class="font-serif font-medium tracking-tight brand-heading-color mb-6"
         >
           {header}
         </Text>
@@ -43,27 +43,27 @@ if (!feature || !testimonials || testimonials.length === 0) {
       <div class="space-y-8">
         {testimonials.map((testimonial) => (
           <div class="max-w-2xl mx-auto">
-            <div class="text-base-500 mb-4">
-              <Text tag="blockquote" variant="textBase" class="italic">
+            <div class="brand-text-color mb-4">
+              <Text tag="blockquote" variant="displayXS" class="italic font-serif">
                 "{testimonial.testimony}"
               </Text>
             </div>
             <div class="text-center">
               {testimonial.nameLink ? (
-                <Link href={testimonial.nameLink} class="font-semibold text-black hover:text-primary transition-colors">
+                <Link href={testimonial.nameLink} class="font-semibold brand-heading-color hover:text-primary transition-colors">
                   {testimonial.name}
                 </Link>
               ) : (
                 <Text
                   tag="p"
                   variant="bodySM"
-                  class="font-semibold text-black"
+                  class="font-semibold brand-heading-color"
                 >
                   {testimonial.name}
                 </Text>
               )}
               {(testimonial.jobTitle || testimonial.company) && (
-                <div class="text-base-500">
+                <div class="brand-text-color">
                   {testimonial.jobTitle && testimonial.company ? (
                     <>
                       {testimonial.jobTitle} at {testimonial.companyLink ? (

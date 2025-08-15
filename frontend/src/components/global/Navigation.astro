@@ -28,12 +28,12 @@ const navigationLinks = [
       <div class="flex flex-row items-center justify-between">
         <a href="/" class="flex flex-col gap-1 brand-name">
           <span class="sr-only">Go to homepage</span>
-          <span class="font-brand text-4xl tracking-tight text-black">Prosody</span>
-          <span class="font-secondary text-2xl tracking-tight text-black">Digital</span>
+          <span class="font-brand text-4xl tracking-tight brand-heading-color">Prosody</span>
+          <span class="font-secondary text-2xl tracking-tight brand-heading-color">Digital</span>
         </a>
         <button
           id="menu-toggle"
-          class="inline-flex items-center justify-center p-2 text-base-600 hover:text-base-800 focus:outline-none focus:text-base-500 md:hidden"
+          class="inline-flex items-center justify-center p-2 text-base-600 hover:text-base-800 focus:outline-none focus:brand-text-color md:hidden"
         >
           <svg
             class="size-6"
@@ -96,7 +96,7 @@ const navigationLinks = [
               navigationLinks.map((link, index) => (
                 <a
                   href={link.href}
-                  class=" text-2xl md:text-sm  hover:text-base-600 text-base-500"
+                  class=" text-2xl md:text-sm  hover:text-base-600 brand-text-color"
                 >
                   {link.title}
                 </a>
@@ -143,7 +143,7 @@ const navigationLinks = [
 
 <style>
   #nav-wrapper{
-    background: light-dark(var(--color-sand-50), var(--color-base-900));
+    background: light-dark(var(--color-sand-50), var(--color-base-800));
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   }
   .brand-name *{

@@ -56,7 +56,7 @@ const breadcrumbs = [
                 tag="h3"
                 variant="textXL"
                 id="modal-title"
-                class="mt-12 font-serif font-medium tracking-tight text-black"
+                class="mt-12 font-serif font-medium tracking-tight brand-heading-color"
               >
                 Connect {frontmatter.integration} to BrightLight
               </Text>
@@ -91,10 +91,10 @@ const breadcrumbs = [
             <Text
               tag="p"
               variant="textXS"
-              class="max-w-sm text-left text-base-500"
+              class="max-w-sm text-left brand-text-color"
             >
               *Don't worry, your secrets are safe with us (seriously). Read our <a
-                class="text-base-500 hover:text-base-800"
+                class="brand-text-color hover:text-base-800"
                 href="/infopages/privacy">Privacy Policy</a
               >. By clicking "Allow access," you're officially trusting us not
               to be shady.
@@ -120,7 +120,7 @@ const breadcrumbs = [
           aria-label="Breadcrumb"
           class="bg-sand-100 p-1.5 rounded-full px-6 w-fit"
         >
-          <ol class="flex items-center text-xs gap-2 text-base-500">
+          <ol class="flex items-center text-xs gap-2 brand-text-color">
             {
               breadcrumbs.map((item, index) => (
                 <>
@@ -152,11 +152,11 @@ const breadcrumbs = [
         <Text
           tag="h1"
           variant="displayMD"
-          class="mt-12 font-serif font-medium tracking-tight text-black"
+          class="mt-12 font-serif font-medium tracking-tight brand-heading-color"
         >
           {frontmatter.integration}
         </Text>
-        <Text tag="p" variant="textBase" class="mt-4 text-base-500">
+        <Text tag="p" variant="textBase" class="mt-4 brand-text-color">
           {frontmatter.description}
         </Text>
         <dl class="flex flex-col mt-8 divide-y divide-base-200">
@@ -176,11 +176,11 @@ const breadcrumbs = [
                   <Text
                     tag="p"
                     variant="textSM"
-                    class="capitalize text-base-500 lg:text-balance"
+                    class="capitalize brand-text-color lg:text-balance"
                   >
                     {detail.url ? (
                       <a
-                        class="text-base-800 hover:text-base-500 duration-300 "
+                        class="text-base-800 hover:brand-text-color duration-300 "
                         href={detail.url}
                       >
                         {detail.value}

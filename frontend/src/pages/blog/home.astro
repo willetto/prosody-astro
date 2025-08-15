@@ -27,11 +27,11 @@ const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
         <Text
           tag="h1"
           variant="displayMD"
-          class="font-serif font-medium tracking-tight text-black"
+          class="font-serif font-medium tracking-tight brand-heading-color"
         >
           Email that shows up — not ghosted by spam filters
         </Text>
-        <Text tag="p" variant="textBase" class="mt-4 text-base-500">
+        <Text tag="p" variant="textBase" class="mt-4 brand-text-color">
           Tired of playing inbox roulette? Our delivery actually delivers. No
           spells, no praying — just reliable email that lands where it's
           supposed to.
@@ -50,7 +50,7 @@ const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
                 title={tag}
                 aria-label={tag}
                 href={`/blog/tags/${tag}`}
-                class="capitalize text-base-500"
+                class="capitalize brand-text-color"
               >
                 {tag}
               </Link>

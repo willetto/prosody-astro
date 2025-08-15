@@ -52,11 +52,11 @@ const breadcrumbs = [
         <Text
           tag="h1"
           variant="displayMD"
-          class="mt-12 font-serif font-medium tracking-tight text-black"
+          class="mt-12 font-serif font-medium tracking-tight brand-heading-color"
         >
           {frontmatter.page}
         </Text>
-        <Text tag="p" variant="textBase" class="mt-4 text-base-500">
+        <Text tag="p" variant="textBase" class="mt-4 brand-text-color">
           <time datetime={new Date(frontmatter.pubDate).toISOString()}>
             {
               new Date(frontmatter.pubDate).toLocaleDateString("en-US", {

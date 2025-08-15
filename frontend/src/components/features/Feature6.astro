@@ -35,12 +35,12 @@ if (!feature || !codeTabs || codeTabs.length === 0) {
         <Text
           tag="h2"
           variant="displaySM"
-          class="font-serif font-medium tracking-tight text-black feature-header"
+          class="font-serif font-medium tracking-tight brand-heading-color feature-header"
         >
           {header}
         </Text>
         {subheading && (
-          <div class="max-w-xl mx-auto mt-4 text-base-500 feature-subheading">
+          <div class="max-w-xl mx-auto mt-4 brand-text-color feature-subheading">
             <PortableText value={subheading} />
           </div>
         )}
@@ -65,7 +65,7 @@ if (!feature || !codeTabs || codeTabs.length === 0) {
             codeTabs.map((tab, i) => {
               return (
                 <button
-                  class="text-xs text-left cursor-pointer text-base-500 feature-tab"
+                  class="text-xs text-left cursor-pointer brand-text-color feature-tab"
                   id={`tab-${tab.id}`}
                   data-tab={tab.id}
                 >

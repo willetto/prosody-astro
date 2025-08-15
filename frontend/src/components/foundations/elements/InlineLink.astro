@@ -1,0 +1,74 @@
+---
+export interface Props {
+  href: string; // Required href attribute for links
+  target?: string; // Optional target attribute (defaults to "_blank" for external links)
+  rel?: string; // Optional rel attribute for security
+  title?: string; // Optional title attribute for accessibility
+  variant?: string; // Specifies the style variant of the text (same as Text.astro)
+  hoverColor?: "base" | "accent" | "blue" | "sand"; // Hover color option
+  class?: string; // Optional prop for additional custom classes
+  ariaLabel?: string; // Optional aria-label attribute for accessibility
+}
+
+// Define text styles for each variant (same as Text.astro)
+const textStyles: Record<string, string> = {
+  display6XL: "text-4xl  sm:text-7xl md:text-9xl lg:text-[12rem]",
+  display5XL: "text-4xl  sm:text-7xl md:text-8xl lg:text-[10rem]",
+  display4XL: "text-4xl  sm:text-7xl md:text-8xl lg:text-9xl",
+  display3XL: "text-5xl  sm:text-6xl md:text-7xl lg:text-8xl",
+  display2XL: "text-5xl  sm:text-5xl md:text-6xl lg:text-7xl",
+  displayXL: "text-4xl  sm:text-4xl md:text-5xl lg:text-6xl",
+  displayLG: "text-3xl  sm:text-3xl md:text-4xl lg:text-5xl",
+  displayMD: "text-2xl  sm:text-2xl md:text-3xl lg:text-4xl",
+  displaySM: "text-lg  sm:text-xl md:text-2xl lg:text-3xl",
+  displayXS: "text-lg  sm:text-lg md:text-xl lg:text-2xl",
+  textXL: "text-lg sm:text-xl md:text-2xl",
+  textLG: "text-base sm:text-lg md:text-xl ",
+  textBase: "text-base",
+  textSM: "text-sm ",
+  textXS: "text-xs ",
+};
+
+// Destructure props with default values
+const {
+  href,
+  target = "_blank", // Default to opening in new tab for external links
+  rel = "noopener noreferrer", // Default security attributes for external links
+  class: className = "",
+  variant = "textBase", // Defaults to textBase style variant
+  hoverColor = "base", // Defaults to base hover color
+  ...rest // Collect remaining props
+} = Astro.props;
+
+// Get the base classes for the specified variant
+const baseClasses = textStyles[variant] || textStyles.textBase;
+
+// Define hover color classes
+const hoverColorClasses: Record<string, string> = {
+  base: "hover:text-neutral-600",
+  accent: "hover:text-accent-500",
+  blue: "hover:text-blue-500",
+  sand: "hover:text-sand-500"
+};
+
+// Base link styles with hover effects
+const linkStyles = `brand-inline-link text-base-500 font-semibold ${hoverColorClasses[hoverColor]} transition-colors underline`;
+
+// Combine base classes with link styles and any additional custom classes
+const combinedClasses = `${baseClasses} ${linkStyles} ${className}`.trim();
+---
+
+<a href={href} target={target} rel={rel} class={combinedClasses} {...rest}>
+  <slot />
+</a>
+
+<style>
+  .brand-inline-link{
+    text-underline-offset: 0.2ex;
+    transition: all 0.1s ease-in-out;
+  }
+  .brand-inline-link:hover, .brand-inline-link:focus-visible{
+    text-underline-offset: 0.5ex;
+    text-decoration-thickness: 0.3ex;
+  }
+</style>

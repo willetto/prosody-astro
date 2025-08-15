@@ -2,6 +2,7 @@
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 import Text from "@/components/foundations/elements/Text.astro";
 import Link from "@/components/foundations/elements/Link.astro";
+import InlineLink from "@/components/foundations/elements/InlineLink.astro";
 
 export interface Props {
   feature?: {
@@ -26,60 +27,61 @@ if (!feature || !testimonials || testimonials.length === 0) {
 }
 ---
 
-<section class="border-t border-base-200 border-dashed">
-  <Wrapper variant="standard" class="py-4">
+<section class="testimony-2">
+  <Wrapper variant="standard" class="py-8 border-y">
     <div class="text-center">
       <div class="space-y-6">
         {testimonials.map((testimonial) => (
-          <div class="max-w-2xl mx-auto">
-            <div class="text-base-500 mb-3">
-              <Text tag="blockquote" variant="textBase" class="italic">
+          <div class="max-w-3xl mx-auto text-left bg-sand-100 border border-sand-200 shadow-lg shadow-sand-200/50 rounded-xl p-4 md:p-6 lg:p-8 dark:bg-sand-200 dark:border-none dark:shadow-neutral-900">
+            <div class="text-neutral-600 mb-3">
+              <Text tag="blockquote" variant="displayXS" class="italic font-serif text-left text-pretty">
                 "{testimonial.testimony}"
               </Text>
             </div>
-            <div class="text-center">
+            <p class="text-right text-base-500">
               {testimonial.nameLink ? (
-                <Link href={testimonial.nameLink} class="font-semibold text-black hover:text-primary transition-colors">
+                <Link href={testimonial.nameLink} hoverColor="blue"  class="font-semibold text-black hover:text-primary transition-colors">
                   {testimonial.name}
                 </Link>
               ) : (
-                <Text
-                  tag="p"
-                  variant="bodySM"
-                  class="font-semibold text-black"
-                >
+                <span class="font-semibold text-black">
                   {testimonial.name}
-                </Text>
+                </span>
               )}
               {(testimonial.jobTitle || testimonial.company) && (
-                <div class="text-base-500">
+                <>
+                  <span class="text-accent-500 font-semibold">—</span>
                   {testimonial.jobTitle && testimonial.company ? (
                     <>
-                      {testimonial.jobTitle} at {testimonial.companyLink ? (
-                        <Link href={testimonial.companyLink} class="hover:text-primary transition-colors">
+                      <span class="text-base-500"> {testimonial.jobTitle} at </span>
+                      {testimonial.companyLink ? (
+                        <InlineLink href={testimonial.companyLink} hoverColor="blue" variant="textBase">
                           {testimonial.company}
-                        </Link>
+                        </InlineLink>
                       ) : (
-                        testimonial.company
+                        <span class="text-base-500">{testimonial.company}</span>
                       )}
                     </>
                   ) : testimonial.jobTitle ? (
-                    testimonial.jobTitle
+                    <span class="text-base-500"> {testimonial.jobTitle}</span>
                   ) : testimonial.company ? (
-                    testimonial.companyLink ? (
-                      <Link href={testimonial.companyLink} class="hover:text-primary transition-colors">
-                        {testimonial.company}
-                      </Link>
-                    ) : (
-                      testimonial.company
-                    )
+                    <span class="text-base-500">
+                      {testimonial.companyLink ? (
+                        <InlineLink href={testimonial.companyLink} variant="textBase">
+                          {testimonial.company}
+                        </InlineLink>
+                      ) : (
+                        <span class="brand-text-color">{testimonial.company}</span>
+                      )}
+                    </span>
                   ) : null}
-                </div>
+                </>
               )}
-            </div>
+            </p>
           </div>
         ))}
       </div>
     </div>
   </Wrapper>
 </section>
+
