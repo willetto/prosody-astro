@@ -1,25 +1,96 @@
 ---
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 import Text from "@/components/foundations/elements/Text.astro";
+import Link from "@/components/foundations/elements/Link.astro";
+
+export interface Props {
+  feature?: {
+    header?: string;
+    testimonials?: Array<{
+      _id: string;
+      testimony: string;
+      name: string;
+      nameLink?: string;
+      jobTitle?: string;
+      company?: string;
+      companyLink?: string;
+    }>;
+  };
+}
+
+const { feature } = Astro.props;
+const { header, testimonials } = feature || {};
+
+// Don't render if no testimonials are provided
+if (!feature || !testimonials || testimonials.length === 0) {
+  return null;
+}
 ---
 
 <section class="border-t border-base-200 border-dashed">
   <Wrapper variant="standard" class="py-12 lg:py-24">
     <div class="text-center">
-      <Text
-        tag="h2"
-        variant="displaySM"
-        class="font-serif font-medium tracking-tight text-black mb-6"
-      >
-        What Our Users Say
-      </Text>
-      <Text
-        tag="p"
-        variant="bodyLG"
-        class="text-base-500 max-w-2xl mx-auto"
-      >
-        "This platform has transformed how we work. The seamless integration and powerful features have made our team more productive than ever."
-      </Text>
+      {header && (
+        <Text
+          tag="h2"
+          variant="displaySM"
+          class="font-serif font-medium tracking-tight text-black mb-6"
+        >
+          {header}
+        </Text>
+      )}
+      
+      <div class="space-y-8">
+        {testimonials.map((testimonial) => (
+          <div class="max-w-2xl mx-auto">
+            <div class="text-base-500 mb-4">
+              <Text tag="blockquote" variant="textBase" class="italic">
+                "{testimonial.testimony}"
+              </Text>
+            </div>
+            <div class="text-center">
+              {testimonial.nameLink ? (
+                <Link href={testimonial.nameLink} class="font-semibold text-black hover:text-primary transition-colors">
+                  {testimonial.name}
+                </Link>
+              ) : (
+                <Text
+                  tag="p"
+                  variant="bodySM"
+                  class="font-semibold text-black"
+                >
+                  {testimonial.name}
+                </Text>
+              )}
+              {(testimonial.jobTitle || testimonial.company) && (
+                <div class="text-base-500">
+                  {testimonial.jobTitle && testimonial.company ? (
+                    <>
+                      {testimonial.jobTitle} at {testimonial.companyLink ? (
+                        <Link href={testimonial.companyLink} class="hover:text-primary transition-colors">
+                          {testimonial.company}
+                        </Link>
+                      ) : (
+                        testimonial.company
+                      )}
+                    </>
+                  ) : testimonial.jobTitle ? (
+                    testimonial.jobTitle
+                  ) : testimonial.company ? (
+                    testimonial.companyLink ? (
+                      <Link href={testimonial.companyLink} class="hover:text-primary transition-colors">
+                        {testimonial.company}
+                      </Link>
+                    ) : (
+                      testimonial.company
+                    )
+                  ) : null}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </Wrapper>
 </section>

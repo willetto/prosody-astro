@@ -111,6 +111,33 @@ export const FEATURE7_FIELDS = `
   }
 `;
 
+export const TESTIMONIAL1_FIELDS = `
+  _type,
+  header,
+  testimonials[]-> {
+    _id,
+    testimony,
+    name,
+    nameLink,
+    jobTitle,
+    company,
+    companyLink
+  }
+`;
+
+export const TESTIMONIAL2_FIELDS = `
+  _type,
+  testimonials[]-> {
+    _id,
+    testimony,
+    name,
+    nameLink,
+    jobTitle,
+    company,
+    companyLink
+  }
+`;
+
 export const ALL_SECTION_FIELDS = `
   _type,
   ${HERO_FIELDS},
@@ -120,5 +147,7 @@ export const ALL_SECTION_FIELDS = `
   ${FEATURE4_FIELDS},
   ${FEATURE5_FIELDS},
   ${FEATURE6_FIELDS},
-  ${FEATURE7_FIELDS}
+  ${FEATURE7_FIELDS},
+  ${TESTIMONIAL1_FIELDS},
+  ${TESTIMONIAL2_FIELDS}
 `;

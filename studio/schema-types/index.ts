@@ -15,8 +15,11 @@ import { feature4 } from "./sections/feature4";
 import { feature5 } from "./sections/feature5";
 import { feature6 } from "./sections/feature6";
 import { feature7 } from "./sections/feature7";
+import { testimonial1 } from "./sections/testimonial1";
+import { testimonial2 } from "./sections/testimonial2";
 import { iconSelector } from "./icon-selector";
 import { page } from "./page";
+import { testimonial } from "./testimonial";
 
 export const schemaTypes = [
   imageWithAlt,
@@ -36,6 +39,9 @@ export const schemaTypes = [
   feature5,
   feature6,
   feature7,
+  testimonial1,
+  testimonial2,
   iconSelector,
   page,
+  testimonial,
 ];

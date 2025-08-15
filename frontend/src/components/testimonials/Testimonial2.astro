@@ -1,18 +1,85 @@
 ---
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 import Text from "@/components/foundations/elements/Text.astro";
+import Link from "@/components/foundations/elements/Link.astro";
+
+export interface Props {
+  feature?: {
+    testimonials?: Array<{
+      _id: string;
+      testimony: string;
+      name: string;
+      nameLink?: string;
+      jobTitle?: string;
+      company?: string;
+      companyLink?: string;
+    }>;
+  };
+}
+
+const { feature } = Astro.props;
+const { testimonials } = feature || {};
+
+// Don't render if no testimonials are provided
+if (!feature || !testimonials || testimonials.length === 0) {
+  return null;
+}
 ---
 
 <section class="border-t border-base-200 border-dashed">
   <Wrapper variant="standard" class="py-4">
     <div class="text-center">
-      <Text
-        tag="p"
-        variant="bodyLG"
-        class="text-base-500 max-w-2xl mx-auto"
-      >
-        "The intuitive design and powerful features have exceeded our expectations. Highly recommended for any team looking to improve their workflow."
-      </Text>
+      <div class="space-y-6">
+        {testimonials.map((testimonial) => (
+          <div class="max-w-2xl mx-auto">
+            <div class="text-base-500 mb-3">
+              <Text tag="blockquote" variant="textBase" class="italic">
+                "{testimonial.testimony}"
+              </Text>
+            </div>
+            <div class="text-center">
+              {testimonial.nameLink ? (
+                <Link href={testimonial.nameLink} class="font-semibold text-black hover:text-primary transition-colors">
+                  {testimonial.name}
+                </Link>
+              ) : (
+                <Text
+                  tag="p"
+                  variant="bodySM"
+                  class="font-semibold text-black"
+                >
+                  {testimonial.name}
+                </Text>
+              )}
+              {(testimonial.jobTitle || testimonial.company) && (
+                <div class="text-base-500">
+                  {testimonial.jobTitle && testimonial.company ? (
+                    <>
+                      {testimonial.jobTitle} at {testimonial.companyLink ? (
+                        <Link href={testimonial.companyLink} class="hover:text-primary transition-colors">
+                          {testimonial.company}
+                        </Link>
+                      ) : (
+                        testimonial.company
+                      )}
+                    </>
+                  ) : testimonial.jobTitle ? (
+                    testimonial.jobTitle
+                  ) : testimonial.company ? (
+                    testimonial.companyLink ? (
+                      <Link href={testimonial.companyLink} class="hover:text-primary transition-colors">
+                        {testimonial.company}
+                      </Link>
+                    ) : (
+                      testimonial.company
+                    )
+                  ) : null}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </Wrapper>
 </section>

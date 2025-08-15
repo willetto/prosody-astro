@@ -35,6 +35,8 @@ export const page = defineType({
         { type: "feature5" },
         { type: "feature6" },
         { type: "feature7" },
+        { type: "testimonial1" },
+        { type: "testimonial2" },
       ],
       description:
         "Add sections to compose this page. Sections will be rendered in the order they appear here.",

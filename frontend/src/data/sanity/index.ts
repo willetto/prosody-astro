@@ -101,3 +101,26 @@ export type Hero = {
     alt?: string;
   };
 };
+
+export type Testimonial = {
+  _id: string;
+  testimony: string;
+  name: string;
+  nameLink?: string;
+  jobTitle?: string;
+  company?: string;
+  companyLink?: string;
+};
+
+export type Testimonial1Section = {
+  _type: "testimonial1";
+  header?: string;
+  testimonials: Testimonial[];
+};
+
+export type Testimonial2Section = {
+  _type: "testimonial2";
+  testimonials: Testimonial[];
+};
+
+export type Section = Hero | Testimonial1Section | Testimonial2Section;
