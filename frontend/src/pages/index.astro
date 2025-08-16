@@ -18,6 +18,10 @@ import Testimonial2 from "@/components/testimonials/Testimonial2.astro";
 import { sanityClient } from "@/data/sanity/fetch";
 import { ALL_SECTION_FIELDS } from "@/data/sanity/groq";
 
+import LogoCloud1 from "@/components/testimonials/LogoCloud1.astro";
+import LogoCloud2 from "@/components/testimonials/LogoCloud2.astro";
+import LogoCloud3 from "@/components/testimonials/LogoCloud3.astro";
+
 type Section = {
   _type: string;
   [key: string]: any;
@@ -84,6 +88,10 @@ try {
 ---
 
 <BaseLayout>
+  <LogoCloud1 />
+  <LogoCloud2 />
+  <LogoCloud3 />
+  
   {sections.map((section) => {
     const Component = sectionComponents[section._type];
     if (!Component) {

@@ -86,7 +86,7 @@
   );
 
   /* Keyframes */
-  --animate-marquee: marquee 12s linear infinite;
+  --animate-marquee: marquee 18s linear infinite;
   --animate-rightMarquee: rightMarquee 300s linear infinite;
   --animate-slowMarquee: marquee 300s linear infinite;
 
@@ -95,7 +95,7 @@
       transform: translateX(0%);
     }
     100% {
-      transform: translateX(-100%);
+      transform: translateX(calc(-100% - var(--marquee-gap, 0px)));
     }
   }
   @keyframes rightMarquee {
@@ -107,6 +107,42 @@
     }
   }
 }
+
+/* Marquee utilities: duplicate tracks for seamless scroll (uses old animate variable/timing) */
+.marquee {
+  --marquee-gap: 3rem;
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: var(--marquee-gap);
+}
+
+.marquee:hover .marquee-track,
+.marquee:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+.marquee-track {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+  gap: var(--marquee-gap);
+  animation: var(--animate-marquee);
+  animation-play-state: running;
+}
+
+/* Back-compat: allow using the old utility class to act as a marquee track */
+.animate-marquee {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+  gap: var(--marquee-gap);
+  animation: var(--animate-marquee);
+  animation-play-state: running;
+}
+
 :root {
   color-scheme: light dark;
 

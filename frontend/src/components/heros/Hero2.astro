@@ -27,10 +27,10 @@ const { feature } = Astro.props as Props;
 ---
 
 <section class="hero-2">
-  <Wrapper variant="standard" class="pt-28 pb-6 overflow-hidden">
+  <Wrapper variant="standard" class="pt-28 pb-12 overflow-hidden">
     <!-- TODO: Improve grid system -->
     <div class="grid gap-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-      <div class="flex flex-col justify-between h-full md:col-span-2">
+      <div class="flex flex-col gap-8 justify-between h-full md:col-span-2">
         <div class="text-left text-balance">
           <Text
             tag="h1"
@@ -62,7 +62,7 @@ const { feature } = Astro.props as Props;
       {feature?.image?.asset?._ref && (
         <SanityImage
           image={feature.image}
-          class="w-full h-auto rounded-xl md:col-span-1 lg:col-span-2"
+          class="w-full h-full lg:h-auto rounded-xl md:col-span-1 lg:col-span-2"
         />
       )}
     </div>
