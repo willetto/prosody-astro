@@ -33,26 +33,52 @@ const logos = [
 ];
 ---
 
-<section>
+<section class="logo-cloud-1">
   <Wrapper variant="standard" class="relative overflow-hidden border-t">
     <div
-      class="relative flex items-center py-8 animate-marquee gap-12 lg:gap-24 whitespace-nowrap"
-    >
-      {
-        logos.map((logo) => (
-          <Image
-            width={200}
-            height={100}
-            class="h-4  dark:invert"
-            src={logo.src}
-            alt={logo.alt}
-          />
-        ))
-      }
+      class="marquee relative flex items-center py-8 gap-12 lg:gap-24 whitespace-nowrap">
+      <div class="marquee-track flex items-center">
+        {
+          logos.map((logo) => (
+            <Image
+              width={200}
+              height={100}
+              class="h-4"
+              src={logo.src}
+              alt={logo.alt}
+            />
+          ))
+        }
+      </div>
+      <div class="marquee-track flex items-center" aria-hidden="true">
+        {
+          logos.map((logo) => (
+            <Image
+              width={200}
+              height={100}
+              class="h-4"
+              src={logo.src}
+              alt={logo.alt}
+            />
+          ))
+        }
+      </div>
     </div>
     <div
-      class="absolute inset-0 w-full bg-linear-45 from-white via-transparent to-white"
+      class="carousel-gradient"
     >
     </div>
   </Wrapper>
 </section>
+
+<style>
+  .carousel-gradient {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    pointer-events: none;
+   --gradient-color: light-dark(var(--color-sand-50), var(--color-base-800));
+
+    background-image: linear-gradient(90deg, var(--gradient-color) 50px, transparent, var(--gradient-color) calc(100% - 50px));
+  }
+</style>

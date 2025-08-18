@@ -33,22 +33,36 @@ const logos = [
 ];
 ---
 
-<section class="overflow-hidden">
+<section class="logo-cloud-3 overflow-hidden">
     <div
-      class="relative flex items-center py-8 animate-marquee gap-12 lg:gap-24 whitespace-nowrap"
-    >
-      {
-        logos.map((logo) => (
-          <Image
-            width={200}
-            height={100}
-            class="h-4"
-            src={logo.src}
-            alt={logo.alt}
-          />
-        ))
-      }
+      class="marquee relative flex items-center py-8 gap-12 lg:gap-24 whitespace-nowrap">
+      <div class="marquee-track flex items-center">
+        {
+          logos.map((logo) => (
+            <Image
+              width={200}
+              height={100}
+              class="h-4"
+              src={logo.src}
+              alt={logo.alt}
+            />
+          ))
+        }
+      </div>
+      <div class="marquee-track flex items-center" aria-hidden="true">
+        {
+          logos.map((logo) => (
+            <Image
+              width={200}
+              height={100}
+              class="h-4"
+              src={logo.src}
+              alt={logo.alt}
+            />
+          ))
+        }
+      </div>
     </div>
-  
+
 
 </section>
