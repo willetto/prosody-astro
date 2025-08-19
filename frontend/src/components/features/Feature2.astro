@@ -56,18 +56,18 @@ if (!feature || !features || features.length === 0) {
     >
       {
         features.map((feature, index) => (
-          <div class="flex flex-col h-full p-6 bg-sand-100 dark:bg-sand-200 rounded-xl group hover:bg-white dark:hover:bg-sand-200 hover:shadow-2xl duration-300 outline-transparent hover:outline hover:outline-sand-100 feature-item">
-            <div class={`inline-flex p-4 bg-white dark:bg-sand-100 rounded-lg group-hover:bg-sand-100 duration-300 group-hover:-rotate-12 group-hover:-translate-y--1 w-fit feature-icon`}>
+          <div class="flex flex-col h-full p-6 bg-sand-100 dark:bg-neutral-800 rounded-xl group hover:bg-white dark:hover:bg-neutral-700 hover:shadow-2xl duration-300 outline-transparent hover:outline hover:outline-sand-100 feature-item">
+            <div class={`inline-flex p-4 bg-white dark:bg-neutral-600 rounded-lg group-hover:bg-sand-100 duration-300 group-hover:-rotate-12 group-hover:-translate-y--1 w-fit feature-icon`}>
               <LucideIcon icon={feature.icon as AllowedIcon} class={index % 2 === 0 ? "text-blue-400" : "text-accent-400"} size="base"/>
             </div>
             <Text
               tag="h3"
               variant="textLG"
-              class="mt-8 font-medium text-base-900 feature-title"
+              class="mt-8 font-medium text-heading-text-color feature-title"
             >
               {feature.title}
             </Text>
-            <Text tag="p" variant="textSM" class="mt-2 feature-description text-base-500 dark:text-neutral-600">
+            <Text tag="p" variant="textSM" class="mt-2 feature-description">
               {feature.description}
             </Text>
           </div>
@@ -76,3 +76,10 @@ if (!feature || !features || features.length === 0) {
     </div>
   </Wrapper>
 </section>
+
+<style>
+  .feature-description{
+    color: var(--body-text-color);
+  }
+
+</style>

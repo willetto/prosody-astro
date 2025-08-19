@@ -52,7 +52,7 @@ const hoverColorClasses: Record<string, string> = {
 };
 
 // Base link styles with hover effects
-const linkStyles = `brand-inline-link text-base-500 font-semibold ${hoverColorClasses[hoverColor]} transition-colors underline`;
+const linkStyles = `brand-inline-link font-semibold ${hoverColorClasses[hoverColor]} transition-colors underline`;
 
 // Combine base classes with link styles and any additional custom classes
 const combinedClasses = `${baseClasses} ${linkStyles} ${className}`.trim();
@@ -66,6 +66,9 @@ const combinedClasses = `${baseClasses} ${linkStyles} ${className}`.trim();
   .brand-inline-link{
     text-underline-offset: 0.2ex;
     transition: all 0.1s ease-in-out;
+  }
+  .brand-inline-link:not(:hover):not(:focus-visible){
+    color: inherit;
   }
   .brand-inline-link:hover, .brand-inline-link:focus-visible{
     text-underline-offset: 0.5ex;
