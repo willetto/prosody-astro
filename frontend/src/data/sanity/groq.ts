@@ -138,6 +138,40 @@ export const TESTIMONIAL2_FIELDS = `
   }
 `;
 
+// Shared fields for UI Image objects
+export const UI_LOGO_IMAGE_FIELDS = `
+  image {
+    asset,
+    "assetAltText": asset->altText,
+    alt
+  },
+  iconTitle,
+  class,
+  loading
+`;
+
+export const LOGO_CLOUD1_FIELDS = `
+  _type,
+  images[] {
+    ${UI_LOGO_IMAGE_FIELDS}
+  }
+`;
+
+export const LOGO_CLOUD2_FIELDS = `
+  _type,
+  header,
+  images[] {
+    ${UI_LOGO_IMAGE_FIELDS}
+  }
+`;
+
+export const LOGO_CLOUD3_FIELDS = `
+  _type,
+  images[] {
+    ${UI_LOGO_IMAGE_FIELDS}
+  }
+`;
+
 export const ALL_SECTION_FIELDS = `
   _type,
   ${HERO_FIELDS},
@@ -149,5 +183,8 @@ export const ALL_SECTION_FIELDS = `
   ${FEATURE6_FIELDS},
   ${FEATURE7_FIELDS},
   ${TESTIMONIAL1_FIELDS},
-  ${TESTIMONIAL2_FIELDS}
+  ${TESTIMONIAL2_FIELDS},
+  ${LOGO_CLOUD1_FIELDS},
+  ${LOGO_CLOUD2_FIELDS},
+  ${LOGO_CLOUD3_FIELDS}
 `;
