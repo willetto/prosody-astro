@@ -29,13 +29,13 @@ if (!feature || images.length === 0) {
   <Wrapper variant="standard" class="relative py-16 overflow-hidden border-b">
     {header && (
       <Text tag="h2"
-          variant="displaySM"
-          class="font-serif font-medium tracking-tight feature-header mb-16 text-center">
+          variant="displayMD"
+          class="font-serif tracking-tight mb-16 text-center">
           {header}
       </Text>
     )}
     <div
-      class="relative items-center justify-around justify-items-center grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-8 rounded-xl icons-wrapper"
+      class="relative items-center justify-around justify-items-center grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-8 rounded-xl icons-wrapper"
     >
       {
         images.map((img) => (
