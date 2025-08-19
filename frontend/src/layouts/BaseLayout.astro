@@ -6,6 +6,7 @@ import BaseHead from "@/components/foundations/head/BaseHead.astro";
 // Components
 import Footer from "@/components/global/Footer.astro";
 import Navigation from "@/components/global/Navigation.astro";
+import ProsodyFooter from "@/components/global/ProsodyFooter.astro";
 
 // Hides nav and footer on selected screens by passing
 // the hideNav and hideFooter props
@@ -28,6 +29,7 @@ const { hideNav = false, hideFooter = false } = Astro.props;
     </main>
 
     { !hideFooter && <Footer /> }
+    { !hideFooter && <ProsodyFooter /> }
   </body>
 </html>
 

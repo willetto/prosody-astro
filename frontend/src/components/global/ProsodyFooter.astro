@@ -1,0 +1,40 @@
+---
+import Wrapper from "@/components/foundations/containers/Wrapper.astro";
+import flagUrl from './colorado.svg?url'
+import InlineLink from "../foundations/elements/InlineLink.astro";
+
+---
+<footer class="border-t border-base-200 border-dashed">
+  <Wrapper variant="standard" class="pt-20 pb-12 flex flex-col gap-8 justify-between items-center text-center font-serif">
+    <div class="links">
+      Contact
+      Our Work
+      About
+      Site Map
+    </div>
+
+    <p>Crafted with care by Prosody Digital in colorful Colorado.</p>
+    <div class="address">
+      <p>Prosody Digital LLC</p>
+      <p>2650 W Belleview Ave Suite D-100</p>
+      <p>Littleton, CO 80123</p>
+    </div>
+    <div >
+      <p>Copyright {new Date().getFullYear()} by Prosody Digital LLC</p>
+      <p>All rights reserved.</p>
+      <p><InlineLink href="/privacy-policy" hoverColor="accent">Privacy Policy</InlineLink></p>
+    </div>
+    <p>Website Version 1.0</p>
+    <div>
+      <p>Lucky numbers</p> 
+      <p class="lucky-numbers">7 11 8 12 24</p>
+    </div>
+    <img src={flagUrl} class="mx-auto dark:invert" alt="Colorado Flag" width="75" height="100"/>
+
+  </Wrapper>
+</footer>
+<style>
+.lucky-numbers {
+  word-spacing: 0.5em;
+}
+</style>
