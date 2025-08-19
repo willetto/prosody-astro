@@ -172,6 +172,12 @@ export const LOGO_CLOUD3_FIELDS = `
   }
 `;
 
+export const RICH_TEXT_FIELDS = `
+  _type,
+  header,
+  content
+`;
+
 export const ALL_SECTION_FIELDS = `
   _type,
   ${HERO_FIELDS},
@@ -186,5 +192,6 @@ export const ALL_SECTION_FIELDS = `
   ${TESTIMONIAL2_FIELDS},
   ${LOGO_CLOUD1_FIELDS},
   ${LOGO_CLOUD2_FIELDS},
-  ${LOGO_CLOUD3_FIELDS}
+  ${LOGO_CLOUD3_FIELDS},
+  ${RICH_TEXT_FIELDS}
 `;

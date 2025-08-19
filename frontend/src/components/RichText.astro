@@ -1,1 +1,36 @@
- 
+---
+import Wrapper from "@/components/foundations/containers/Wrapper.astro";
+import Text from "@/components/foundations/elements/Text.astro";
+import PortableText from "@/components/foundations/elements/PortableText.astro";
+
+interface Props {
+  feature?: {
+    header?: string;
+    content?: any[];
+  };
+}
+
+const { feature } = Astro.props as Props;
+const { header, content = [] } = feature || {};
+
+if (!feature || !Array.isArray(content) || content.length === 0) {
+  return null;
+}
+---
+
+<section class="rich-text-section">
+  <Wrapper variant="standard" class="py-12 border-b">
+    {header && (
+      <Text
+        tag="h2"
+        variant="displaySM"
+        class="font-serif font-medium tracking-tight brand-heading-color max-w-xl mx-auto"
+      >
+        {header}
+      </Text>
+    )}
+    <div class={header ? "mt-6 brand-text-color max-w-xl mx-auto" : "brand-text-color max-w-xl mx-auto"}>
+      <PortableText value={content} />
+    </div>
+  </Wrapper>
+</section>

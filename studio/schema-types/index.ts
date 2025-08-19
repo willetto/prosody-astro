@@ -21,6 +21,7 @@ import { testimonial2 } from "./sections/testimonial2";
 import { logoCloud1 } from "./sections/logoCloud1";
 import { logoCloud2 } from "./sections/logoCloud2";
 import { logoCloud3 } from "./sections/logoCloud3";
+import { richText } from "./sections/richText";
 import { iconSelector } from "./icon-selector";
 import { page } from "./page";
 import { testimonial } from "./testimonial";
@@ -49,6 +50,7 @@ export const schemaTypes = [
   logoCloud1,
   logoCloud2,
   logoCloud3,
+  richText,
   iconSelector,
   page,
   testimonial,
