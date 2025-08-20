@@ -12,7 +12,7 @@ export default defineConfig({
     enabled: true,
   },
   prefetch: true,
-  trailingSlash: "never",
+  trailingSlash: "ignore",
   vite: {
     plugins: [tailwindcss()],
     css: {
