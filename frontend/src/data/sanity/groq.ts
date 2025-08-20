@@ -195,3 +195,41 @@ export const ALL_SECTION_FIELDS = `
   ${LOGO_CLOUD3_FIELDS},
   ${RICH_TEXT_FIELDS}
 `;
+
+// Case Study documents
+export const CASE_STUDY_LIST_FIELDS = `
+  _id,
+  title,
+  "slug": slug.current,
+  socialImage {
+    asset,
+    "assetAltText": asset->altText,
+    alt
+  }
+`;
+
+export const CASE_STUDY_DETAIL_FIELDS = `
+  _id,
+  title,
+  "slug": slug.current,
+  socialImage {
+    asset,
+    "assetAltText": asset->altText,
+    alt
+  },
+  sections[] {
+    ${ALL_SECTION_FIELDS}
+  }
+`;
+
+export const CASE_STUDY_LIST_QUERY = `
+  *[_type == "caseStudy"] | order(title asc) {
+    ${CASE_STUDY_LIST_FIELDS}
+  }
+`;
+
+export const CASE_STUDY_BY_SLUG_QUERY = `
+  *[_type == "caseStudy" && slug.current == $slug][0] {
+    ${CASE_STUDY_DETAIL_FIELDS}
+  }
+`;

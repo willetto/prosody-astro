@@ -1,0 +1,60 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+import Hero1 from "@/components/heros/Hero1.astro";
+import Hero2 from "@/components/heros/Hero2.astro";
+import Feature1 from "@/components/features/Feature1.astro";
+import Feature2 from "@/components/features/Feature2.astro";
+import Feature3 from "@/components/features/Feature3.astro";
+import Feature4 from "@/components/features/Feature4.astro";
+import Feature5 from "@/components/features/Feature5.astro";
+import Feature6 from "@/components/features/Feature6.astro";
+import Feature7 from "@/components/features/Feature7.astro";
+import Testimonial1 from "@/components/testimonials/Testimonial1.astro";
+import Testimonial2 from "@/components/testimonials/Testimonial2.astro";
+import LogoCloud1 from "@/components/testimonials/LogoCloud1.astro";
+import LogoCloud2 from "@/components/testimonials/LogoCloud2.astro";
+import LogoCloud3 from "@/components/testimonials/LogoCloud3.astro";
+import RichText from "@/components/RichText.astro";
+
+import { fetchAllCaseStudies, fetchCaseStudyBySlug } from "@/data/sanity/fetch";
+
+export async function getStaticPaths() {
+  const items = await fetchAllCaseStudies();
+  return items.map((item) => ({ params: { slug: String(item.slug) } }));
+}
+
+const params = Astro.params;
+const slug = Array.isArray(params.slug) ? params.slug.join("/") : params.slug || "";
+const caseStudy = await fetchCaseStudyBySlug(slug);
+
+const sections = Array.isArray(caseStudy?.sections) ? caseStudy.sections : [];
+
+const sectionComponents = {
+  hero1: Hero1,
+  hero2: Hero2,
+  feature1: Feature1,
+  feature2: Feature2,
+  feature3: Feature3,
+  feature4: Feature4,
+  feature5: Feature5,
+  feature6: Feature6,
+  feature7: Feature7,
+  testimonial1: Testimonial1,
+  testimonial2: Testimonial2,
+  logoCloud1: LogoCloud1,
+  logoCloud2: LogoCloud2,
+  logoCloud3: LogoCloud3,
+  richText: RichText,
+} as const;
+---
+
+<BaseLayout>
+  {sections.map((section) => {
+    const Component = sectionComponents[section._type];
+    if (!Component) return null;
+    return <Component feature={section} />;
+  })}
+</BaseLayout>
+
+

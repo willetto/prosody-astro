@@ -25,6 +25,7 @@ import { richText } from "./sections/richText";
 import { iconSelector } from "./icon-selector";
 import { page } from "./page";
 import { testimonial } from "./testimonial";
+import { caseStudy } from "./case-study";
 
 export const schemaTypes = [
   imageWithAlt,
@@ -54,4 +55,5 @@ export const schemaTypes = [
   iconSelector,
   page,
   testimonial,
+  caseStudy,
 ];

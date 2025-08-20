@@ -3,7 +3,7 @@ import { defineField, defineType } from "sanity";
 export const testimonial = defineType({
   name: "testimonial",
   type: "document",
-  title: "Testimonial",
+  title: "Testimonials",
   fields: [
     defineField({
       name: "testimony",

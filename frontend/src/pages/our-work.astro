@@ -1,0 +1,107 @@
+---
+// foundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+// Sections
+import Hero1 from "@/components/heros/Hero1.astro";
+import Hero2 from "@/components/heros/Hero2.astro";
+import Feature1 from "@/components/features/Feature1.astro";
+import Feature2 from "@/components/features/Feature2.astro";
+import Feature3 from "@/components/features/Feature3.astro";
+import Feature4 from "@/components/features/Feature4.astro";
+import Feature5 from "@/components/features/Feature5.astro";
+import Feature6 from "@/components/features/Feature6.astro";
+import Feature7 from "@/components/features/Feature7.astro";
+import Testimonial1 from "@/components/testimonials/Testimonial1.astro";
+import Testimonial2 from "@/components/testimonials/Testimonial2.astro";
+import LogoCloud1 from "@/components/testimonials/LogoCloud1.astro";
+import LogoCloud2 from "@/components/testimonials/LogoCloud2.astro";
+import LogoCloud3 from "@/components/testimonials/LogoCloud3.astro";
+import RichText from "@/components/RichText.astro";
+
+// Sanity
+import { sanityClient } from "@/data/sanity/fetch";
+import { ALL_SECTION_FIELDS } from "@/data/sanity/groq";
+
+
+type Section = {
+  _type: string;
+  [key: string]: any;
+};
+
+const homeSlugCandidates = ["our-work"] as const;
+
+const query = `*[_type == "page" && slug.current in $slugs]{
+  slug,
+  sections[]{
+    ${ALL_SECTION_FIELDS}
+  }
+}`;
+
+type PageDoc = { slug?: { current?: string }; sections?: Section[] };
+
+const pages = (await sanityClient
+  .fetch<PageDoc[]>(query, { slugs: homeSlugCandidates })
+  .catch((err) => {
+    console.error("[Sanity] Fetch error for home slugs:", err?.message || err);
+    return [] as PageDoc[];
+  })) as PageDoc[];
+
+// Pick the first page matching our preferred slug order
+const selectedPage = homeSlugCandidates
+  .map((s) => pages.find((p) => p?.slug?.current === s))
+  .find((p) => !!p) || null;
+
+const sections: Section[] = Array.isArray(selectedPage?.sections)
+  ? selectedPage.sections
+  : [];
+
+// Section component mapping
+const sectionComponents = {
+  hero1: Hero1,
+  hero2: Hero2,
+  feature1: Feature1,
+  feature2: Feature2,
+  feature3: Feature3,
+  feature4: Feature4,
+  feature5: Feature5,
+  feature6: Feature6,
+  feature7: Feature7,
+  testimonial1: Testimonial1,
+  testimonial2: Testimonial2,
+  logoCloud1: LogoCloud1,
+  logoCloud2: LogoCloud2,
+  logoCloud3: LogoCloud3,
+  richText: RichText,
+};
+
+// Minimal debug: summarize what we received from Sanity
+try {
+  const debugSummary = {
+    triedSlugs: [...homeSlugCandidates],
+    foundPages: pages.map((p) => p?.slug?.current),
+    selectedSlug: selectedPage?.slug?.current ?? null,
+    sectionsCount: sections.length,
+    sectionTypes: sections.map((s) => s?._type),
+  };
+  console.debug("[Sanity] Home page resolution:", debugSummary);
+  if (!selectedPage) {
+    console.warn("[Sanity] No home page found for any of:", homeSlugCandidates);
+  } else if (sections.length === 0) {
+    console.warn("[Sanity] No sections found on home page slug:", debugSummary.selectedSlug);
+  }
+} catch {}
+---
+
+<BaseLayout>
+  {sections.map((section) => {
+    const Component = sectionComponents[section._type];
+    if (!Component) {
+      console.warn(`[Sanity] Unknown section type: ${section._type}`);
+      return null;
+    }
+    
+    // Pass the section data as props to the component
+    // All components now use the wrapper pattern with a 'feature' prop
+    return <Component feature={section} />;
+  })}
+</BaseLayout>
