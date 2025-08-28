@@ -60,9 +60,10 @@ studio/
     │   └── contactForm.ts                  # New schema
     └── index.ts                           # Register new schema
 
-netlify/
-└── functions/
-    └── form-submission.ts                 # New TypeScript serverless function
+frontend/
+├── netlify/
+│   └── functions/
+│       └── form-submission.ts             # New TypeScript serverless function
 ```
 
 ## Implementation Details

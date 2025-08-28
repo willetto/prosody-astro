@@ -40,7 +40,7 @@ Contact Form Submission
     ↓
 Netlify Forms (spam filtering + backup)
     ↓
-Custom Netlify Function (form-submission.ts)
+Custom Netlify Function (frontend/netlify/functions/form-submission.ts)
     ↓
 Pipedrive API Integration
     ↓
@@ -86,6 +86,8 @@ The Netlify function provides comprehensive logging with `[FORM-SUBMISSION]` pre
 1. Netlify Dashboard → Functions tab
 2. Click on `form-submission` function
 3. View real-time logs
+
+**Note**: The function should now be detected in `frontend/netlify/functions/` directory.
 
 #### Browser Console
 

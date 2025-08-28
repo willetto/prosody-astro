@@ -16,4 +16,5 @@ export default defineCliConfig({
     dataset,
   },
   autoUpdates: true,
+  studioHost: "prosody",
 });

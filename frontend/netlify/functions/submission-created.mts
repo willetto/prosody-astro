@@ -2,7 +2,7 @@
  * Netlify Serverless Function: Form Submission Handler (TypeScript)
  * Processes contact form submissions and creates leads in Pipedrive
  *
- * Triggered by: Netlify Forms on form submission
+ * Triggered by: Netlify Forms submission-created event
  * Environment Variables Required:
  * - PIPEDRIVE_API_KEY: Your Pipedrive API token
  */
@@ -18,15 +18,32 @@ const PIPEDRIVE_DOMAIN = "prosodydigital.pipedrive.com";
 type LogLevel = "debug" | "info" | "warn" | "error";
 
 /**
- * Form data structure from contact form
+ * Netlify Forms submission payload structure
  */
-interface ContactFormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  message: string;
-  "form-name": string;
-  "bot-field"?: string; // Honeypot field
+interface NetlifyFormSubmission {
+  id: string;
+  form_name: string;
+  form_data: {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    message?: string;
+    "bot-field"?: string;
+  };
+  created_at: string;
+  site_url: string;
+}
+
+/**
+ * Event payload structure for submission-created
+ */
+interface SubmissionCreatedPayload {
+  payload: NetlifyFormSubmission;
+  site: {
+    id: string;
+    name: string;
+    url: string;
+  };
 }
 
 /**
@@ -213,7 +230,7 @@ async function findOrCreatePerson(
  */
 async function createLead(
   person: PipedrivePerson,
-  formData: Pick<ContactFormData, "message">
+  formData: Pick<NetlifyFormSubmission["form_data"], "message">
 ): Promise<PipedriveLead> {
   log("info", `Creating lead in Pipedrive`, {
     personId: person.id,
@@ -266,15 +283,6 @@ async function createLead(
 }
 
 /**
- * Parse URL-encoded form data into ContactFormData object
- */
-function parseFormData(body: string): ContactFormData {
-  const params = new URLSearchParams(body);
-  const formData = Object.fromEntries(params) as unknown as ContactFormData;
-  return formData;
-}
-
-/**
  * Validate email format
  */
 function isValidEmail(email: string): boolean {
@@ -283,7 +291,7 @@ function isValidEmail(email: string): boolean {
 }
 
 /**
- * Main handler function
+ * Main handler function for submission-created event
  */
 export const handler: Handler = async (
   event: HandlerEvent,
@@ -298,125 +306,138 @@ export const handler: Handler = async (
     timestamp: new Date().toISOString(),
   });
 
-  // Only process POST requests
-  if (event.httpMethod !== "POST") {
-    log("warn", `Invalid HTTP method`, { method: event.httpMethod });
-    return {
-      statusCode: 405,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ error: "Method not allowed" }),
-    };
-  }
-
   try {
-    // Parse form data
-    let formData: ContactFormData;
+    // Parse the event body to get the submission data
+    let submissionData: SubmissionCreatedPayload;
     try {
       if (!event.body) {
-        throw new Error("No form data received");
+        throw new Error("No event data received");
       }
 
-      formData = parseFormData(event.body);
+      submissionData = JSON.parse(event.body) as SubmissionCreatedPayload;
+      const { payload, site } = submissionData;
+
+      log("info", `Received form submission event`, {
+        submissionId: payload.id,
+        formName: payload.form_name,
+        siteId: site.id,
+        siteName: site.name,
+        siteUrl: site.url,
+        createdAt: payload.created_at,
+      });
+
+      // Extract form data
+      const {
+        firstName,
+        lastName,
+        email,
+        message,
+        "bot-field": botField,
+      } = payload.form_data;
 
       log("info", `Parsed form data`, {
-        formName: formData["form-name"],
-        hasFirstName: !!formData.firstName,
-        hasLastName: !!formData.lastName,
-        hasEmail: !!formData.email,
-        hasMessage: !!formData.message,
-        messageLength: formData.message ? formData.message.length : 0,
-        isSpam: !!formData["bot-field"], // Honeypot field should be empty
+        hasFirstName: !!firstName,
+        hasLastName: !!lastName,
+        hasEmail: !!email,
+        hasMessage: !!message,
+        messageLength: message ? message.length : 0,
+        isSpam: !!botField, // Honeypot field should be empty
       });
-    } catch (parseError) {
-      log("error", `Failed to parse form data`, {
-        error:
-          parseError instanceof Error ? parseError.message : String(parseError),
-        body: event.body,
-      });
-      throw new Error("Invalid form data");
-    }
 
-    // Check honeypot field for spam
-    if (formData["bot-field"]) {
-      log("warn", `Spam detected via honeypot field`, {
-        botField: formData["bot-field"],
+      // Check honeypot field for spam
+      if (botField) {
+        log("warn", `Spam detected via honeypot field`, {
+          botField,
+        });
+        return {
+          statusCode: 200, // Return 200 for event handlers to avoid retries
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            success: false,
+            message: "Spam detected - submission ignored",
+          }),
+        };
+      }
+
+      // Validate required fields
+      if (!firstName || !lastName || !email) {
+        log("warn", `Missing required fields`, {
+          firstName: !!firstName,
+          lastName: !!lastName,
+          email: !!email,
+        });
+        return {
+          statusCode: 200, // Return 200 for event handlers to avoid retries
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            success: false,
+            error: "Missing required fields",
+            required: ["firstName", "lastName", "email"],
+          }),
+        };
+      }
+
+      // Validate email format
+      if (!isValidEmail(email)) {
+        log("warn", `Invalid email format`, { email });
+        return {
+          statusCode: 200, // Return 200 for event handlers to avoid retries
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            success: false,
+            error: "Invalid email format",
+          }),
+        };
+      }
+
+      // Process with Pipedrive
+      log("info", `Starting Pipedrive integration`);
+
+      // Step 1: Find or create person
+      const person = await findOrCreatePerson(email, firstName, lastName);
+
+      // Step 2: Create lead
+      const lead = await createLead(person, { message });
+
+      // Calculate processing time
+      const processingTime = Date.now() - startTime;
+
+      log("info", `Form submission processed successfully`, {
+        submissionId: payload.id,
+        personId: person.id,
+        leadId: lead.id,
+        processingTimeMs: processingTime,
+        email: email.replace(/(.{3}).*(@.*)/, "$1***$2"), // Partially hide email in logs
       });
+
+      // Return success response
       return {
-        statusCode: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ error: "Spam detected" }),
-      };
-    }
-
-    // Validate required fields
-    const { firstName, lastName, email, message } = formData;
-
-    if (!firstName || !lastName || !email) {
-      log("warn", `Missing required fields`, {
-        firstName: !!firstName,
-        lastName: !!lastName,
-        email: !!email,
-      });
-      return {
-        statusCode: 400,
+        statusCode: 200,
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          error: "Missing required fields",
-          required: ["firstName", "lastName", "email"],
+          success: true,
+          message: "Contact form submitted successfully",
+          submissionId: payload.id,
+          leadId: lead.id,
+          processingTime: processingTime,
         }),
       };
+    } catch (parseError) {
+      log("error", `Failed to parse event data`, {
+        error:
+          parseError instanceof Error ? parseError.message : String(parseError),
+        body: event.body,
+      });
+      throw new Error("Invalid event data");
     }
-
-    // Validate email format
-    if (!isValidEmail(email)) {
-      log("warn", `Invalid email format`, { email });
-      return {
-        statusCode: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ error: "Invalid email format" }),
-      };
-    }
-
-    // Process with Pipedrive
-    log("info", `Starting Pipedrive integration`);
-
-    // Step 1: Find or create person
-    const person = await findOrCreatePerson(email, firstName, lastName);
-
-    // Step 2: Create lead
-    const lead = await createLead(person, { message });
-
-    // Calculate processing time
-    const processingTime = Date.now() - startTime;
-
-    log("info", `Form submission processed successfully`, {
-      personId: person.id,
-      leadId: lead.id,
-      processingTimeMs: processingTime,
-      email: email.replace(/(.{3}).*(@.*)/, "$1***$2"), // Partially hide email in logs
-    });
-
-    // Return success response
-    return {
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        success: true,
-        message: "Contact form submitted successfully",
-        leadId: lead.id,
-        processingTime: processingTime,
-      }),
-    };
   } catch (error) {
     const processingTime = Date.now() - startTime;
 
@@ -426,9 +447,9 @@ export const handler: Handler = async (
       processingTimeMs: processingTime,
     });
 
-    // Return error response
+    // Return error response (200 to avoid retries in event handlers)
     return {
-      statusCode: 500,
+      statusCode: 200,
       headers: {
         "Content-Type": "application/json",
       },
