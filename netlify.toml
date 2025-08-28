@@ -10,10 +10,6 @@
   # Ensure a modern Node runtime compatible with Astro 5
   NODE_VERSION = "20"
 
-[functions]
-  # Directory for Netlify Functions
-  directory = "netlify/functions"
-
 # Form processing configuration
 # Netlify will automatically detect forms with data-netlify="true"
 # TypeScript functions are automatically compiled by Netlify
