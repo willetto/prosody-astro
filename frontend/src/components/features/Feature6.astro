@@ -1,6 +1,7 @@
 ---
 // Assets
 import { Code } from "astro:components";
+import type { CodeLanguage } from "astro";
 // foundations
 import Text from "@/components/foundations/elements/Text.astro";
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
@@ -21,6 +22,7 @@ interface Props {
 
 const { feature } = Astro.props;
 const { header, subheading, codeTabs = [] } = feature || {};
+const tabIds = codeTabs.map((tab) => tab.id);
 
 // Don't render if no feature data
 if (!feature || !codeTabs || codeTabs.length === 0) {
@@ -81,7 +83,7 @@ if (!feature || !codeTabs || codeTabs.length === 0) {
               <div id={`content-${tab.id}`} class={`${index === 0 ? "" : "hidden"} feature-code-tab`}>
                 <div class="h-full overflow-hidden divide-y divide-sand-50">
                   <Code
-                    lang={tab.language}
+                    lang={tab.language as CodeLanguage}
                     theme="css-variables"
                     class="h-full p-4 pl-2 text-xs scrollbar-hide"
                     code={tab.code}
@@ -97,7 +99,7 @@ if (!feature || !codeTabs || codeTabs.length === 0) {
     <script type="module">
       const tabContainer = document.querySelector('.feature-tabs');
       if (tabContainer) {
-        const tabIds = {codeTabs.map(tab => tab.id)};
+        const tabIds = JSON.parse('{JSON.stringify(tabIds)}');
         
         tabIds.forEach((lang) => {
           const button = document.getElementById(`tab-${lang}`);

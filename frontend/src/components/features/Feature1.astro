@@ -6,6 +6,7 @@ import Text from "@/components/foundations/elements/Text.astro";
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 import PortableText from "@/components/foundations/elements/PortableText.astro";
 import IconRenderer from "@/components/foundations/elements/IconRenderer.astro";
+import type { CodeLanguage } from "astro";
 
 interface Props {
   feature?: {
@@ -26,6 +27,7 @@ interface Props {
 
 const { feature } = Astro.props;
 const { header, subheading, codeTabs = [] } = feature || {};
+const tabIds = codeTabs.map((tab) => tab.id);
 
 // Don't render if no feature data
 if (!feature || !codeTabs || codeTabs.length === 0) {
@@ -88,7 +90,7 @@ if (!feature || !codeTabs || codeTabs.length === 0) {
                 </div>
               </div>
               <Code
-                lang={tab.language}
+                lang={tab.language as CodeLanguage}
                 theme="css-variables"
                 class="h-full p-4 pl-2 text-xs scrollbar-hide feature-code-content"
                 code={tab.code}
@@ -103,7 +105,7 @@ if (!feature || !codeTabs || codeTabs.length === 0) {
     <script type="module">
       const tabContainer = document.querySelector('.feature-tabs');
       if (tabContainer) {
-        const tabIds = {codeTabs.map(tab => tab.id)};
+        const tabIds = JSON.parse('{JSON.stringify(tabIds)}');
         
         tabIds.forEach((lang) => {
           const button = document.getElementById(`tab-${lang}`);
