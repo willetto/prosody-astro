@@ -1,0 +1,16 @@
+[build]
+  # Monorepo: change into the frontend package before running commands
+  base = "frontend"
+  # Astro builds to `dist` by default
+  publish = "dist"
+  # Use pnpm for deterministic installs, then build
+  command = "pnpm install --frozen-lockfile && pnpm build"
+
+[build.environment]
+  # Ensure a modern Node runtime compatible with Astro 5
+  NODE_VERSION = "20"
+
+# If you later enable SSR/Netlify adapter, you may also configure redirects/headers here.
+# See: https://docs.netlify.com/build/frameworks/framework-setup-guides/astro/
+
+
