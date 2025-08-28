@@ -16,6 +16,7 @@ import LogoCloud1 from "@/components/testimonials/LogoCloud1.astro";
 import LogoCloud2 from "@/components/testimonials/LogoCloud2.astro";
 import LogoCloud3 from "@/components/testimonials/LogoCloud3.astro";
 import RichText from "@/components/RichText.astro";
+import ContactForm from "@/components/forms/ContactForm.astro";
 
 import { fetchAllPages, fetchPageBySlug } from "@/data/sanity/fetch";
 
@@ -46,6 +47,7 @@ const sectionComponents = {
   logoCloud2: LogoCloud2,
   logoCloud3: LogoCloud3,
   richText: RichText,
+  contactForm: ContactForm,
 } as const;
 ---
 

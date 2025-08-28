@@ -123,7 +123,18 @@ export type Testimonial2Section = {
   testimonials: Testimonial[];
 };
 
-export type Section = Hero | Testimonial1Section | Testimonial2Section;
+export type ContactFormSection = {
+  _type: "contactForm";
+  header?: string;
+  subheading?: any[]; // Portable Text blocks
+  successMessage?: string;
+};
+
+export type Section =
+  | Hero
+  | Testimonial1Section
+  | Testimonial2Section
+  | ContactFormSection;
 
 // Navigation types from Site Settings
 export type InlineLinkOptions = {

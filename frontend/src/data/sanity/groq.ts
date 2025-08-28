@@ -178,6 +178,13 @@ export const RICH_TEXT_FIELDS = `
   content
 `;
 
+export const CONTACT_FORM_FIELDS = `
+  _type,
+  header,
+  subheading,
+  successMessage
+`;
+
 export const ALL_SECTION_FIELDS = `
   _type,
   ${HERO_FIELDS},
@@ -193,7 +200,8 @@ export const ALL_SECTION_FIELDS = `
   ${LOGO_CLOUD1_FIELDS},
   ${LOGO_CLOUD2_FIELDS},
   ${LOGO_CLOUD3_FIELDS},
-  ${RICH_TEXT_FIELDS}
+  ${RICH_TEXT_FIELDS},
+  ${CONTACT_FORM_FIELDS}
 `;
 
 // Case Study documents
