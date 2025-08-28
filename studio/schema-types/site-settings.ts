@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { EarthGlobeIcon } from "@sanity/icons";
 
 export const siteSettings = defineType({
   name: "siteSettings",
   title: "Site Settings",
   type: "document",
+  icon: EarthGlobeIcon,
   fields: [
     defineField({
       name: "title",

@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity";
+import { CaseIcon } from "@sanity/icons";
 
 export const caseStudy = defineType({
   name: "caseStudy",
   title: "Case Studies",
   type: "document",
+  icon: CaseIcon,
   groups: [
     {
       name: "projectDetails",

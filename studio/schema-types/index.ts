@@ -54,8 +54,8 @@ export const schemaTypes = [
   logoCloud3,
   richText,
   iconSelector,
-  page,
-  testimonial,
-  caseStudy,
   siteSettings,
+  page,
+  caseStudy,
+  testimonial,
 ];
