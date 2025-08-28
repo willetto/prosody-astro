@@ -124,3 +124,62 @@ export type Testimonial2Section = {
 };
 
 export type Section = Hero | Testimonial1Section | Testimonial2Section;
+
+// Navigation types from Site Settings
+export type InlineLinkOptions = {
+  target?: "_self" | "_blank" | "_parent" | "_top";
+  rel?: string;
+  title?: string;
+  variant?:
+    | "display6XL"
+    | "display5XL"
+    | "display4XL"
+    | "display3XL"
+    | "display2XL"
+    | "displayXL"
+    | "displayLG"
+    | "displayMD"
+    | "displaySM"
+    | "displayXS"
+    | "textXL"
+    | "textLG"
+    | "textBase"
+    | "textSM"
+    | "textXS";
+  hoverColor?: "base" | "accent" | "blue" | "sand";
+  weight?:
+    | "thin"
+    | "extralight"
+    | "light"
+    | "normal"
+    | "medium"
+    | "semibold"
+    | "bold"
+    | "extrabold"
+    | "black";
+  hideUnderline?: boolean;
+  class?: string;
+  ariaLabel?: string;
+};
+
+export type LinkOptions = {
+  variant?: "default" | "accent" | "muted" | "link";
+  size?: "xxs" | "xs" | "sm" | "base" | "md" | "lg" | "xl";
+  gap?: "xs" | "sm" | "base" | "md" | "lg";
+  rel?: string;
+  target?: "" | "_blank" | "_parent" | "_self" | "_top";
+  ariaLabel?: string;
+  class?: string;
+};
+
+export type SiteNavItem = {
+  label?: string;
+  component?: "InlineLink" | "Link";
+  page?: { slug?: string; title?: string } | null;
+  inlineLinkOptions?: InlineLinkOptions;
+  linkOptions?: LinkOptions;
+};
+
+export type SiteSettingsNav = {
+  mainNav?: SiteNavItem[];
+};

@@ -217,6 +217,10 @@ export const CASE_STUDY_DETAIL_FIELDS = `
     "assetAltText": asset->altText,
     alt
   },
+  metafields[] {
+    name,
+    value
+  },
   sections[] {
     ${ALL_SECTION_FIELDS}
   }
@@ -231,5 +235,67 @@ export const CASE_STUDY_LIST_QUERY = `
 export const CASE_STUDY_BY_SLUG_QUERY = `
   *[_type == "caseStudy" && slug.current == $slug][0] {
     ${CASE_STUDY_DETAIL_FIELDS}
+  }
+`;
+
+// Site Settings Navigation
+export const SITE_SETTINGS_NAV_FIELDS = `
+  mainNav[] {
+    label,
+    component,
+    inlineLinkOptions {
+      target,
+      rel,
+      title,
+      variant,
+      hoverColor,
+      weight,
+      hideUnderline,
+      class,
+      ariaLabel
+    },
+    linkOptions {
+      variant,
+      size,
+      gap,
+      rel,
+      target,
+      ariaLabel,
+      class
+    },
+    "page": page-> {
+      "slug": slug.current,
+      title
+    }
+  }
+`;
+
+export const SITE_SETTINGS_NAV_QUERY = `
+  *[_type == "siteSettings"][0] {
+    ${SITE_SETTINGS_NAV_FIELDS}
+  }
+`;
+
+// Pages
+export const PAGE_SECTION_FIELDS = `
+  sections[] {
+    ${ALL_SECTION_FIELDS}
+  }
+`;
+
+export const PAGE_LIST_QUERY = `
+  *[_type == "page"] | order(title asc) {
+    _id,
+    title,
+    "slug": slug.current
+  }
+`;
+
+export const PAGE_BY_SLUG_QUERY = `
+  *[_type == "page" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    ${PAGE_SECTION_FIELDS}
   }
 `;

@@ -16,23 +16,19 @@ import LogoCloud1 from "@/components/testimonials/LogoCloud1.astro";
 import LogoCloud2 from "@/components/testimonials/LogoCloud2.astro";
 import LogoCloud3 from "@/components/testimonials/LogoCloud3.astro";
 import RichText from "@/components/RichText.astro";
-import Text from "@/components/foundations/elements/Text.astro";
-import PortableText from "@/components/foundations/elements/PortableText.astro";
 
-import { fetchAllCaseStudies, fetchCaseStudyBySlug } from "@/data/sanity/fetch";
-import Breadcrumbs from "@/components/foundations/elements/Breadcrumbs.astro";
-import Wrapper from "@/components/foundations/containers/Wrapper.astro";
+import { fetchAllPages, fetchPageBySlug } from "@/data/sanity/fetch";
 
 export async function getStaticPaths() {
-  const items = await fetchAllCaseStudies();
-  return items.map((item) => ({ params: { slug: String(item.slug) } }));
+  const pages = await fetchAllPages();
+  return pages.map((p) => ({ params: { slug: String(p.slug) } }));
 }
 
 const params = Astro.params;
 const slug = Array.isArray(params.slug) ? params.slug.join("/") : params.slug || "";
-const caseStudy = await fetchCaseStudyBySlug(slug);
+const page = await fetchPageBySlug(slug);
 
-const sections = Array.isArray(caseStudy?.sections) ? caseStudy.sections : [];
+const sections = Array.isArray(page?.sections) ? page.sections : [];
 
 const sectionComponents = {
   hero1: Hero1,
@@ -54,33 +50,10 @@ const sectionComponents = {
 ---
 
 <BaseLayout>
-  <Wrapper variant="standard" class="pt-12 pb-16">
-    <Breadcrumbs />
-    {Array.isArray(caseStudy?.metafields) && caseStudy.metafields.length > 0 ? (
-      <dl class="flex flex-col mt-8 divide-y divide-base-200">
-        {caseStudy.metafields.map((detail) => (
-          <div class="flex items-center justify-between py-2 gap-2">
-            <dt>
-              <Text
-                tag="h4"
-                variant="textSM"
-                class="font-medium text-base-800"
-              >
-                {detail?.name}
-              </Text>
-            </dt>
-            <dd class="brand-text-color lg:text-balance">
-              <PortableText value={detail?.value} />
-            </dd>
-          </div>
-        ))}
-      </dl>
-    ) : null}
-  </Wrapper>
   {sections.map((section) => {
-    const Component = sectionComponents[section._type];
+    const Component = sectionComponents[section._type as keyof typeof sectionComponents];
     if (!Component) return null;
-    return <Component feature={section} />;
+    return <Component feature={section as any} />;
   })}
 </BaseLayout>
 

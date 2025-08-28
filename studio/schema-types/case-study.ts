@@ -4,6 +4,12 @@ export const caseStudy = defineType({
   name: "caseStudy",
   title: "Case Studies",
   type: "document",
+  groups: [
+    {
+      name: "projectDetails",
+      title: "Project Details",
+    },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -50,6 +56,81 @@ export const caseStudy = defineType({
       title: "Social / Listing Image",
       type: "imageWithAlt",
       description: "Used for social share cards and the Our Work listing page.",
+      group: "projectDetails",
+    }),
+    defineField({
+      name: "metafields",
+      title: "Metafields",
+      description:
+        "Optional list of name/value pairs for project details (e.g., client, technologies used).",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          name: "metafield",
+          fields: [
+            defineField({
+              name: "name",
+              title: "Name",
+              type: "string",
+            }),
+            defineField({
+              name: "value",
+              title: "Value",
+              description: "Text with inline links only (no other formatting)",
+              type: "array",
+              of: [
+                {
+                  type: "block",
+                  styles: [],
+                  lists: [],
+                  marks: {
+                    decorators: [],
+                    annotations: [
+                      {
+                        name: "link",
+                        type: "object",
+                        title: "Link",
+                        fields: [
+                          defineField({
+                            name: "href",
+                            type: "url",
+                            title: "URL",
+                            validation: (rule) =>
+                              rule.uri({
+                                scheme: ["http", "https", "mailto", "tel"],
+                              }),
+                          }),
+                        ],
+                      },
+                    ],
+                  },
+                },
+              ],
+            }),
+          ],
+          preview: {
+            select: { name: "name", value: "value" },
+            prepare({ name, value }) {
+              const plain = Array.isArray(value)
+                ? value
+                    .map((block) =>
+                      Array.isArray(block?.children)
+                        ? block.children
+                            .map((child) => child?.text)
+                            .filter(Boolean)
+                            .join("")
+                        : ""
+                    )
+                    .filter(Boolean)
+                    .join(" ")
+                : "";
+              return { title: name, subtitle: plain };
+            },
+          },
+        },
+      ],
+      group: "projectDetails",
     }),
     defineField({
       name: "sections",

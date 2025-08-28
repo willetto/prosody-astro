@@ -6,6 +6,17 @@ export interface Props {
   title?: string; // Optional title attribute for accessibility
   variant?: string; // Specifies the style variant of the text (same as Text.astro)
   hoverColor?: "base" | "accent" | "blue" | "sand"; // Hover color option
+  weight?:
+    | "thin"
+    | "extralight"
+    | "light"
+    | "normal"
+    | "medium"
+    | "semibold"
+    | "bold"
+    | "extrabold"
+    | "black"; // Font weight option (Tailwind scale); defaults to semibold
+  hideUnderline?: boolean; // If true, keeps underline but makes it transparent until hover/focus
   class?: string; // Optional prop for additional custom classes
   ariaLabel?: string; // Optional aria-label attribute for accessibility
 }
@@ -37,6 +48,8 @@ const {
   class: className = "",
   variant = "textBase", // Defaults to textBase style variant
   hoverColor = "base", // Defaults to base hover color
+  weight = "semibold",
+  hideUnderline = false,
   ...rest // Collect remaining props
 } = Astro.props;
 
@@ -51,8 +64,28 @@ const hoverColorClasses: Record<string, string> = {
   sand: "hover:text-sand-500"
 };
 
+// Map weight prop to Tailwind font-weight classes
+const weightToClass: Record<string, string> = {
+  thin: "font-thin",
+  extralight: "font-extralight",
+  light: "font-light",
+  normal: "font-normal",
+  medium: "font-medium",
+  semibold: "font-semibold",
+  bold: "font-bold",
+  extrabold: "font-extrabold",
+  black: "font-black",
+};
+
+const weightClass = weightToClass[weight] ?? weightToClass["semibold"];
+
+// Underline visibility behavior
+const underlineVisibilityClasses = hideUnderline
+  ? "underline decoration-transparent hover:decoration-current focus-visible:decoration-current"
+  : "underline";
+
 // Base link styles with hover effects
-const linkStyles = `brand-inline-link font-semibold ${hoverColorClasses[hoverColor]} transition-colors underline`;
+const linkStyles = `brand-inline-link ${weightClass} ${hoverColorClasses[hoverColor]} transition-colors ${underlineVisibilityClasses}`;
 
 // Combine base classes with link styles and any additional custom classes
 const combinedClasses = `${baseClasses} ${linkStyles} ${className}`.trim();

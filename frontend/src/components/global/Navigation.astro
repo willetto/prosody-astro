@@ -4,16 +4,35 @@ import Logo from "@/components/assets/Logo.astro";
 import Link from "@/components/foundations/elements/Link.astro";
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 import Text from "../foundations/elements/Text.astro";
-const navigationLinks = [
-  {
-    title: "Overview",
-    href: "/system/overview",
-  },
-  {
-    title: "Blog",
-    href: "/blog/home",
-  },
+import InlineLink from "@/components/foundations/elements/InlineLink.astro";
+import { fetchSiteSettingsNavigation } from "@/data/sanity/fetch";
+const navigationLinks = await fetchSiteSettingsNavigation();
+const fallbackLinks = [
+  { title: "Overview", href: "/system/overview" },
+  { title: "Blog", href: "/blog/home" },
 ];
+const resolvedLinks = (navigationLinks.length
+  ? navigationLinks
+  : fallbackLinks.map((l) => ({
+      title: l.title,
+      href: l.href,
+      component: "InlineLink",
+      inlineLinkOptions: {
+        target: "_self",
+        hoverColor: "blue",
+        weight: "light",
+        hideUnderline: true,
+        variant: "textSM",
+      },
+      linkOptions: { variant: "muted", size: "sm" },
+    }))
+) as Array<{
+  title: string;
+  href: string;
+  component: "InlineLink" | "Link";
+  inlineLinkOptions?: any;
+  linkOptions?: any;
+}>;
 ---
 
 <div
@@ -91,25 +110,42 @@ const navigationLinks = [
             <span class="sr-only">Go to homepage</span>
             <Logo class="h-12 text-base-800" />
           </a>
-          <div class="flex flex-col gap-2 md:gap-4 md:flex-row">
+          <div class="flex flex-col gap-2 md:gap-4 md:flex-row md:items-center">
             {
-              navigationLinks.map((link, index) => (
-                <a
-                  href={link.href}
-                  class=" text-2xl md:text-sm  hover:text-base-600 brand-text-color"
-                >
-                  {link.title}
-                </a>
-              ))
+              resolvedLinks.map((link) => (
+                  link.component === "Link" ? (
+                    <Link
+                      href={link.href}
+                      variant={link.linkOptions?.variant || "muted"}
+                      size={link.linkOptions?.size || "sm"}
+                      gap={link.linkOptions?.gap}
+                      rel={link.linkOptions?.rel}
+                      target={link.linkOptions?.target}
+                      aria-label={link.linkOptions?.ariaLabel}
+                      class={link.linkOptions?.class}
+                    >
+                      {link.title}
+                    </Link>
+                  ) : (
+                    <InlineLink
+                      href={link.href}
+                      target={link.inlineLinkOptions?.target || "_self"}
+                      rel={link.inlineLinkOptions?.rel}
+                      title={link.inlineLinkOptions?.title}
+                      variant={link.inlineLinkOptions?.variant || "textSM"}
+                      hoverColor={link.inlineLinkOptions?.hoverColor || "blue"}
+                      weight={link.inlineLinkOptions?.weight || "light"}
+                      hideUnderline={
+                        link.inlineLinkOptions?.hideUnderline ?? true
+                      }
+                      class={link.inlineLinkOptions?.class}
+                      ariaLabel={link.inlineLinkOptions?.ariaLabel}
+                    >
+                      {link.title}
+                    </InlineLink>
+                  )
+                ))
             }
-          </div>
-          <div class="flex flex-wrap items-center mt-auto gap-2">
-            <Link size="xs" variant="muted" href="/forms/sign-up">
-              Sign up
-            </Link>
-            <Link size="xs" variant="accent" href="/forms/sign-in">
-              Sign in
-            </Link>
           </div>
         </div>
       </nav>

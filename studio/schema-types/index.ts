@@ -26,6 +26,7 @@ import { iconSelector } from "./icon-selector";
 import { page } from "./page";
 import { testimonial } from "./testimonial";
 import { caseStudy } from "./case-study";
+import { siteSettings } from "./site-settings";
 
 export const schemaTypes = [
   imageWithAlt,
@@ -56,4 +57,5 @@ export const schemaTypes = [
   page,
   testimonial,
   caseStudy,
+  siteSettings,
 ];

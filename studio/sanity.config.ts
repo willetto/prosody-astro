@@ -13,6 +13,9 @@ export default defineConfig({
   title: "Studio",
   projectId,
   dataset,
+  api: {
+    apiVersion: "2025-02-19",
+  },
   plugins: [
     lucideIconPicker(),
     structureTool({
@@ -25,7 +28,9 @@ export default defineConfig({
             )
           ),
     }),
-    visionTool(),
+    visionTool({
+      defaultApiVersion: "2025-02-19",
+    }),
     media(),
   ],
   schema: {

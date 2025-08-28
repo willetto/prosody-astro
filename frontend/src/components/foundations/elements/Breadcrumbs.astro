@@ -1,0 +1,89 @@
+---
+import ChevronRight from "@/components/foundations/icons/ChevronRight.astro";
+
+type Override = {
+  href?: string;
+  label?: string;
+};
+
+interface Props {
+  /** Route to parse. Defaults to current page path. */
+  route?: string;
+  /** Map segment name to custom href/label overrides. Example: { integrations: { href: '/integrations/home' } } */
+  overrides?: Record<string, Override>;
+  /** Override label for the last breadcrumb segment (useful for pretty names). */
+  lastLabel?: string;
+  /** Hide the root Home item. */
+  showHome?: boolean;
+  /** Customize the Home label. */
+  homeLabel?: string;
+}
+
+const {
+  route = Astro.url.pathname,
+  overrides = {},
+  lastLabel,
+  showHome = true,
+  homeLabel = "Home",
+} = Astro.props as Props;
+
+const toTitleCase = (text: string) =>
+  text
+    .replace(/[-_]+/g, " ")
+    .split(" ")
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+const normalizePath = (path: string) => {
+  if (!path) return "/";
+  let normalized = path.split("?")[0].split("#")[0];
+  if (!normalized.startsWith("/")) normalized = "/" + normalized;
+  if (normalized.length > 1 && normalized.endsWith("/")) normalized = normalized.slice(0, -1);
+  return normalized;
+};
+
+const pathname = normalizePath(route);
+const segments = pathname.split("/").filter(Boolean);
+
+type Crumb = { label: string; href: string };
+const crumbs: Crumb[] = [];
+
+if (showHome) {
+  crumbs.push({ label: homeLabel, href: "/" });
+}
+
+let accPath = "";
+segments.forEach((segment, index) => {
+  accPath += `/${segment}`;
+  const isLast = index === segments.length - 1;
+  const override = overrides[segment] ?? {};
+  const href = override.href ?? accPath;
+  const label = isLast && lastLabel ? lastLabel : override.label ?? toTitleCase(segment);
+  crumbs.push({ label, href });
+});
+---
+
+<nav aria-label="Breadcrumb" class="bg-sand-100 p-1.5 rounded-full px-6 w-fit">
+  <ol class="flex items-center text-xs gap-2 brand-text-color">
+    {crumbs.map((item, index) => (
+      <>
+        <li>
+          {index < crumbs.length - 1 ? (
+            <a href={item.href} class="text-xs font-medium hover:text-accent-500 text-base-800">{item.label}</a>
+          ) : (
+            <span class="text-xs font-medium text-accent-500">{item.label}</span>
+          )}
+        </li>
+        {index < crumbs.length - 1 && (
+          <li class="text-base-400">
+            <ChevronRight size="sm" />
+          </li>
+        )}
+      </>
+    ))}
+  </ol>
+  
+</nav>
+
+
