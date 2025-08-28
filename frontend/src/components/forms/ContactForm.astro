@@ -43,11 +43,17 @@ const { feature } = Astro.props;
         name="contact" 
         method="POST" 
         data-netlify="true"
+        data-netlify-honeypot="bot-field"
         class="mt-10 space-y-4"
         id="contact-form"
       >
         <!-- Hidden input for Netlify form identification -->
         <input type="hidden" name="form-name" value="contact" />
+        
+        <!-- Honeypot field for spam protection -->
+        <p style="display: none;">
+          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        </p>
         
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div class="w-full">
@@ -151,7 +157,7 @@ const { feature } = Astro.props;
 </section>
 
 <script>
-  // Handle form submission with inline success message
+  // Handle form submission with inline success message and Pipedrive integration
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contact-form') as HTMLFormElement;
     const buttonContainer = document.getElementById('form-button-container');
@@ -162,19 +168,60 @@ const { feature } = Astro.props;
         e.preventDefault();
         
         const formData = new FormData(form);
+        const submitButton = buttonContainer.querySelector('button');
         
-        fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(formData as any).toString()
-        })
-        .then(() => {
+        // Disable submit button and show loading state
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Sending...';
+        }
+        
+        console.log('[CONTACT-FORM] Starting form submission...');
+        
+        // Submit to both Netlify Forms (for backup) and our custom function
+        Promise.all([
+          // Submit to Netlify Forms for spam filtering and backup
+          fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData as any).toString()
+          }),
+          
+          // Submit to our custom function for Pipedrive integration
+          fetch('/.netlify/functions/form-submission', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData as any).toString()
+          })
+        ])
+        .then(async ([netlifyResponse, functionResponse]) => {
+          console.log('[CONTACT-FORM] Netlify Forms response:', netlifyResponse.status);
+          
+          // Check custom function response
+          if (functionResponse.ok) {
+            const functionResult = await functionResponse.json();
+            console.log('[CONTACT-FORM] Pipedrive integration success:', functionResult);
+          } else {
+            const errorResult = await functionResponse.json().catch(() => ({ error: 'Unknown error' }));
+            console.warn('[CONTACT-FORM] Pipedrive integration failed:', errorResult);
+            // Note: We still show success to user even if Pipedrive fails
+            // The form data is captured by Netlify Forms as backup
+          }
+          
           // Hide button, show success message
           buttonContainer.style.display = 'none';
           successMessage.classList.remove('hidden');
+          console.log('[CONTACT-FORM] Form submission completed successfully');
         })
         .catch(error => {
-          console.error('Form submission error:', error);
+          console.error('[CONTACT-FORM] Form submission error:', error);
+          
+          // Re-enable button
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Send Message';
+          }
+          
           alert('There was an error submitting your form. Please try again.');
         });
       });
