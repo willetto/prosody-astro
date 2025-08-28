@@ -4,7 +4,7 @@
   # Astro builds to `dist` by default
   publish = "dist"
   # Use pnpm for deterministic installs, then build
-  command = "pnpm install --frozen-lockfile && pnpm build"
+  command = "pnpm install --frozen-lockfile && pnpm astro build"
 
 [build.environment]
   # Ensure a modern Node runtime compatible with Astro 5
