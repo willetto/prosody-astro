@@ -2,12 +2,17 @@
 // Assets
 import Text from "@/components/foundations/elements/Text.astro";
 import Button from "@/components/foundations/elements/Button.astro";
+import SanityImage from "@/components/foundations/elements/SanityImage.astro";
 
 interface Props {
   feature: {
     _type: "contactForm";
     header?: string;
     subheading?: any[]; // Portable text blocks
+    backgroundImage?: {
+      asset: { _ref: string };
+      alt?: string;
+    };
     successMessage?: string;
   };
 }
@@ -15,11 +20,13 @@ interface Props {
 const { feature } = Astro.props;
 ---
 
-<section class="w-full bg-sand-100">
-  <div class="flex items-center justify-center w-full p-8">
-    <div class="w-full max-w-md py-24 lg:py-32">
+<section class="w-full bg-sand-100 dark:bg-neutral-800">
+  <div class="flex flex-col h-screen lg:flex-row lg:gap-10">
+    {/* Form Section - First on all screen sizes */}
+    <div class="flex items-center justify-center w-full p-8 bg-sand-100 dark:bg-neutral-800 lg:w-2/3 lg:justify-start">
+      <div class="w-full max-w-md py-24 lg:py-32">
       {feature.header && (
-        <div class="text-center">
+        <div class="text-center lg:text-left">
           <Text
             tag="h2"
             variant="displayMD"
@@ -69,7 +76,7 @@ const { feature } = Astro.props;
                 type="text"
                 required
                 placeholder="Jane"
-                class="block w-full px-4 py-2 text-xs leading-tight align-middle bg-white border border-transparent transition duration-300 ease-in-out focus:z-10 h-9 rounded-md brand-text-color ring-1 ring-base-200 placeholder-base-400 focus:border-accent-500 focus:ring-accent-100 focus:ring-2 focus:outline-none shadow-sm"
+                class="block w-full px-4 py-2 text-xs leading-tight align-middle bg-white dark:bg-neutral-700 border border-transparent transition duration-300 ease-in-out focus:z-10 h-9 rounded-md brand-text-color dark:text-neutral-200 ring-1 ring-base-200 dark:ring-neutral-600 placeholder-base-400 dark:placeholder-neutral-400 focus:border-accent-500 focus:ring-accent-100 dark:focus:ring-accent-900 focus:ring-2 focus:outline-none shadow-sm"
               />
             </div>
           </div>
@@ -87,7 +94,7 @@ const { feature } = Astro.props;
                 type="text"
                 required
                 placeholder="Doe"
-                class="block w-full px-4 py-2 text-xs leading-tight align-middle bg-white border border-transparent transition duration-300 ease-in-out focus:z-10 h-9 rounded-md brand-text-color ring-1 ring-base-200 placeholder-base-400 focus:border-accent-500 focus:ring-accent-100 focus:ring-2 focus:outline-none shadow-sm"
+                class="block w-full px-4 py-2 text-xs leading-tight align-middle bg-white dark:bg-neutral-700 border border-transparent transition duration-300 ease-in-out focus:z-10 h-9 rounded-md brand-text-color dark:text-neutral-200 ring-1 ring-base-200 dark:ring-neutral-600 placeholder-base-400 dark:placeholder-neutral-400 focus:border-accent-500 focus:ring-accent-100 dark:focus:ring-accent-900 focus:ring-2 focus:outline-none shadow-sm"
               />
             </div>
           </div>
@@ -106,7 +113,7 @@ const { feature } = Astro.props;
               type="email"
               required
               placeholder="you@example.com"
-              class="block w-full px-4 py-2 text-xs leading-tight align-middle bg-white border border-transparent transition duration-300 ease-in-out focus:z-10 h-9 rounded-md brand-text-color ring-1 ring-base-200 placeholder-base-400 focus:border-accent-500 focus:ring-accent-100 focus:ring-2 focus:outline-none shadow-sm"
+              class="block w-full px-4 py-2 text-xs leading-tight align-middle bg-white dark:bg-neutral-700 border border-transparent transition duration-300 ease-in-out focus:z-10 h-9 rounded-md brand-text-color dark:text-neutral-200 ring-1 ring-base-200 dark:ring-neutral-600 placeholder-base-400 dark:placeholder-neutral-400 focus:border-accent-500 focus:ring-accent-100 dark:focus:ring-accent-900 focus:ring-2 focus:outline-none shadow-sm"
               inputmode="email"
             />
           </div>
@@ -125,7 +132,7 @@ const { feature } = Astro.props;
               rows="4"
               required
               placeholder="What's on your mind?"
-              class="block w-full px-4 py-2 text-xs leading-tight align-middle bg-white border border-transparent transition duration-300 ease-in-out focus:z-10 rounded-md brand-text-color ring-1 ring-base-200 placeholder-base-400 focus:border-accent-500 focus:ring-accent-100 focus:ring-2 focus:outline-none shadow-sm"
+              class="block w-full px-4 py-2 text-xs leading-tight align-middle bg-white dark:bg-neutral-700 border border-transparent transition duration-300 ease-in-out focus:z-10 rounded-md brand-text-color dark:text-neutral-200 ring-1 ring-base-200 dark:ring-neutral-600 placeholder-base-400 dark:placeholder-neutral-400 focus:border-accent-500 focus:ring-accent-100 dark:focus:ring-accent-900 focus:ring-2 focus:outline-none shadow-sm"
             ></textarea>
           </div>
         </div>
@@ -154,10 +161,40 @@ const { feature } = Astro.props;
       </form>
     </div>
   </div>
+
+  {/* Background Image Section - Below form on small/medium, to the side on large */}
+  {feature.backgroundImage?.asset?._ref && (
+    <div
+      class="relative w-full h-64 overflow-hidden lg:h-auto lg:w-1/2 lg:order-first"
+    >
+      <SanityImage
+        image={feature.backgroundImage}
+        width={1200}
+        height={1200}
+        loading="lazy"
+        class="object-cover object-center w-full h-full bg-base-50 dark:bg-neutral-900"
+      />
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 pointer-events-none bg-sand-700/50 dark:bg-neutral-800/50"
+      >
+      </div>
+      {/* <div
+        class="absolute inset-0 flex flex-col items-center justify-between p-8 text-center"
+      >
+        <div>
+          <Text tag="p" variant="textXL" class="mt-4 font-medium text-white">
+            Hello, is it me <br />
+            you are looking for?
+          </text>
+          </div>
+        </div> */}
+    </div>
+  )}
 </section>
 
 <script>
-  // Handle form submission with inline success message and Pipedrive integration
+  // Handle form submission with inline success message
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contact-form') as HTMLFormElement;
     const buttonContainer = document.getElementById('form-button-container');
@@ -178,35 +215,14 @@ const { feature } = Astro.props;
         
         console.log('[CONTACT-FORM] Starting form submission...');
         
-        // Submit to both Netlify Forms (for backup) and our custom function
-        Promise.all([
-          // Submit to Netlify Forms for spam filtering and backup
-          fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(formData as any).toString()
-          }),
-          
-          // Submit to our custom function for Pipedrive integration
-          fetch('/.netlify/functions/form-submission', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(formData as any).toString()
-          })
-        ])
-        .then(async ([netlifyResponse, functionResponse]) => {
-          console.log('[CONTACT-FORM] Netlify Forms response:', netlifyResponse.status);
-          
-          // Check custom function response
-          if (functionResponse.ok) {
-            const functionResult = await functionResponse.json();
-            console.log('[CONTACT-FORM] Pipedrive integration success:', functionResult);
-          } else {
-            const errorResult = await functionResponse.json().catch(() => ({ error: 'Unknown error' }));
-            console.warn('[CONTACT-FORM] Pipedrive integration failed:', errorResult);
-            // Note: We still show success to user even if Pipedrive fails
-            // The form data is captured by Netlify Forms as backup
-          }
+        // Submit to Netlify Forms
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData as any).toString()
+        })
+        .then(response => {
+          console.log('[CONTACT-FORM] Form submission response:', response.status);
           
           // Hide button, show success message
           buttonContainer.style.display = 'none';
@@ -228,3 +244,28 @@ const { feature } = Astro.props;
     }
   });
 </script>
+
+<style>
+  /* Dark mode support for form elements */
+  .brand-heading-color {
+    color: var(--heading-text-color);
+  }
+  
+  .brand-text-color {
+    color: var(--body-text-color);
+  }
+  
+  /* Form input focus states for dark mode */
+  input:focus,
+  textarea:focus {
+    background-color: var(--input-bg-color);
+    border-color: var(--accent-color);
+    color: var(--input-text-color);
+  }
+  
+  /* Dark mode placeholder text */
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--placeholder-color);
+  }
+</style>

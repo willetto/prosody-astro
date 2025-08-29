@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { EnvelopeIcon } from "@sanity/icons";
 
 export const contactForm = defineType({
   name: "contactForm",
@@ -20,6 +21,13 @@ export const contactForm = defineType({
         "Optional subheading text below the header. Leave empty to hide.",
     }),
     defineField({
+      name: "backgroundImage",
+      title: "Background Image",
+      type: "imageWithAlt",
+      description:
+        "Optional background image for the right side of the contact form. Leave empty to hide the image section.",
+    }),
+    defineField({
       name: "successMessage",
       title: "Success Message",
       type: "string",
@@ -33,12 +41,13 @@ export const contactForm = defineType({
     select: {
       title: "header",
       subtitle: "successMessage",
+      media: "backgroundImage",
     },
-    prepare({ title, subtitle }) {
+    prepare({ title, subtitle, media }) {
       return {
         title: title || "Contact Form",
         subtitle: subtitle || "Contact form with default success message",
-        media: () => "📧", // Email emoji as icon
+        media: media || EnvelopeIcon, // Email emoji as icon if no image
       };
     },
   },

@@ -88,10 +88,20 @@ export type UiImage = {
 
 export type UiElement = UiButton | UiLink | UiText | UiShareButtons | UiImage;
 
+// Portable Text type for better type safety
+export type PortableTextBlock = {
+  _type: "block";
+  style?: string;
+  listItem?: string;
+  markDefs?: unknown[];
+  children?: unknown[];
+  [key: string]: unknown;
+};
+
 export type Hero = {
   _type: "hero1" | "hero2";
   header?: string;
-  subheader?: any[]; // Portable Text blocks
+  subheader?: PortableTextBlock[]; // Portable Text blocks
   primaryCtaLabel?: string;
   primaryCtaHref?: string;
   secondaryCtaLabel?: string;
@@ -126,7 +136,11 @@ export type Testimonial2Section = {
 export type ContactFormSection = {
   _type: "contactForm";
   header?: string;
-  subheading?: any[]; // Portable Text blocks
+  subheading?: PortableTextBlock[]; // Portable Text blocks
+  backgroundImage?: {
+    asset: { _ref: string };
+    alt?: string;
+  };
   successMessage?: string;
 };
 

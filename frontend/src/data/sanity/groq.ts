@@ -182,6 +182,11 @@ export const CONTACT_FORM_FIELDS = `
   _type,
   header,
   subheading,
+  backgroundImage {
+    asset,
+    "assetAltText": asset->altText,
+    alt
+  },
   successMessage
 `;
 
