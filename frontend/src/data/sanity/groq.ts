@@ -58,26 +58,17 @@ export const FEATURE4_FIELDS = `
   header,
   subheading,
   firstFeature {
-    icon {
-      asset,
-      "assetUrl": asset->url,
-      alt
-    },
+    icon,
     title,
-    subheading,
+    description,
     ctaLabel,
-    ctaHref
-  },
-  secondFeature {
-    icon {
+    ctaHref,
+    imagePosition,
+    image {
       asset,
-      "assetUrl": asset->url,
+      "assetAltText": asset->altText,
       alt
-    },
-    title,
-    subheading,
-    ctaLabel,
-    ctaHref
+    }
   }
 `;
 

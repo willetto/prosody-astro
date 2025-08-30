@@ -1,8 +1,10 @@
 import { defineField, defineType } from "sanity";
+import { ALLOWED_ICONS } from "../allowed-icons";
+import { InlineIcon } from "@sanity/icons";
 
 export const feature4 = defineType({
   name: "feature4",
-  title: "Feature 4 - Split Features",
+  title: "50-50",
   type: "object",
   fields: [
     defineField({
@@ -19,14 +21,17 @@ export const feature4 = defineType({
     }),
     defineField({
       name: "firstFeature",
-      title: "First Feature",
+      title: "Feature",
       type: "object",
       fields: [
         defineField({
           name: "icon",
           title: "Icon",
-          type: "iconSelector",
-          description: "Select from available icons or upload custom SVG/PNG",
+          type: "lucide-icon",
+          description: "Search from Lucide Icons",
+          options: {
+            allowedIcons: ALLOWED_ICONS,
+          },
         }),
         defineField({
           name: "title",
@@ -50,59 +55,35 @@ export const feature4 = defineType({
           title: "CTA Link",
           type: "string",
         }),
-      ],
-      preview: {
-        select: {
-          title: "title",
-        },
-        prepare({ title }) {
-          return {
-            title: title || "First Feature",
-          };
-        },
-      },
-    }),
-    defineField({
-      name: "secondFeature",
-      title: "Second Feature",
-      type: "object",
-      fields: [
         defineField({
-          name: "icon",
-          title: "Icon",
-          type: "iconSelector",
-          description: "Select from available icons or upload custom SVG/PNG",
-        }),
-        defineField({
-          name: "title",
-          title: "Title",
+          name: "imagePosition",
+          title: "Image Position",
           type: "string",
+          options: {
+            list: [
+              { title: "Image Left", value: "left" },
+              { title: "Image Right", value: "right" },
+            ],
+          },
           validation: (rule) => rule.required(),
+          initialValue: "right",
         }),
         defineField({
-          name: "description",
-          title: "Description",
-          type: "portableText",
-          validation: (rule) => rule.required(),
-        }),
-        defineField({
-          name: "ctaLabel",
-          title: "CTA Label",
-          type: "string",
-        }),
-        defineField({
-          name: "ctaHref",
-          title: "CTA Link",
-          type: "string",
+          name: "image",
+          title: "Image",
+          type: "imageWithAlt",
+          description: "Image to display alongside the feature content",
         }),
       ],
       preview: {
         select: {
           title: "title",
+          imagePosition: "imagePosition",
         },
-        prepare({ title }) {
+        prepare({ title, imagePosition }) {
           return {
-            title: title || "Second Feature",
+            title: title || "Feature",
+            subtitle: `Image ${imagePosition || "right"}`,
           };
         },
       },
@@ -112,12 +93,14 @@ export const feature4 = defineType({
     select: {
       title: "header",
       firstFeature: "firstFeature.title",
-      secondFeature: "secondFeature.title",
+      imagePosition: "firstFeature.imagePosition",
+      image: "firstFeature.image",
     },
-    prepare({ title, firstFeature, secondFeature }) {
+    prepare({ title, firstFeature, imagePosition, image }) {
       return {
-        title: title || "Feature 4 - Split Features",
-        subtitle: `${firstFeature || "No title"}, ${secondFeature || "No title"}`,
+        title: firstFeature || "Feature 4 - Split Features",
+        subtitle: "50-50 Section",
+        media: image || InlineIcon,
       };
     },
   },
