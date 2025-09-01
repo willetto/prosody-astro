@@ -47,10 +47,12 @@ if (!feature) {
     <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-4 feature-content">
       {image?.asset?._ref && (
         <div class="lg:col-span-2 feature-image-container">
-          <SanityImage
-            image={image}
-            class="w-full h-auto rounded-xl shadow-sm"
-          />
+          <div class="w-full aspect-[16/9] rounded-xl shadow-sm overflow-hidden">
+            <SanityImage
+              image={image}
+              class="w-full h-full object-cover rounded-xl"
+            />
+          </div>
         </div>
       )}
     </div>

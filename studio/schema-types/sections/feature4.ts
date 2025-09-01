@@ -34,6 +34,12 @@ export const feature4 = defineType({
           },
         }),
         defineField({
+          name: "image",
+          title: "Image",
+          type: "image",
+          description: "Image to display alongside the feature content",
+        }),
+        defineField({
           name: "title",
           title: "Title",
           type: "string",
@@ -67,12 +73,6 @@ export const feature4 = defineType({
           },
           validation: (rule) => rule.required(),
           initialValue: "right",
-        }),
-        defineField({
-          name: "image",
-          title: "Image",
-          type: "imageWithAlt",
-          description: "Image to display alongside the feature content",
         }),
       ],
       preview: {

@@ -60,10 +60,12 @@ const { feature } = Astro.props as Props;
         </div>
       </div>
       {feature?.image?.asset?._ref && (
-        <SanityImage
-          image={feature.image}
-          class="w-full h-full lg:h-auto rounded-xl md:col-span-1 lg:col-span-2"
-        />
+        <div class="w-full aspect-[4/3] rounded-xl overflow-hidden md:col-span-1 lg:col-span-2">
+          <SanityImage
+            image={feature.image}
+            class="w-full h-full object-cover rounded-xl"
+          />
+        </div>
       )}
     </div>
   </Wrapper>
