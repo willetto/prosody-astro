@@ -59,27 +59,12 @@ const isImageLeft = firstFeature.imagePosition === "left";
     )}
 
     {firstFeature && (
-      <div class="items-end grid grid-cols-1 md:grid-cols-2 gap-12 feature-first">
-        {isImageLeft && (
-          <div class="feature-visual flex h-full order-2 md:order-1">
-            {firstFeature.image?.asset?._ref ? (
-              <SanityImage
-                image={firstFeature.image}
-                class="w-full h-auto max-h-[300px]  md:aspect-[5/3] md:w-full lg:aspect-[3/5] lg:h-full lg:object-cover rounded-xl shadow-sm object-cover"
-              />
-            ) : (
-              <div class="w-full h-64 md:h-auto md:aspect-[5/3] md:w-full lg:aspect-[3/5] lg:h-full bg-sand-100 rounded-xl flex items-center justify-center">
-                <p class="text-sand-500">Image placeholder</p>
-              </div>
-            )}
-          </div>
-        )}
-        
-        <div class="flex flex-col fit-content text-balance gap-10 order-1 md:order-2">
-          <div class="inline-flex p-4 rounded-lg bg-sand-100 w-fit feature-icon">
+      <div class="feature-content-grid">
+        <div class="feature-text-container">
+          <div class="feature-icon-container">
             <LucideIcon icon={firstFeature.icon as AllowedIcon} size="base" class="text-neutral-700" />
           </div>
-          <div>
+          <div class="feature-content">
             <Text
               tag="h2"
               variant="displaySM"
@@ -97,22 +82,71 @@ const isImageLeft = firstFeature.imagePosition === "left";
             )}
           </div>
         </div>
-
-        {!isImageLeft && (
-          <div class="feature-visual flex h-full order-2">
-            {firstFeature.image?.asset?._ref ? (
+        <div class={`feature-image-container ${isImageLeft ? 'feature-image-left' : 'feature-image-right'} relative  w-full h-full`} >
+            {firstFeature.image?.asset?._ref && (
               <SanityImage
                 image={firstFeature.image}
-                class="w-full h-auto max-h-[300px]  md:aspect-[5/3] md:w-full lg:aspect-[3/5] lg:h-full lg:object-cover rounded-xl shadow-sm object-cover"
+                class="absolute inset-0 object-cover w-full h-full rounded-xl shadow-sm"
               />
-            ) : (
-              <div class="w-full h-64 md:h-auto md:aspect-[5/3] md:w-full lg:aspect-[3/5] lg:h-full bg-sand-100 rounded-xl flex items-center justify-center">
-                <p class="text-sand-500">Image placeholder</p>
-              </div>
             )}
           </div>
-        )}
       </div>
     )}
   </Wrapper>
 </section>
+
+<style>
+  .feature-content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  .feature-image-container {
+    height: 100%;
+    min-height: 300px;
+  }
+
+  .feature-text-container {
+    display: flex;
+    flex-direction: column;
+    text-wrap: pretty;
+    gap: 2.5rem;
+  }
+
+  .feature-icon-container {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: rgb(245 245 244);
+    width: fit-content;
+  }
+
+  /* Responsive styles */
+  @media (min-width: 768px) {
+    .feature-content-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch
+    }
+
+    .feature-content-grid:has(.feature-image-left) .feature-text-container {
+      order: 2;
+    }
+
+    .feature-image-left{
+      order: 1;
+    }
+    
+  
+  }
+
+  @media (min-width: 1024px) {
+    .feature-text-container {
+      flex: 1;
+    }
+    .feature-image-container {
+      flex: 1;
+    }
+  }
+</style>
