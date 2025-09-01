@@ -178,6 +178,7 @@ export const CONTACT_FORM_FIELDS = `
     "assetAltText": asset->altText,
     alt
   },
+  desaturateImage,
   successMessage
 `;
 
@@ -277,6 +278,23 @@ export const SITE_SETTINGS_NAV_FIELDS = `
 export const SITE_SETTINGS_NAV_QUERY = `
   *[_type == "siteSettings"][0] {
     ${SITE_SETTINGS_NAV_FIELDS}
+  }
+`;
+
+// Site Settings: Favicon
+export const SITE_SETTINGS_FAVICON_FIELDS = `
+  favicon {
+    asset,
+    "assetUrl": asset->url,
+    "assetMimeType": asset->mimeType,
+    "assetExt": asset->extension,
+    alt
+  }
+`;
+
+export const SITE_SETTINGS_FAVICON_QUERY = `
+  *[_type == "siteSettings"][0] {
+    ${SITE_SETTINGS_FAVICON_FIELDS}
   }
 `;
 

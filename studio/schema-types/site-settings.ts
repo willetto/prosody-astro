@@ -8,6 +8,16 @@ export const siteSettings = defineType({
   icon: EarthGlobeIcon,
   fields: [
     defineField({
+      name: "favicon",
+      title: "Favicon",
+      description:
+        "Upload an SVG or PNG favicon. Prefer square images; SVG recommended.",
+      type: "image",
+      options: {
+        accept: "image/svg+xml,image/png",
+      },
+    }),
+    defineField({
       name: "title",
       title: "Title",
       type: "string",

@@ -141,6 +141,7 @@ export type ContactFormSection = {
     asset: { _ref: string };
     alt?: string;
   };
+  desaturateImage?: boolean;
   successMessage?: string;
 };
 

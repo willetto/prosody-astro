@@ -4,6 +4,7 @@ import {
   CASE_STUDY_BY_SLUG_QUERY,
   CASE_STUDY_LIST_QUERY,
   SITE_SETTINGS_NAV_QUERY,
+  SITE_SETTINGS_FAVICON_QUERY,
   PAGE_LIST_QUERY,
   PAGE_BY_SLUG_QUERY,
 } from "./groq";
@@ -220,5 +221,26 @@ export async function fetchSiteSettingsNavigation(): Promise<
     return normalized;
   } catch {
     return [];
+  }
+}
+
+export type SiteFavicon = {
+  favicon?: {
+    asset?: { _ref?: string };
+    assetUrl?: string;
+    assetMimeType?: string;
+    assetExt?: string;
+    alt?: string;
+  };
+};
+
+export async function fetchSiteFavicon(): Promise<SiteFavicon | null> {
+  try {
+    const result = await sanityClient.fetch<SiteFavicon | null>(
+      SITE_SETTINGS_FAVICON_QUERY
+    );
+    return result ?? null;
+  } catch {
+    return null;
   }
 }

@@ -13,6 +13,7 @@ interface Props {
       asset: { _ref: string };
       alt?: string;
     };
+    desaturateImage?: boolean;
     successMessage?: string;
   };
 }
@@ -172,11 +173,11 @@ const { feature } = Astro.props;
         width={1200}
         height={1200}
         loading="lazy"
-        class="object-cover object-center w-full h-full bg-base-50 dark:bg-neutral-900"
+        class={`object-cover object-center w-full h-full bg-base-50 dark:bg-neutral-900 ${feature.desaturateImage ? 'grayscale' : ''}`}
       />
       <div
         aria-hidden="true"
-        class="absolute inset-0 pointer-events-none bg-sand-700/50 dark:bg-neutral-800/50"
+        class="absolute inset-0 pointer-events-none bg-sand-500/50 dark:bg-neutral-700/50 mix-blend-overlay"
       >
       </div>
       {/* <div

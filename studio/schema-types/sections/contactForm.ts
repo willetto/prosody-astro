@@ -28,6 +28,14 @@ export const contactForm = defineType({
         "Optional background image for the right side of the contact form. Leave empty to hide the image section.",
     }),
     defineField({
+      name: "desaturateImage",
+      title: "Desaturate Image",
+      type: "boolean",
+      description:
+        "Apply grayscale filter to the background image before the color overlay.",
+      initialValue: false,
+    }),
+    defineField({
       name: "successMessage",
       title: "Success Message",
       type: "string",
