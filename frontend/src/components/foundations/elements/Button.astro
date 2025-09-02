@@ -39,6 +39,7 @@ const md = ["h-11", "px-6", "py-3", "text-md"];
 const lg = ["h-12", "px-6", "py-3", "text-lg"];
 const xl = ["h-14", "px-6", "py-3", "text-base"];
 
+const gapXXS = ["gap-1"];
 const gapXS = ["gap-2"];
 const gapSM = ["gap-4"];
 const gapBase = ["gap-8"];
@@ -70,6 +71,7 @@ const additionalClasses = className ? className.split(" ") : [];
     size === "md" && md,
     size === "lg" && lg,
     size === "xl" && xl,
+    gap === "xxs" && gapXXS,
     gap === "xs" && gapXS,
     gap === "sm" && gapSM,
     gap === "base" && gapBase,

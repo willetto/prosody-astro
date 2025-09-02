@@ -1,0 +1,89 @@
+---
+import Text from "@/components/foundations/elements/Text.astro";
+import Button from "@/components/foundations/elements/Button.astro";
+import Wrapper from "@/components/foundations/containers/Wrapper.astro";
+import SanityImage from "@/components/foundations/elements/SanityImage.astro";
+import ArrowRight from "@/components/foundations/icons/ArrowRight.astro";
+
+import type { ProjectListingsSection } from "@/data/sanity";
+
+interface Props {
+  feature?: ProjectListingsSection;
+}
+
+const { feature } = Astro.props as Props;
+const items = Array.isArray(feature?.items) ? feature!.items : [];
+
+if (!items.length) {
+  return null;
+}
+---
+
+<section class="project-listings">
+  <Wrapper variant="standard" class="pt-12 pb-4 border-t">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((item) => {
+        const cs = item?.caseStudy;
+        if (!cs) return null;
+        const href = cs.slug ? `/our-work/${cs.slug}` : "#";
+        return (
+          <article class="flex flex-col overflow-hidden rounded-xl  bg-sand-100 dark:bg-neutral-800 group hover:bg-white dark:hover:bg-neutral-700 hover:shadow-2xl duration-300 ease-in-out">
+            {cs?.socialImage?.asset?._ref && (
+              <a href={href} class="block">
+                <div class="w-full aspect-[5/3] overflow-hidden bg-base-50 dark:bg-neutral-900">
+                  <SanityImage
+                    image={cs.socialImage}
+                    class="w-full h-full object-cover transition duration-300 ease-in-out group-hover:brightness-110"
+                  />
+                </div>
+              </a>
+            )}
+            <div class="flex flex-col p-4 gap-3">
+              <a href={href} class="group">
+                <Text
+                  tag="h3"
+                  variant="displayXS"
+                  class="font-serif font-medium tracking-tight brand-heading-color hover:opacity-50 transition-opacity duration-300 ease-in-out"
+                >
+                  {cs.title}
+                </Text>
+              </a>
+
+              {Array.isArray(item?.badges) && item.badges.length > 0 && (
+                <ul class="flex flex-wrap gap-2 mt-1">
+                  {item.badges.map((b) => (
+                    <li class="text-xs px-3 py-1 rounded-sm border border-blue-400 dark:border-neutral-600 text-blue-600 dark:text-accent-300 bg-blue-50 dark:bg-neutral-700">
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {item?.description && (
+                <Text tag="p" variant="textBase" class="brand-text-color">
+                  {item.description}
+                </Text>
+              )}
+
+
+              <div class="mt-2">
+                <a href={href} class="block w-full">
+                  <Button class="w-full group/btn" variant="accent" size="sm" gap="xxs">
+                    {item?.ctaLabel || "View project"}
+                    <ArrowRight
+                      slot="right-icon"
+                      size="sm"
+                      class="transition-transform duration-300 translate-x-0 group-hover/btn:translate-x-2 group-focus/btn:translate-x-2 group-focus-visible/btn:translate-x-2"
+                    />
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </Wrapper>
+  
+</section>
+
+

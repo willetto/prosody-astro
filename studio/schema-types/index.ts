@@ -23,6 +23,7 @@ import { logoCloud2 } from "./sections/logoCloud2";
 import { logoCloud3 } from "./sections/logoCloud3";
 import { richText } from "./sections/richText";
 import { contactForm } from "./sections/contactForm";
+import { projectListings } from "./sections/projectListings";
 import { iconSelector } from "./icon-selector";
 import { page } from "./page";
 import { testimonial } from "./testimonial";
@@ -55,6 +56,7 @@ export const schemaTypes = [
   logoCloud3,
   richText,
   contactForm,
+  projectListings,
   iconSelector,
   siteSettings,
   page,

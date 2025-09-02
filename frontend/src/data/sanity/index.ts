@@ -149,7 +149,27 @@ export type Section =
   | Hero
   | Testimonial1Section
   | Testimonial2Section
-  | ContactFormSection;
+  | ContactFormSection
+  | ProjectListingsSection;
+
+export type ProjectListingsSection = {
+  _type: "projectListings";
+  items?: Array<{
+    caseStudy?: {
+      _id: string;
+      title: string;
+      slug: string;
+      socialImage?: {
+        asset?: { _ref?: string };
+        alt?: string;
+        assetAltText?: string;
+      };
+    } | null;
+    description?: string;
+    ctaLabel?: string;
+    badges?: string[];
+  }>;
+};
 
 // Navigation types from Site Settings
 export type InlineLinkOptions = {

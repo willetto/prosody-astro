@@ -17,10 +17,10 @@
   "dependencies": {
     "@sanity/icons": "^3.7.4",
     "@sanity/ui": "^2.16.13",
-    "@sanity/vision": "^4.6.0",
+    "@sanity/vision": "^4.6.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sanity": "^4.6.0",
+    "sanity": "^4.6.1",
     "sanity-plugin-lucide-icon-picker": "^1.0.3",
     "sanity-plugin-media": "^4.0.0",
     "styled-components": "^6.1.19"

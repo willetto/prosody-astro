@@ -44,6 +44,7 @@ export const page = defineType({
         { type: "logoCloud3" },
         { type: "richText" },
         { type: "contactForm" },
+        { type: "projectListings" },
       ],
       description:
         "Add sections to compose this page. Sections will be rendered in the order they appear here.",

@@ -182,6 +182,25 @@ export const CONTACT_FORM_FIELDS = `
   successMessage
 `;
 
+export const PROJECT_LISTINGS_FIELDS = `
+  _type,
+  items[] {
+    caseStudy-> {
+      _id,
+      title,
+      "slug": slug.current,
+      socialImage {
+        asset,
+        "assetAltText": asset->altText,
+        alt
+      }
+    },
+    description,
+    ctaLabel,
+    badges
+  }
+`;
+
 export const ALL_SECTION_FIELDS = `
   _type,
   ${HERO_FIELDS},
@@ -198,7 +217,8 @@ export const ALL_SECTION_FIELDS = `
   ${LOGO_CLOUD2_FIELDS},
   ${LOGO_CLOUD3_FIELDS},
   ${RICH_TEXT_FIELDS},
-  ${CONTACT_FORM_FIELDS}
+  ${CONTACT_FORM_FIELDS},
+  ${PROJECT_LISTINGS_FIELDS}
 `;
 
 // Case Study documents
