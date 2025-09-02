@@ -1,4 +1,6 @@
+/* eslint-env node */
 import { defineConfig, envField } from "astro/config";
+import process from "node:process";
 import tailwindcss from "@tailwindcss/vite";
 
 import sitemap from "@astrojs/sitemap";
@@ -11,8 +13,9 @@ export default defineConfig({
   devToolbar: {
     enabled: true,
   },
-  prefetch: true,
-  defaultStrategy: "hover",
+  prefetch: {
+    defaultStrategy: "hover",
+  },
   trailingSlash: "ignore",
   vite: {
     plugins: [tailwindcss()],
