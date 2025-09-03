@@ -150,6 +150,7 @@ export type Section =
   | Testimonial1Section
   | Testimonial2Section
   | ContactFormSection
+  | Cta1Section
   | ProjectListingsSection;
 
 export type ProjectListingsSection = {
@@ -169,6 +170,15 @@ export type ProjectListingsSection = {
     ctaLabel?: string;
     badges?: string[];
   }>;
+};
+
+export type Cta1Section = {
+  _type: "cta1";
+  header?: string;
+  subheading?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  alignment?: "center" | "left";
 };
 
 // Navigation types from Site Settings

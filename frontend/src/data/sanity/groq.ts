@@ -169,6 +169,15 @@ export const RICH_TEXT_FIELDS = `
   content
 `;
 
+export const CTA1_FIELDS = `
+  _type,
+  header,
+  subheading,
+  ctaLabel,
+  ctaHref,
+  alignment
+`;
+
 export const CONTACT_FORM_FIELDS = `
   _type,
   header,
@@ -217,6 +226,7 @@ export const ALL_SECTION_FIELDS = `
   ${LOGO_CLOUD2_FIELDS},
   ${LOGO_CLOUD3_FIELDS},
   ${RICH_TEXT_FIELDS},
+  ${CTA1_FIELDS},
   ${CONTACT_FORM_FIELDS},
   ${PROJECT_LISTINGS_FIELDS}
 `;

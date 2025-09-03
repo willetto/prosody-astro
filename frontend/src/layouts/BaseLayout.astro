@@ -28,7 +28,7 @@ const { hideNav = false, hideFooter = false } = Astro.props;
       <slot />
     </main>
 
-    <!-- { !hideFooter && <Footer /> } -->
+    { !hideFooter && <Footer /> }
     { !hideFooter && <ProsodyFooter /> }
   </body>
 </html>
