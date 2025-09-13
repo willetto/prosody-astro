@@ -6,6 +6,8 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 
+import svelte from "@astrojs/svelte";
+
 const SITE_URL = process.env.SITE_URL;
 
 // https://astro.build/config
@@ -39,7 +41,7 @@ export default defineConfig({
     domains: ["cdn.sanity.io"],
     remotePatterns: [{ protocol: "https" }],
   },
-  integrations: [sitemap(), mdx()],
+  integrations: [sitemap(), mdx(), svelte()],
   env: {
     schema: {
       SITE_URL: envField.string({
