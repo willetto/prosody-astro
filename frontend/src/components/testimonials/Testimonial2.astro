@@ -40,9 +40,9 @@ if (!feature || !testimonials || testimonials.length === 0) {
             </div>
             <p class="text-right">
               {testimonial.nameLink ? (
-                <Link href={testimonial.nameLink} hoverColor="blue"  class="testimony-name font-semibold hover:text-primary transition-colors">
+                <InlineLink href={testimonial.nameLink} hoverColor="blue"  class="testimony-name font-semibold hover:text-primary transition-colors">
                   {testimonial.name}
-                </Link>
+                </InlineLink>
               ) : (
                 <span class="testimony-name font-semibold">
                   {testimonial.name}
