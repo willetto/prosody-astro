@@ -61,6 +61,14 @@ export const caseStudy = defineType({
       group: "projectDetails",
     }),
     defineField({
+      name: "highlightedImage",
+      title: "Highlighted Image",
+      type: "imageWithAlt",
+      description:
+        "Optional featured image for the case study detail page. If omitted, the Social / Listing Image will be used.",
+      group: "projectDetails",
+    }),
+    defineField({
       name: "metafields",
       title: "Metafields",
       description:

@@ -2,16 +2,14 @@
 import Wrapper from "@/components/foundations/containers/Wrapper.astro";
 import Text from "@/components/foundations/elements/Text.astro";
 import PortableText from "@/components/foundations/elements/PortableText.astro";
+import type { RichTextSection } from "@/data/sanity";
 
 interface Props {
-  feature?: {
-    header?: string;
-    content?: any[];
-  };
+  feature?: RichTextSection;
 }
 
 const { feature } = Astro.props as Props;
-const { header, content = [] } = feature || {};
+const { header, content = [], showBottomBorder = false } = feature || {};
 
 if (!feature || !Array.isArray(content) || content.length === 0) {
   return null;
@@ -19,7 +17,7 @@ if (!feature || !Array.isArray(content) || content.length === 0) {
 ---
 
 <section class="rich-text-section">
-  <Wrapper variant="standard" class="py-12 border-b">
+  <Wrapper variant="standard" class={showBottomBorder ? "py-12 border-b" : "py-12"}>
     {header && (
       <Text
         tag="h2"

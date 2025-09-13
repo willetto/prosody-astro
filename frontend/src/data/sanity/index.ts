@@ -151,7 +151,8 @@ export type Section =
   | Testimonial2Section
   | ContactFormSection
   | Cta1Section
-  | ProjectListingsSection;
+  | ProjectListingsSection
+  | RichTextSection;
 
 export type ProjectListingsSection = {
   _type: "projectListings";
@@ -179,6 +180,13 @@ export type Cta1Section = {
   ctaLabel?: string;
   ctaHref?: string;
   alignment?: "center" | "left";
+};
+
+export type RichTextSection = {
+  _type: "richText";
+  header?: string;
+  content?: PortableTextBlock[];
+  showBottomBorder?: boolean;
 };
 
 // Navigation types from Site Settings

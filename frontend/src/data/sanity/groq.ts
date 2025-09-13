@@ -166,7 +166,8 @@ export const LOGO_CLOUD3_FIELDS = `
 export const RICH_TEXT_FIELDS = `
   _type,
   header,
-  content
+  content,
+  showBottomBorder
 `;
 
 export const CTA1_FIELDS = `
@@ -248,6 +249,11 @@ export const CASE_STUDY_DETAIL_FIELDS = `
   title,
   "slug": slug.current,
   socialImage {
+    asset,
+    "assetAltText": asset->altText,
+    alt
+  },
+  highlightedImage {
     asset,
     "assetAltText": asset->altText,
     alt

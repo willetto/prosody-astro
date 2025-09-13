@@ -78,6 +78,11 @@ export type CaseStudyDetail = {
     alt?: string;
     assetAltText?: string;
   };
+  highlightedImage?: {
+    asset?: { _ref?: string };
+    alt?: string;
+    assetAltText?: string;
+  };
   metafields?: Array<{
     name?: string;
     value?: unknown[];
