@@ -258,6 +258,7 @@ export const CASE_STUDY_DETAIL_FIELDS = `
     "assetAltText": asset->altText,
     alt
   },
+  websiteLink,
   metafields[] {
     name,
     value

@@ -83,6 +83,7 @@ export type CaseStudyDetail = {
     alt?: string;
     assetAltText?: string;
   };
+  websiteLink?: string;
   metafields?: Array<{
     name?: string;
     value?: unknown[];

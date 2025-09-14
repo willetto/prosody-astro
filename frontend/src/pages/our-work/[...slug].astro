@@ -19,6 +19,8 @@ import RichText from "@/components/RichText.astro";
 import Text from "@/components/foundations/elements/Text.astro";
 import PortableText from "@/components/foundations/elements/PortableText.astro";
 import SanityImage from "@/components/foundations/elements/SanityImage.astro";
+import Link from "@/components/foundations/elements/Link.astro";
+import ArrowRight from "@/components/foundations/icons/ArrowRight.astro";
 
 import { fetchAllCaseStudies, fetchCaseStudyBySlug } from "@/data/sanity/fetch";
 import Breadcrumbs from "@/components/foundations/elements/Breadcrumbs.astro";
@@ -59,7 +61,7 @@ const sectionComponents = {
     <Breadcrumbs />
     <div class="metafields flex flex-col items-stretch lg:flex-row gap-8 lg:gap-12  mt-4 lg:mt-8">
       <div class="flex flex-1 flex-col justify-between">
-      <Text tag="h1" variant="displayLG" class="font-serif font-medium tracking-tight brand-heading-color">{caseStudy?.title}</Text>
+        <Text tag="h1" variant="displayLG" class="font-serif font-medium tracking-tight brand-heading-color">{caseStudy?.title}</Text>
         {Array.isArray(caseStudy?.metafields) && caseStudy.metafields.length > 0 ? (
           <dl class="flex flex-col mt-8 divide-y divide-base-200">
             {caseStudy.metafields.map((detail) => (
@@ -80,7 +82,21 @@ const sectionComponents = {
             ))}
           </dl>
         ) : null}
-        </div>
+        {caseStudy?.websiteLink ? (
+          <div class="mt-4">
+            <Link href={caseStudy.websiteLink} variant="accent" size="sm" target="_blank" rel="noopener noreferrer" class="w-full lg:w-1/2 group/btn" gap="xxs">
+              Visit the site
+              <span slot="right-icon" class="ml-2">
+                <ArrowRight
+                      slot="right-icon"
+                      size="sm"
+                      class="transition-transform duration-300 translate-x-0 group-hover/btn:translate-x-2 group-focus/btn:translate-x-2 group-focus-visible/btn:translate-x-2"
+                    />
+              </span>
+            </Link>
+          </div>
+        ) : null}
+      </div>
 
       {/** Highlighted image (fallback to socialImage) */}
       {(() => {

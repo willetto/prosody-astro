@@ -17,8 +17,9 @@ export const imageWithAlt = defineType({
   options: {
     hotspot: true,
   },
+  // Optional overall: only validate asset alt text when an asset is present
   validation: (rule) =>
-    rule.required().custom(async (value, context) => {
+    rule.custom(async (value, context) => {
       try {
         const assetRef = (value as any)?.asset?._ref;
         if (!assetRef) return true;

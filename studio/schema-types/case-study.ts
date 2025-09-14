@@ -69,6 +69,18 @@ export const caseStudy = defineType({
       group: "projectDetails",
     }),
     defineField({
+      name: "websiteLink",
+      title: "Website link",
+      type: "url",
+      description: "Optional URL to the live site for this case study.",
+      group: "projectDetails",
+      validation: (rule) =>
+        rule.uri({
+          allowRelative: false,
+          scheme: ["https"],
+        }),
+    }),
+    defineField({
       name: "metafields",
       title: "Metafields",
       description:
