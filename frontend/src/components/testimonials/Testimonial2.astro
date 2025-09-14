@@ -6,6 +6,7 @@ import InlineLink from "@/components/foundations/elements/InlineLink.astro";
 
 export interface Props {
   feature?: {
+    showBottomBorder?: boolean;
     testimonials?: Array<{
       _id: string;
       testimony: string;
@@ -19,7 +20,7 @@ export interface Props {
 }
 
 const { feature } = Astro.props;
-const { testimonials } = feature || {};
+const { testimonials, showBottomBorder = false } = feature || {};
 
 // Don't render if no testimonials are provided
 if (!feature || !testimonials || testimonials.length === 0) {
@@ -28,7 +29,7 @@ if (!feature || !testimonials || testimonials.length === 0) {
 ---
 
 <section class="testimonial-2">
-  <Wrapper variant="standard" class="py-16 border-b">
+  <Wrapper variant="standard" class={showBottomBorder ? "py-16 border-b" : "py-16"}>
     <div class="text-center">
       <div class="space-y-6">
         {testimonials.map((testimonial) => (
@@ -40,7 +41,7 @@ if (!feature || !testimonials || testimonials.length === 0) {
             </div>
             <p class="text-right">
               {testimonial.nameLink ? (
-                <InlineLink href={testimonial.nameLink} hoverColor="blue"  class="testimony-name font-semibold hover:text-primary transition-colors">
+                <InlineLink href={testimonial.nameLink} hideUnderline={true} target="_blank" class="testimony-name font-semibold hover:text-primary transition-colors">
                   {testimonial.name}
                 </InlineLink>
               ) : (
@@ -55,7 +56,7 @@ if (!feature || !testimonials || testimonials.length === 0) {
                     <>
                       <span> {testimonial.jobTitle} at </span>
                       {testimonial.companyLink ? (
-                        <InlineLink href={testimonial.companyLink} hoverColor="blue" variant="textBase">
+                        <InlineLink href={testimonial.companyLink} hoverColor="blue" hideUnderline={true} target="_blank" variant="textBase">
                           {testimonial.company}
                         </InlineLink>
                       ) : (
@@ -67,7 +68,7 @@ if (!feature || !testimonials || testimonials.length === 0) {
                   ) : testimonial.company ? (
                     <span>
                       {testimonial.companyLink ? (
-                        <InlineLink href={testimonial.companyLink} variant="textBase">
+                        <InlineLink href={testimonial.companyLink} hideUnderline={true} target="_blank" variant="textBase">
                           {testimonial.company}
                         </InlineLink>
                       ) : (

@@ -6,6 +6,7 @@ import Link from "@/components/foundations/elements/Link.astro";
 export interface Props {
   feature?: {
     header?: string;
+    showBottomBorder?: boolean;
     testimonials?: Array<{
       _id: string;
       testimony: string;
@@ -19,7 +20,7 @@ export interface Props {
 }
 
 const { feature } = Astro.props;
-const { header, testimonials } = feature || {};
+const { header, testimonials, showBottomBorder = false } = feature || {};
 
 // Don't render if no testimonials are provided
 if (!feature || !testimonials || testimonials.length === 0) {
@@ -28,7 +29,7 @@ if (!feature || !testimonials || testimonials.length === 0) {
 ---
 
 <section>
-  <Wrapper variant="standard" class="py-16 border-b">
+  <Wrapper variant="standard" class={showBottomBorder ? "py-16 border-b" : "py-16"}>
     <div class="text-center">
       {header && (
         <Text
@@ -50,7 +51,7 @@ if (!feature || !testimonials || testimonials.length === 0) {
             </div>
             <div class="text-center">
               {testimonial.nameLink ? (
-                <Link href={testimonial.nameLink} class="font-semibold brand-heading-color hover:text-primary transition-colors">
+                <Link href={testimonial.nameLink} target="_blank" hideUnderline={true} class="font-semibold brand-heading-color hover:text-primary transition-colors">
                   {testimonial.name}
                 </Link>
               ) : (
@@ -67,7 +68,7 @@ if (!feature || !testimonials || testimonials.length === 0) {
                   {testimonial.jobTitle && testimonial.company ? (
                     <>
                       {testimonial.jobTitle} at {testimonial.companyLink ? (
-                        <Link href={testimonial.companyLink} class="hover:text-primary transition-colors">
+                        <Link href={testimonial.companyLink} target="_blank" hideUnderline={true} class="hover:text-primary transition-colors">
                           {testimonial.company}
                         </Link>
                       ) : (

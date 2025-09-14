@@ -24,6 +24,13 @@ export const testimonial1 = defineType({
       ],
       validation: (rule) => rule.required().min(1),
     }),
+    defineField({
+      name: "showBottomBorder",
+      title: "Show bottom border",
+      type: "boolean",
+      description: "Display a bottom border under this section.",
+      initialValue: false,
+    }),
   ],
   preview: {
     select: {
