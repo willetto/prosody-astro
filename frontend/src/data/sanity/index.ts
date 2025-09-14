@@ -152,7 +152,8 @@ export type Section =
   | ContactFormSection
   | Cta1Section
   | ProjectListingsSection
-  | RichTextSection;
+  | RichTextSection
+  | BlogImagesSection;
 
 export type ProjectListingsSection = {
   _type: "projectListings";
@@ -166,10 +167,10 @@ export type ProjectListingsSection = {
         alt?: string;
         assetAltText?: string;
       };
+      listingDescription?: string;
+      listingCtaLabel?: string;
+      listingBadges?: string[];
     } | null;
-    description?: string;
-    ctaLabel?: string;
-    badges?: string[];
   }>;
 };
 
@@ -186,6 +187,20 @@ export type RichTextSection = {
   _type: "richText";
   header?: string;
   content?: PortableTextBlock[];
+  showBottomBorder?: boolean;
+};
+
+export type BlogImagesSection = {
+  _type: "blogImages";
+  header?: string;
+  images?: Array<{
+    image?: {
+      asset?: { _ref?: string };
+      alt?: string;
+      assetAltText?: string;
+    };
+    caption?: string;
+  }>;
   showBottomBorder?: boolean;
 };
 

@@ -46,6 +46,7 @@ export const page = defineType({
         { type: "contactForm" },
         { type: "projectListings" },
         { type: "cta1" },
+        { type: "blogImages" },
       ],
       description:
         "Add sections to compose this page. Sections will be rendered in the order they appear here.",

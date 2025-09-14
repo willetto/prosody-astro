@@ -170,6 +170,20 @@ export const RICH_TEXT_FIELDS = `
   showBottomBorder
 `;
 
+export const BLOG_IMAGES_FIELDS = `
+  _type,
+  header,
+  images[] {
+    image {
+      asset,
+      "assetAltText": asset->altText,
+      alt
+    },
+    caption
+  },
+  showBottomBorder
+`;
+
 export const CTA1_FIELDS = `
   _type,
   header,
@@ -203,11 +217,11 @@ export const PROJECT_LISTINGS_FIELDS = `
         asset,
         "assetAltText": asset->altText,
         alt
-      }
+      },
+      listingDescription,
+      listingCtaLabel,
+      listingBadges
     },
-    description,
-    ctaLabel,
-    badges
   }
 `;
 
@@ -227,6 +241,7 @@ export const ALL_SECTION_FIELDS = `
   ${LOGO_CLOUD2_FIELDS},
   ${LOGO_CLOUD3_FIELDS},
   ${RICH_TEXT_FIELDS},
+  ${BLOG_IMAGES_FIELDS},
   ${CTA1_FIELDS},
   ${CONTACT_FORM_FIELDS},
   ${PROJECT_LISTINGS_FIELDS}

@@ -22,33 +22,11 @@ export const projectListings = defineType({
               to: [{ type: "caseStudy" }],
               validation: (rule) => rule.required(),
             }),
-            defineField({
-              name: "description",
-              title: "Short description",
-              description:
-                "One sentence shown under the project title (recommend ≤ 140 characters)",
-              type: "string",
-              validation: (rule) => rule.max(200),
-            }),
-            defineField({
-              name: "ctaLabel",
-              title: "Button label",
-              type: "string",
-              initialValue: "View project",
-            }),
-            defineField({
-              name: "badges",
-              title: "Badges",
-              description: "Technologies or tags to highlight (1–2 words each)",
-              type: "array",
-              of: [{ type: "string" }],
-              validation: (rule) => rule.unique(),
-            }),
           ],
           preview: {
             select: {
               title: "caseStudy.title",
-              subtitle: "description",
+              subtitle: "caseStudy.listingDescription",
               media: "caseStudy.socialImage",
             },
           },

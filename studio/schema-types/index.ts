@@ -25,6 +25,7 @@ import { richText } from "./sections/richText";
 import { contactForm } from "./sections/contactForm";
 import { projectListings } from "./sections/projectListings";
 import { cta1 } from "./sections/cta1";
+import { blogImages } from "./sections/blogImages";
 import { iconSelector } from "./icon-selector";
 import { page } from "./page";
 import { testimonial } from "./testimonial";
@@ -59,6 +60,7 @@ export const schemaTypes = [
   contactForm,
   projectListings,
   cta1,
+  blogImages,
   iconSelector,
   siteSettings,
   page,

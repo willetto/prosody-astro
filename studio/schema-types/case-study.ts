@@ -11,6 +11,10 @@ export const caseStudy = defineType({
       name: "projectDetails",
       title: "Project Details",
     },
+    {
+      name: "section",
+      title: "Section",
+    },
   ],
   fields: [
     defineField({
@@ -66,6 +70,24 @@ export const caseStudy = defineType({
       type: "imageWithAlt",
       description:
         "Optional featured image for the case study detail page. If omitted, the Social / Listing Image will be used.",
+      group: "projectDetails",
+    }),
+    defineField({
+      name: "listingDescription",
+      title: "Listing description",
+      description:
+        "One sentence shown under the project title in listings (recommend ≤ 140 characters)",
+      type: "string",
+      validation: (rule) => rule.max(200),
+      group: "projectDetails",
+    }),
+    defineField({
+      name: "listingBadges",
+      title: "Listing badges",
+      description: "Technologies or tags to highlight (1–2 words each)",
+      type: "array",
+      of: [{ type: "string" }],
+      validation: (rule) => rule.unique(),
       group: "projectDetails",
     }),
     defineField({
@@ -174,9 +196,11 @@ export const caseStudy = defineType({
         { type: "logoCloud2" },
         { type: "logoCloud3" },
         { type: "richText" },
+        { type: "blogImages" },
       ],
       description:
         "Add sections to compose this case study. Sections will be rendered in the order they appear here.",
+      group: "section",
     }),
   ],
   preview: {

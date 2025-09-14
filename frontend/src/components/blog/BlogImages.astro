@@ -1,0 +1,55 @@
+---
+import Wrapper from "@/components/foundations/containers/Wrapper.astro";
+import Text from "@/components/foundations/elements/Text.astro";
+import SanityImage from "@/components/foundations/elements/SanityImage.astro";
+import type { BlogImagesSection } from "@/data/sanity";
+
+interface Props {
+  feature?: BlogImagesSection;
+}
+
+const { feature } = Astro.props as Props;
+const header = feature?.header;
+const showBottomBorder = feature?.showBottomBorder ?? false;
+const featureImages = feature?.images;
+
+if (!feature || !Array.isArray(featureImages) || featureImages.length === 0) {
+  return null;
+}
+---
+
+<section class="blog-images-section">
+  <Wrapper variant="standard" class={showBottomBorder ? "py-12 border-b" : "py-12"}>
+    {header && (
+      <Text
+        tag="h2"
+        variant="displaySM"
+        class="font-serif font-medium tracking-tight brand-heading-color max-w-xl mx-auto"
+      >
+        {header}
+      </Text>
+    )}
+
+    <div class={header ? "mt-6 max-w-5xl mx-auto" : "max-w-5xl mx-auto"}>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {featureImages.map((item) => {
+          const img = item?.image;
+          const caption = item?.caption;
+          return (
+            <figure class="flex flex-col">
+              {img ? (
+                <SanityImage image={img} class="w-full h-auto rounded-md" />
+              ) : null}
+              {caption && (
+                <figcaption class="mt-2 text-sm brand-text-color/80">{caption}</figcaption>
+              )}
+            </figure>
+          );
+        })}
+      </div>
+    </div>
+  </Wrapper>
+  
+</section>
+
+

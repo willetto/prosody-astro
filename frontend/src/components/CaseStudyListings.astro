@@ -49,18 +49,18 @@ if (!items.length) {
                 </Text>
               </a>
 
-              {Array.isArray(item?.badges) && item.badges.length > 0 && (
+              {Array.isArray(cs?.listingBadges) && cs.listingBadges.length > 0 && (
                 <ul class="flex flex-wrap gap-2 mt-1">
-                  {item.badges.map((b) => (
+                  {cs.listingBadges.map((b) => (
                     <li class="text-xs px-3 py-1 rounded-sm border border-blue-400 dark:border-neutral-600 text-blue-600 dark:text-accent-300 bg-blue-50 dark:bg-neutral-700">
                       {b}
                     </li>
                   ))}
                 </ul>
               )}
-              {item?.description && (
+              {cs?.listingDescription && (
                 <Text tag="p" variant="textBase" class="brand-text-color">
-                  {item.description}
+                  {cs.listingDescription}
                 </Text>
               )}
 
@@ -68,7 +68,7 @@ if (!items.length) {
               <div class="mt-2">
                 <a href={href} class="block w-full">
                   <Button class="w-full group/btn" variant="accent" size="sm" gap="xxs">
-                    {item?.ctaLabel || "View project"}
+                    View project
                     <ArrowRight
                       slot="right-icon"
                       size="sm"
