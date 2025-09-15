@@ -31,14 +31,14 @@ if (!feature || !Array.isArray(featureImages) || featureImages.length === 0) {
     )}
 
     <div class={header ? "mt-6 max-w-5xl mx-auto" : "max-w-5xl mx-auto"}>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="flex">
         {featureImages.map((item) => {
           const img = item?.image;
           const caption = item?.caption;
           return (
             <figure class="flex flex-col">
               {img ? (
-                <SanityImage image={img} class="w-full h-auto rounded-md" />
+                <SanityImage image={img} class="w-full h-auto rounded-xl shadow-xl" />
               ) : null}
               {caption && (
                 <figcaption class="mt-2 text-sm brand-text-color/80">{caption}</figcaption>
