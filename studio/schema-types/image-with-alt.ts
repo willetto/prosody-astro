@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { mediaAssetSource } from "sanity-plugin-media";
 
 export const imageWithAlt = defineType({
   name: "imageWithAlt",
@@ -16,6 +17,7 @@ export const imageWithAlt = defineType({
   ],
   options: {
     hotspot: true,
+    sources: [mediaAssetSource],
   },
   // Optional overall: only validate asset alt text when an asset is present
   validation: (rule) =>
