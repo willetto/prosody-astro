@@ -64,7 +64,7 @@ const sectionComponents = {
     <Breadcrumbs />
     <div class="metafields flex flex-col items-stretch lg:flex-row gap-8 lg:gap-12  mt-4 lg:mt-8">
       <div class="flex flex-1 flex-col justify-between">
-        <Text tag="h1" variant="displayLG" class="font-serif font-medium tracking-tight brand-heading-color">{caseStudy?.title}</Text>
+        <Text tag="h1" variant="displayLG" class="font-serif font-medium tracking-tight brand-heading-color text-balance">{caseStudy?.title}</Text>
         {Array.isArray(caseStudy?.metafields) && caseStudy.metafields.length > 0 ? (
           <dl class="flex flex-col mt-8 divide-y divide-base-200">
             {caseStudy.metafields.map((detail) => (
